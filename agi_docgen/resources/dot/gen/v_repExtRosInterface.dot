@@ -1,0 +1,88 @@
+digraph PkgGenerationGraph {
+nodesep=0.1;
+node [ shape=plaintext];
+v_repExtRosInterface [ shape=box3d style=filled color="#6495ED" fontsize=22];
+find_package [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF0000" COLSPAN="1">Package dependencies</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">roscpp</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">rosmsg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">libopencv-dev</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">cv_bridge</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">image_transport</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tf</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">actionlib_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">control_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">diagnostic_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">geometry_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">map_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">nav_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">pcl_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">sensor_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">shape_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">std_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tf2_geometry_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tf2_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tf2_sensor_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">trajectory_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">visualization_msgs</td>
+  </tr>
+</table>
+>];
+add_library [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#F08080" COLSPAN="1">Library generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">v_repExtRosInterface</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">v_repExtRosInterface</td>
+  </tr>
+</table>
+>];
+find_package -> v_repExtRosInterface;
+v_repExtRosInterface -> add_library;
+}

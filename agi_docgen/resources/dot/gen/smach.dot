@@ -1,0 +1,12 @@
+digraph PkgGenerationGraph {
+nodesep=0.1;
+node [ shape=plaintext];
+smach [ shape=box3d style=filled color="#6495ED" fontsize=22];
+find_package [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF0000" COLSPAN="1">Package dependencies</td>
+  </tr>
+</table>
+>];
+find_package -> smach;
+}

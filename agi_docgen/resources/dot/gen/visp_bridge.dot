@@ -1,0 +1,50 @@
+digraph PkgGenerationGraph {
+nodesep=0.1;
+node [ shape=plaintext];
+visp_bridge [ shape=box3d style=filled color="#6495ED" fontsize=22];
+find_package [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF0000" COLSPAN="1">Package dependencies</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">geometry_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">roscpp</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">sensor_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">std_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">visp</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">camera_calibration_parsers</td>
+  </tr>
+</table>
+>];
+add_library [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#F08080" COLSPAN="1">Library generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">visp_bridge</td>
+  </tr>
+</table>
+>];
+add_executable [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF4500" COLSPAN="1">Executable generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">visp_bridge_convert_camera_parameters</td>
+  </tr>
+</table>
+>];
+find_package -> visp_bridge;
+visp_bridge -> add_library;
+visp_bridge -> add_executable;
+}
