@@ -1,0 +1,128 @@
+digraph PkgGenerationGraph {
+nodesep=0.1;
+node [ shape=plaintext];
+visp_tracker [ shape=box3d style=filled color="#6495ED" fontsize=22];
+find_package [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF0000" COLSPAN="1">Package dependencies</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">message_generation</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">dynamic_reconfigure</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">nodelet</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">roscpp</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">rospy</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">std_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">sensor_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">geometry_msgs</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">image_proc</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">image_transport</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">resource_retriever</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tf</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">visp</td>
+  </tr>
+</table>
+>];
+add_message_files [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#87CEFA" COLSPAN="1">Message files generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">KltPoint.msg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">KltPoints.msg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">KltSettings.msg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">MovingEdgeSettings.msg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">MovingEdgeSite.msg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">MovingEdgeSites.msg</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">TrackerSettings.msg</td>
+  </tr>
+</table>
+>];
+add_service_files [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFF00" COLSPAN="1">Service files generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">Init.srv</td>
+  </tr>
+</table>
+>];
+add_library [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#F08080" COLSPAN="1">Library generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">visp_tracker</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">trackerNodelet</td>
+  </tr>
+</table>
+>];
+add_executable [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF4500" COLSPAN="1">Executable generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tracker</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">${PROJECT_NAME}_client</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">${PROJECT_NAME}_viewer</td>
+  </tr>
+</table>
+>];
+add_py_executable [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF4500" COLSPAN="1">Python executable generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">tf_localization.py</td>
+  </tr>
+</table>
+>];
+find_package -> visp_tracker;
+visp_tracker -> add_message_files;
+visp_tracker -> add_service_files;
+visp_tracker -> add_library;
+visp_tracker -> add_executable;
+visp_tracker -> add_py_executable;
+}

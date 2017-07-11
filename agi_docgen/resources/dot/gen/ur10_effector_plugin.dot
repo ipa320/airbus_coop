@@ -1,0 +1,34 @@
+digraph PkgGenerationGraph {
+nodesep=0.1;
+node [ shape=plaintext];
+ur10_effector_plugin [ shape=box3d style=filled color="#6495ED" fontsize=22];
+find_package [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF0000" COLSPAN="1">Package dependencies</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1" />
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">cobot_gui</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">pyqt_agi_extend</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">rospy</td>
+  </tr>
+</table>
+>];
+add_py_executable [ label=<<table BGCOLOR="#FFFFFF" BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FF4500" COLSPAN="1">Python executable generated</td>
+  </tr>
+  <tr>
+    <td ALIGN="CENTER" BGCOLOR="#FFFFFF" COLSPAN="1">ur10_effector_plugin_node.py</td>
+  </tr>
+</table>
+>];
+find_package -> ur10_effector_plugin;
+ur10_effector_plugin -> add_py_executable;
+}
