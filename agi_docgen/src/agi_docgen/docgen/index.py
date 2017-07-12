@@ -16,7 +16,6 @@
 
 import os
 import sys
-# sys.path.append("/opt/ros/indigo/workspace/rosdoc")
 
 from agi_docgen.common import html
 from agi_docgen.common.html import HtmlElementTree
