@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<resources>
+    <style name="slider">
+        <style name="background">
+            QLabel {
+                background-color:#646464;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+        </style>
+        <style name="off">
+            QLabel {
+                background-color: qlineargradient(x1:0.5, y1:0.994318, x2:0.507752, y2:0, stop:0 rgba(146,146,146,255), stop:1 rgba(146,146,146,150));
+                border: 1px solid black;
+                border-radius: 5px;
+                font-size: 14pt;
+                color: @colors/text_white;
+                qproperty-alignment: AlignCenter;
+            }
+        </style>
+        <style name="on">
+            QLabel {
+                background-color: qlineargradient(x1:0.5, y1:0.994318,x2:0.507752, y2:0,stop:0 rgba(51,166,255,255),stop:1 rgba(51,166,255,150));
+                border: 1px solid black;
+                border-radius: 5px;
+                font-size: 14pt;
+                color: @colors/text_white;
+                qproperty-alignment: AlignCenter;
+            }
+        </style>
+        <style name="test">
+            QLabel {
+                background-image: @images/ic_test_background;
+            }
+        </style>
+    </style>
+</resources>
