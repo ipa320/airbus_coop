@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf8'?>
-<dashboard>
-  <import module="iiwa_dashboard.dashboard" class="IIWADashboard"/>
-  <description>A Python plugin for displaying into cobot_gui dashboard.</description>
-  <version>0.0.0</version>
-  <setup>
-    <access-rights>operator</access-rights>
-  </setup>
-</dashboard>
