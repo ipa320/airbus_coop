@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resources>
-   <strings default-lng="en"> 
-        <string id="title">
-            <en>PMA dashboard</en>
-            <fr>PMA dashboard</fr>
-        </string>
-    </strings>
-</resources> 
