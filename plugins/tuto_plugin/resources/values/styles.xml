@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf8'?>
+<resources>
+    <styles>
+        <style id="hello">
+            background-color:#d9d9d9;
+            border-radius: 5px;
+            font-size: 18pt; 
+            font-weight:40; 
+            color: #7c7c7c;
+        </style>
+        <style id="tuto">
+            background-color:rgb(255,0,0);
+            border-radius: 5px;
+            font-size: 32pt; 
+            font-weight:40; 
+            color: #7c7c7c;
+        </style>
+    </styles>
+</resources>

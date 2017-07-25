@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>container_ui</class>
+ <widget class="QWidget" name="container_ui">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>469</width>
+    <height>533</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <layout class="QGridLayout" name="central_layout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>10</number>
+   </property>
+   <property name="verticalSpacing">
+    <number>6</number>
+   </property>
+   <item row="26" column="1">
+    <widget class="QPushButton" name="modif_user_account_button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>39</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton::enabled{
+background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color:#000000;
+};
+QPushButton::disabled { 
+  background-color:#aeaeae;
+  border: 2px #616763;
+  border-radius: 5px;
+  font-size: 16pt; 
+  font-weight:40; 
+  color:#000000;
+};</string>
+     </property>
+     <property name="text">
+      <string>Ok</string>
+     </property>
+    </widget>
+   </item>
+   <item row="25" column="0" colspan="2">
+    <widget class="QLineEdit" name="confirm_new_password_edit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #ffffff;
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color: #494842;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="24" column="0" colspan="2">
+    <widget class="QLabel" name="confirm_password_label">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 16pt;
+font-weight:40; 
+ color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Confirmed new password</string>
+     </property>
+    </widget>
+   </item>
+   <item row="22" column="0" colspan="2">
+    <widget class="QLineEdit" name="new_password_edit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #ffffff;
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color: #494842;</string>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText</set>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="select_user_label">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 16pt;
+font-weight:40; 
+ color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Select user</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QComboBox" name="users_list_combo">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>--user--</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QComboBox" name="access_rights_combo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Operator</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Maintenance</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Expert</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Developer</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="21" column="0" colspan="2">
+    <widget class="QLabel" name="new_password_label">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 16pt;
+font-weight:40; 
+ color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>New password</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QLabel" name="access_rights_label">
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 16pt;
+font-weight:40; 
+ color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Access rights</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="check_password_button">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color:#000000;</string>
+     </property>
+     <property name="text">
+      <string>Check</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="current_password_label">
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 16pt;
+font-weight:40; 
+ color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Current password</string>
+     </property>
+    </widget>
+   </item>
+   <item row="26" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLineEdit" name="current_password_edit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #ffffff;
+border-radius: 5px;
+font-size: 16pt; 
+font-weight:40; 
+color: #494842;</string>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="10" margin="11"/>
+ <tabstops>
+  <tabstop>users_list_combo</tabstop>
+  <tabstop>current_password_edit</tabstop>
+  <tabstop>check_password_button</tabstop>
+  <tabstop>access_rights_combo</tabstop>
+  <tabstop>new_password_edit</tabstop>
+  <tabstop>confirm_new_password_edit</tabstop>
+  <tabstop>modif_user_account_button</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

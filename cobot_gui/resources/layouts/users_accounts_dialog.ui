@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>container_ui</class>
+ <widget class="QWidget" name="container_ui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>788</width>
+    <height>569</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>350</width>
+    <height>350</height>
+   </size>
+  </property>
+  <layout class="QGridLayout" name="central_layout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>10</number>
+   </property>
+   <property name="verticalSpacing">
+    <number>20</number>
+   </property>
+   <item row="16" column="0">
+    <widget class="QPushButton" name="modif_button">
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Modif</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="14" column="0" rowspan="2">
+    <widget class="QPushButton" name="add_button">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="0">
+    <widget class="QPushButton" name="exit_button">
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Exit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="0">
+    <widget class="QPushButton" name="remove_button">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Remove</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="QLabel" name="header_label">
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 18pt;
+font-weight:40; 
+ color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Account manager</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1" rowspan="7">
+    <widget class="QScrollArea" name="viewer_area">
+     <property name="minimumSize">
+      <size>
+       <width>600</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>600</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0,  y1: 0, x2: 0, y2: 1, stop: 0 #616763, stop: 1 #89928c);
+border-radius: 5px;</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="default_widget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>600</width>
+        <height>500</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QLabel" name="settings_label">
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+font-size: 18pt;
+font-weight:40; 
+ color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Settings</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="10" margin="11"/>
+ <tabstops>
+  <tabstop>add_button</tabstop>
+  <tabstop>modif_button</tabstop>
+  <tabstop>remove_button</tabstop>
+  <tabstop>exit_button</tabstop>
+  <tabstop>viewer_area</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

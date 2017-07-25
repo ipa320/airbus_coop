@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+   <strings default-lng="en"> 
+        <string id="title">
+            <en>UR10 Dashboard</en>
+            <fr>UR10 Dashboard</fr>
+        </string>
+        <string id="robot_in_error">
+            <en>The robot is in error !</en>
+            <fr>Le robot est en erreur !</fr>
+        </string>
+        <string id="acquit_timeout_exceeded">
+            <en>Timeout from acquit default exceeded !</en>
+            <fr>Délai d'acquittement dépassé !</fr>
+        </string>
+        <string id="unknown">
+            <en>Unknown</en>
+            <fr>Inconnu</fr>
+        </string>
+    </strings>
+</resources> 

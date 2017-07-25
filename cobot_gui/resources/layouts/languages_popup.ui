@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>container_ui</class>
+ <widget class="QWidget" name="container_ui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>203</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="central_layout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <item row="0" column="1">
+    <layout class="QVBoxLayout" name="country_layout">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="10" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<dashboard>
+  <import module="pma_dashboard.dashboard" class="PMADashboard"/>
+  <description>A Python plugin for displaying into dashboard dashboard.</description>
+  <version>0.0.0</version>
+  <setup>
+    <access-rights>operator</access-rights>
+  </setup>
+</dashboard>

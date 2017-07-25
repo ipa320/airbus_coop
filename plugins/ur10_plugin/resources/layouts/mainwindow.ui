@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1623</width>
+    <height>2018</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>2000</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>2000</width>
+       <height>2000</height>
+      </size>
+     </property>
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>320</y>
+        <width>811</width>
+        <height>551</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1500</width>
+        <height>800</height>
+       </size>
+      </property>
+      <widget class="QPushButton" name="pushButton_14">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>150</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Position Home</string>
+       </property>
+      </widget>
+      <widget class="Line" name="line_2">
+       <property name="geometry">
+        <rect>
+         <x>-290</x>
+         <y>-10</y>
+         <width>1391</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>0</y>
+         <width>631</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+
+QGroupBox {
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+</string>
+       </property>
+       <property name="title">
+        <string>Translation</string>
+       </property>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>80</y>
+          <width>110</width>
+          <height>85</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>110</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/increment_y.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>100</width>
+          <height>125</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>10</y>
+          <width>105</width>
+          <height>95</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>105</width>
+          <height>95</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/increment_x.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>100</width>
+          <height>125</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>80</y>
+          <width>110</width>
+          <height>85</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>110</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/decrement_y.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>97</width>
+          <height>125</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>150</y>
+          <width>105</width>
+          <height>95</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>105</width>
+          <height>95</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/decrement_x.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>95</width>
+          <height>120</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>10</y>
+          <width>105</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>105</width>
+          <height>91</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/increment_z.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>100</width>
+          <height>125</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>130</y>
+          <width>105</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>105</width>
+          <height>91</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/decrement_z.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>100</width>
+          <height>125</height>
+         </size>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>270</y>
+         <width>631</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+
+QGroupBox {
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+</string>
+       </property>
+       <property name="title">
+        <string>Orientation</string>
+       </property>
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>20</y>
+          <width>93</width>
+          <height>94</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>93</width>
+          <height>94</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/increment_rotz.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>100</width>
+          <height>90</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>120</y>
+          <width>100</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/increment_roty.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>94</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>40</y>
+          <width>97</width>
+          <height>95</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>97</width>
+          <height>95</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/increment_rotx.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>90</width>
+          <height>120</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>170</y>
+          <width>97</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>97</width>
+          <height>95</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/decrement_rotx.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>87</width>
+          <height>120</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_10">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>120</y>
+          <width>100</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/decrement_roty.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>94</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>20</y>
+          <width>93</width>
+          <height>94</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>93</width>
+          <height>94</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <disabledoff>../images/decrement_rotz.png</disabledoff>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>100</width>
+          <height>90</height>
+         </size>
+        </property>
+       </widget>
+       <zorder>pushButton_11</zorder>
+       <zorder>pushButton_9</zorder>
+       <zorder>pushButton_7</zorder>
+       <zorder>pushButton_8</zorder>
+       <zorder>pushButton_10</zorder>
+       <zorder>pushButton_12</zorder>
+       <zorder>line_4</zorder>
+      </widget>
+      <widget class="QPushButton" name="pushButton_13">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>360</y>
+         <width>150</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>acquisition position</string>
+       </property>
+      </widget>
+      <zorder>pushButton_14</zorder>
+      <zorder>groupBox</zorder>
+      <zorder>line_2</zorder>
+      <zorder>groupBox_5</zorder>
+      <zorder>groupBox_6</zorder>
+      <zorder>pushButton_13</zorder>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>63</x>
+        <y>10</y>
+        <width>20</width>
+        <height>861</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>1410</x>
+        <y>0</y>
+        <width>16</width>
+        <height>871</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>77</x>
+        <y>860</y>
+        <width>1341</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_5">
+      <property name="geometry">
+       <rect>
+        <x>77</x>
+        <y>0</y>
+        <width>1341</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_6">
+      <property name="geometry">
+       <rect>
+        <x>733</x>
+        <y>10</y>
+        <width>20</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>10</y>
+        <width>651</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+
+QGroupBox {
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>631</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+
+QGroupBox {
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+</string>
+       </property>
+       <property name="title">
+        <string>Position</string>
+       </property>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>30</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>60</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>90</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>631</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+
+QGroupBox {
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+</string>
+       </property>
+       <property name="title">
+        <string>Orientation</string>
+       </property>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>50</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>80</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>110</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>20</y>
+          <width>300</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <zorder>label_7</zorder>
+       <zorder>label_8</zorder>
+       <zorder>label_9</zorder>
+       <zorder>label_6</zorder>
+       <zorder>groupBox_3</zorder>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>10</y>
+        <width>661</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+
+QGroupBox {
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+</string>
+      </property>
+      <property name="title">
+       <string>Position des joints</string>
+      </property>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>20</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>70</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_13">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>120</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>170</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>220</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_16">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>270</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#d9d9d9;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #7c7c7c;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="Line" name="line_7">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>310</y>
+        <width>1351</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QScrollArea" name="robot_view">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>320</y>
+        <width>531</width>
+        <height>541</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>529</width>
+         <height>539</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

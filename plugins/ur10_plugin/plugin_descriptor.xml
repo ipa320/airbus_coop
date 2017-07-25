@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf8'?>
+<plugin>
+  <import module="ur10_plugin.plugin" class="Ur10Plugin"/>
+  <description>A Python plugin for displaying into cobot_gui launcher.</description>
+  <version>0.0.0</version>
+  <setup>
+    <icon>${ur10_plugin}/resources/images/ur_product_ur5.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>

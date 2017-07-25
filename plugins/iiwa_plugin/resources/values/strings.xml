@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+   <strings default-lng="en"> 
+        <string id="title">
+            <en>IIWA plugin</en>
+            <fr>IIWA plugin</fr>
+        </string>
+    </strings>
+</resources> 

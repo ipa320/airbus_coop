@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<agidoc>
+  <node name="iiwa_plugin">
+      <description>
+          <p>User Interface :</p>
+          <ul>
+              <li>Joint motion</li>
+              <li>Cartesian motion</li>
+              <li>Gravity motion</li>
+              <li>Frames change</li>
+              <li>IOMediaFlange (Input/Output)</li>
+          </ul>
+      </description>
+      <io>
+         <topics>
+            <!-- Publishers -->
+            <subscriber name="/iiwa/status"    msg="industrial_msgs::RobotStatus" />
+            <subscriber name="/iiwa/io_states" msg="arm_msgs::IOState" />
+            <subscriber name="/joint_states"   msg="sensor_msgs::JointState" />
+            <subscriber name="/pose_states"    msg="geometry_msgs::Pose" />
+            <!-- Subscribers -->
+            <publisher name="/iiwa/joint_command"           msg="trajectory_msgs::JointTrajectoryPoint" />
+            <publisher name="/iiwa/cartesian_command"  msg="arm_msgs::CartesianTrajectoryPoint" /> 
+            <publisher name="/iiwa/gravity_command"      msg="arm_msgs::Empty" />
+            <publisher name="/iiwa/digital_command"       msg="arm_msgs::Digital" />
+        </topics>
+        <actionlib/>
+        <services/>
+      </io>
+      <parameters/>
+  </node>
+</agidoc>

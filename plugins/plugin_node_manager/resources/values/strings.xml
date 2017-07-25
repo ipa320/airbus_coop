@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+   <strings default-lng="en"> 
+        <string id="nodes_manager_title">
+            <en>Nodes manager</en>
+            <fr>Gestionnaire de noeuds</fr>
+        </string>
+        <string id="cleanup">
+            <en>Cleanup</en>
+            <fr>Nettoyer</fr>
+        </string>
+        <string id="machine">
+            <en>Machine</en>
+            <fr>Machine</fr>
+        </string>
+        <string id="node">
+            <en>Node</en>
+            <fr>Noeud</fr>
+        </string>
+        <string id="status">
+            <en>Status</en>
+            <fr>Statut</fr>
+        </string>
+        <string id="ping">
+            <en>Ping (ms)</en>
+            <fr>Ping (ms)</fr>
+        </string>
+        <string id="start_stop">
+            <en>Start/Stop</en>
+            <fr>Démarrer/Arrêtez</fr>
+        </string>
+    </strings>
+</resources> 

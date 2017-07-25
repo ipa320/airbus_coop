@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf8'?>
+<plugin>
+  <import module="aldo_plugin.plugin" class="aldoPlugin"/>
+  <description>A Python plugin for displaying into cobot_gui launcher.</description>
+  <version>0.0.0</version>
+  <setup>
+    <icon>${aldo_plugin}/resources/images/ic_launcher.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>

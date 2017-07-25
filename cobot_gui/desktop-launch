@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ ! -z $ROS_WORKSPACE ]; then
+  ROS_WS=$ROS_WORKSPACE
+elif [ ! -z $CMAKE_PREFIX_PATH ]; then
+  IFS=":" read -a workspaces <<< "$CMAKE_PREFIX_PATH"
+  for ws in "${workspaces[@]}"; do
+    if [ -f $ws/../.catkin_workspace ]; then
+      ROS_DEV=$ws
+      ROS_WS= echo $(cd $ws/.. && pwd)
+    fi
+  done
+fi
+
+source $ROS_DEV/setup.bash
+export ROS_WORKSPACE=${ROS_WS}
+
+script_path=$(rospack find cobot_gui)
+python $script_path/scripts/main.py
+

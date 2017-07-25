@@ -1,0 +1,18 @@
+################################################################################
+#
+# Copyright Airbus Group SAS 2015
+# All rigths reserved.
+#
+# File Name : SSM_start.srv
+# Authors : Ludovic DELVAL
+#
+# If you find any bug or if you have any question please contact
+# Adolfo Suarez Roos <adolfo.suarez@airbus.com>
+# Ludovic DELVAL <Ludovic.DELVAL.external@airbus.com>
+#
+#
+################################################################################
+
+std_msgs/String file_scxml
+---
+std_msgs/Bool result

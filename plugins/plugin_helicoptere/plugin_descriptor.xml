@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<plugin>
+  <import module="plugin_helicoptere.plugin" class="HelicopterePlugin"/>
+  <description>A Python plugin for displaying the IIWA interface plugin in cobot_gui.</description>
+  <version>1.0</version>
+  <setup>
+    <icon>${plugin_helicoptere}/resources/images/launcher.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>

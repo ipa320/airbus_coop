@@ -1,0 +1,19 @@
+<package>
+  <name>dashboards</name>
+  <version>0.0.1</version>
+  <description>
+  This package provides dashboards components.
+  </description>
+  <maintainer email="martin.matignon.external@airbus.com">Martin Matignon</maintainer>
+  
+  <license>AIRBUS</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <run_depend>roslib</run_depend>
+  <run_depend>rospy</run_depend>
+  
+  <export>
+   <metapackage />
+  </export>
+</package>

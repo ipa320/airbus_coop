@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<agidoc>
+  <node name="NODE_NAME">
+      <description>
+          <p>
+             Write your node description here, (you can write html format is supported by the generator).
+           </p>
+      </description>
+      <io>
+         <topics>
+            <publisher name="TOPIC_NAME" msg="MSG_TYPE"  />
+            <subscriber name="TOPIC_NAME" msg="MSG_TYPE"  />
+        </topics>
+        <actionlib>
+            <client name="ACTION_CLIENT_NAME" action="ACTION_TYPE" />
+            <server name="ACTION_SERVER_NAME" action="ACTION_TYPE" />
+        </actionlib>
+        <services/>
+      </io>
+      <parameters>
+        <param name="PARAMETER_NAME" type="PARAMETER_TYPE" default="DEFAULT_VALUE" unit="PARAMETER_UNIT"/>
+      </parameters>
+  </node>
+  <node name="OTHER_NODE_NAME">
+      <description>
+          Write your node description here, (you can write html format is supported by the generator).
+      </description>
+      <io>
+        <topics/>
+        <actionlib/>
+        <services/>
+      </io>
+      <parameters/>
+  </node>
+</agidoc>

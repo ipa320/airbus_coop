@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+   <styles> 
+        <style id="preempt">
+            QPushButton {
+                background-color:rgb(255,0,0);
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+        </style>
+    </styles>
+</resources> 
