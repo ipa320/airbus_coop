@@ -18,7 +18,7 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-	packages=['pyqt_agi_extend.QtAgiCore','pyqt_agi_extend.QtAgiGui'],
+	packages=['pyqt_agi_extend','pyqt_agi_extend.QtAgiCore','pyqt_agi_extend.QtAgiGui'],
 	package_dir={'': 'src'},
 )
 
