@@ -4,41 +4,10 @@
   <version>0.0.0</version>
   <description>The ssm_plugin package</description>
 
-   
-  
-  
   <maintainer email="ihm-pma@todo.todo">ihm-pma</maintainer>
 
-
-  
-  
-  
   <license>TODO</license>
 
-
-  
-  
-  
-  
-
-
-  
-  
-  
-  
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>cobot_gui</build_depend>
   <build_depend>pyqt_agi_extend</build_depend>
@@ -49,10 +18,8 @@
   <run_depend>rospy</run_depend>
   <run_depend>ssm_core</run_depend>
 
-
-  
   <export>
-    
+    <agidoc src="agidoc.xml" />
+  </export>
 
-  <agidoc src="agidoc.xml" /></export>
 </package>

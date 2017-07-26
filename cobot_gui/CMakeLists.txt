@@ -12,17 +12,14 @@ catkin_python_setup()
 
 catkin_package()
 
-include_directories(
-  ${catkin_INCLUDE_DIRS}
+install(DIRECTORY config doc launch resources
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-install(DIRECTORY config doc launch resources
-        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-
-catkin_install_python(PROGRAMS scripts/cobot_gui_node.py scripts/main.py
-                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+catkin_install_python(PROGRAMS scripts/cobot_gui_node.py scripts/main.py src/cobot_gui/autorun.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 install(PROGRAMS desktop-launch
 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
