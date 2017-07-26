@@ -15,6 +15,7 @@ fi
 source $ROS_DEV/setup.bash
 export ROS_WORKSPACE=${ROS_WS}
 
-script_path=$(rospack find cobot_gui)
-python $script_path/scripts/main.py
+rosrun cobot_gui main.py
+#script_path=$(rospack find cobot_gui)
+#python $script_path/scripts/main.py
 
