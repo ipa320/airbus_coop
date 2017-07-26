@@ -18,7 +18,16 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-	packages=['cobot_gui'],
+	packages=['cobot_gui',
+	'cobot_gui.account',
+	'cobot_gui.alarm',
+	'cobot_gui.util',
+	'cobot_gui.control_mode',
+	'cobot_gui.dashboard',
+	'cobot_gui.emergency',
+	'cobot_gui.plugin',
+	'cobot_gui.timestamp',
+	'cobot_gui.translator'],
 	package_dir={'': 'src'},
 )
 
