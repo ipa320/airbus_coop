@@ -10,10 +10,10 @@
   
   <buildtool_depend>catkin</buildtool_depend>
   
-  <run_depend>roslib</run_depend>
-  <run_depend>rospy</run_depend>
+  <run_depend>tuto_dashboard</run_depend>
+  <run_depend>ur10_dashboard</run_depend>
   
   <export>
-   <metapackage />
+   <metapackage/>
   </export>
 </package>
