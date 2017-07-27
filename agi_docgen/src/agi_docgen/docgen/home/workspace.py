@@ -63,8 +63,9 @@ class RosWorkspace(HtmlElement):
         connection_register = []
         
         for directory in packages_dir:
-            
-            rpkg = directory.replace("/opt/ros/indigo/workspace/","")
+            ros_wss = catkin_pkg.workspaces.get_spaces()
+            ros_ws = os.path.dirname(ROS_WSs[0])
+            rpkg = directory.replace(ros_ws,"")
             
             path = rpkg.split('/')
             

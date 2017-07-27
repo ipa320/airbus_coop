@@ -15,8 +15,11 @@
 ################################################################################
 import os
 from roslib.packages import get_pkg_dir
+import catkin_pkg.workspaces
 
-ROS_WS = os.getenv("ROS_WORKSPACE")
+ROS_WSs = catkin_pkg.workspaces.get_spaces()
+ROS_WS = os.path.dirname(ROS_WSs[0])
+
 ROSDOC_ROOT      = get_pkg_dir("agi_docgen")# os.path.join(ROS_WS, "rosdoc")
 ROSDOC_RSC       = os.path.join(ROSDOC_ROOT, "resources")
 ROSDOC_DOT       = os.path.join(ROSDOC_RSC, "dot")
@@ -25,4 +28,3 @@ ROSDOC_POLICES   = os.path.join(ROSDOC_RSC, "polices")
 ROSDOC_STYLES    = os.path.join(ROSDOC_RSC, "styles")
 ROSDOC_TEMPLATES = os.path.join(ROSDOC_RSC, "templates")
 ROSDOC_GEN = os.path.join(ROSDOC_RSC, "gen")
-

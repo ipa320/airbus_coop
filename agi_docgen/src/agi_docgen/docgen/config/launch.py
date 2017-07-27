@@ -191,6 +191,5 @@ class ConfigLaunch(HtmlElement):
 if __name__ == '__main__':
     
     cl = ConfigLaunch()
-    cl.read("/opt/ros/indigo/workspace/src/config/pma/pma_startup/launch/pma_system_startup_all.launch")
     
     
