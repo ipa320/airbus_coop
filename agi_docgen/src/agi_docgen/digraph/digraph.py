@@ -426,6 +426,7 @@ def digraph_test():
     
     print str(digraph)
     
+    #ToDo: get the path from user input (by default save into /tmp folder) or use rospack.get_path(agi_docgen)...
     digraph.saveDot("/home/ihm-pma/Documents/dot_test/digraph_test.dot")
     digraph.dotToPng("/home/ihm-pma/Documents/dot_test/digraph_test.png")
 

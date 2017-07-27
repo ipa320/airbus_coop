@@ -120,7 +120,8 @@ if __name__ == '__main__':
     
     digraph.connect(subs,pubs)
     
-    digraph.saveDot("/home/ihm-pma/Documents/dot_test/SubscribersModel.dot")
+    #ToDo: get the path from user input (by default save into /tmp folder) or use rospack.get_path(agi_docgen)...
+    digraph.saveDot("/home/ihm-pma/Documents/dot_test/SubscribersModel.dot") 
     digraph.dotToPng("/home/ihm-pma/Documents/dot_test/SubscribersModel.png")
 
     

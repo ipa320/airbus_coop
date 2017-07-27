@@ -186,6 +186,7 @@ if __name__ == '__main__':
     digraph.addNode(ex)
     digraph.connect(digraph.getRootNode(), ex)
     
+    #ToDo: get the path from user input (by default save into /tmp folder) or use rospack.get_path(agi_docgen)...
     digraph.saveDot("/home/ihm-pma/Documents/dot_test/CmakeListsModel.dot")
     digraph.dotToPng("/home/ihm-pma/Documents/dot_test/CmakeListsModel.png")
 
