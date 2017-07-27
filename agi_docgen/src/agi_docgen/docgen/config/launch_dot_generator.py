@@ -163,14 +163,3 @@ class RosLaunchDotGenerator:
 if __name__ == '__main__':
     
     dep = RosLaunchDotGenerator()
-    dep.parse("/opt/ros/indigo/workspace/src/config/pma/pma_startup/launch/pma_system_startup_all.launch", "pma1_launch.dot")
-    dep.to_ps("pma1_launch")
-    
-#     dep.parse("/opt/ros/indigo/workspace/src/config/cobot/cobot_launch/launch/demo_SAPHARI_with_mobility.launch", "demo_SAPHARI_with_mobility.dot")
-#     dep.to_ps("demo_SAPHARI_with_mobility")
-    
-    dep.parse("/opt/ros/indigo/workspace/src/config/cobot/cobot_launch/launch/demo_SAPHARI_without_mobility_vrep.launch", "demo_SAPHARI_without_mobility_vrep.dot")
-    dep.to_ps("demo_SAPHARI_without_mobility_vrep")
-    
-    dep.parse("/opt/ros/indigo/workspace/src/config/cobot/cobot_launch/launch/demo_chain_inspection_with_mobility.launch", "demo_chain_inspection_with_mobility.dot")
-    dep.to_ps("demo_chain_inspection_with_mobility")
