@@ -9,10 +9,8 @@
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>catkin_pkg</build_depend>
   <build_depend>roslib</build_depend>
   <build_depend>rospy</build_depend>
-  <run_depend>catkin_pkg</run_depend>
   <run_depend>roslib</run_depend>
   <run_depend>rospy</run_depend>
 
