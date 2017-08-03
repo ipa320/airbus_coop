@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <node pkg="cobot_gui" type="cobot_gui_node.py" name="cobot_gui_node" output="screen">
-        <param name="config" value="${cobot_gui}/config/pma1_brackets_processing.conf"/>
-  </node>
-</launch>

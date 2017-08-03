@@ -1,19 +1,7 @@
 <?xml version='1.0' encoding='utf8'?>
 <plugins-register>
   <plugin label="Rviz"           package="plugin_rviz" />
-  <plugin label="OmniV2"         package="omni_gui" />
   <plugin label="Rqt"            package="plugin_rqt" />
   <plugin label="NodeManager"    package="plugin_node_manager" />
   <plugin label="LogManager"     package="plugin_log_manager" />
-  <plugin label="IIWA"           package="iiwa_plugin" />
-  <plugin label="Pma1"           package="pma_plugin" />
-  <plugin label="SSM"            package="ssm_plugin" />
-  <plugin label="AirbusHelicop"  package="plugin_helicoptere" />
-  <plugin label="TrajectoryXml"  package="trajectory_xml" />
-  <plugin label="RobotiqHand"    package="robotiq_hand_plugin" />
-  <plugin label="AppStatus"      package="application_status" />
-  <plugin label="Tuto" package="tuto_plugin" />
-  <plugin label="ur10_effector" package="ur10_effector_plugin" />
-  <plugin label="SaraLearnings" package="sara_learning_plugin" />
-<plugin label="AldoPlugin" package="aldo_plugin" />
 </plugins-register>

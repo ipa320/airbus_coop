@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf8'?>
-<dashboard>
-  <import module="ur10_dashboard.dashboard" class="UR10Dashboard"/>
-  <description>A Python plugin for displaying into cobot_gui dashboard.</description>
-  <version>16.23.11</version>
-  <setup>
-    <access-rights>operator</access-rights>
-  </setup>
-</dashboard>
