@@ -43,7 +43,7 @@ if __name__ == "__main__":
     
     rospy.init_node('cobot_gui_autorun_%d' % os.getpid())
     
-    config = rospy.get_param("~config", "${cobot_gui}/resources/config/default.conf")
+    config = rospy.get_param("~config", "${cobot_gui}/config/default.conf")
     
     set_boot_configuration(config)
     
