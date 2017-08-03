@@ -67,8 +67,6 @@ class LaunchItem:
         
     def _launch_node_slot(self):
         
-        print 'coucou'
-        
         rospy.loginfo('%s::_launch_node()'%self.launch_name.text())
         
         subprocess.Popen(['roslaunch',
