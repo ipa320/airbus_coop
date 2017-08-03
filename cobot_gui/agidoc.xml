@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<agidoc>
+  <generation>
+    <libraries/>
+    <messages/>
+    <actions/>
+    <services/>
+  </generation>
+  <node name="cobot_gui_node">
+      <description>This node start the GUI application and load the user parameters file.</description>
+      <io>
+         <topics>
+            <publisher name="/emergency_stop/state" msg="std_msgs::Bool" />
+        </topics>
+        <services/>
+      </io>
+      <parameters>
+        <param name="config" type="string" default="${cobot_gui}/resources/config/default.conf" unit="xml">
+            Graphic user interface parameters sets (mode(s), plugin(s), widget(s), ...).
+        </param>
+      </parameters>
+  </node>
+</agidoc>

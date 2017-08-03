@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+   <strings default-lng="en"> 
+        <string id="title">
+            <en>Trajectory LWR Recorder</en>
+            <fr>Enregistement de Trajectoires XML</fr>
+        </string>
+    </strings>
+</resources> 

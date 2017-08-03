@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>container_ui</class>
+ <widget class="QWidget" name="container_ui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>330</width>
+    <height>394</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="central_layout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <item row="17" column="1" colspan="3">
+    <widget class="QPushButton" name="connection_button">
+     <property name="minimumSize">
+      <size>
+       <width>250</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color: #000000;</string>
+     </property>
+     <property name="text">
+      <string>Connection</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="2">
+    <widget class="QLabel" name="user_id_header_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>User</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="1" colspan="3">
+    <widget class="QPushButton" name="accounts_manager_button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>250</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton::enabled{
+background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color:#000000;
+};
+QPushButton::disabled { 
+  background-color:#aeaeae;
+  border: 2px #616763;
+  border-radius: 5px;
+  font-size: 18pt; 
+  font-weight:40; 
+  color:#000000;
+};</string>
+     </property>
+     <property name="text">
+      <string>Users accounts</string>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="3">
+    <widget class="QLabel" name="time_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="3">
+    <widget class="QLabel" name="user_id_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="3">
+    <widget class="QLabel" name="language_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="3">
+    <widget class="QLabel" name="access_rights_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="3">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="2">
+    <widget class="QLabel" name="access_rights_header_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>Rights</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="2">
+    <widget class="QLabel" name="time_header_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>Time</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="2">
+    <widget class="QLabel" name="language_header_label">
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;
+font-weight:40; </string>
+     </property>
+     <property name="text">
+      <string>Language</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="3">
+    <widget class="QLabel" name="header_label">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 18pt;
+font-weight:60; </string>
+     </property>
+     <property name="text">
+      <string>User account</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1" rowspan="4">
+    <widget class="QLabel" name="user_icon_label">
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1" colspan="3">
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1" colspan="3">
+    <widget class="QPushButton" name="deconnection_button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>250</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton::enabled{
+background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2ca1cf, stop: 1 #0482bb);
+border: 2px #616763;
+border-radius: 5px;
+font-size: 18pt; 
+font-weight:40; 
+color:#000000;
+};
+QPushButton::disabled { 
+  background-color:#aeaeae;
+  border: 2px #616763;
+  border-radius: 5px;
+  font-size: 18pt; 
+  font-weight:40; 
+  color:#000000;
+};</string>
+     </property>
+     <property name="text">
+      <string>Deconnection</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="10" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

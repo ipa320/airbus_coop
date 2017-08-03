@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>plugin_node_manager</name>
+  <version>0.0.0</version>
+  <description>The plugin_node_manager package</description>
+  <maintainer email="cobotgui@todo.todo">cobotgui</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>cobot_gui</build_depend>
+  <build_depend>roslib</build_depend>
+  <build_depend>rospy</build_depend>
+
+  <run_depend>cobot_gui</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>rospy</run_depend>
+
+</package>

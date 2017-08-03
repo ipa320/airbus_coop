@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+    <styles>
+        <style id="alarm">
+            QWidget{background-color: #ffff01;}
+        </style>
+        <style id="background_estop_locked">
+            QWidget{background-color: #ff0000;}
+        </style>
+        <style id="background_estop_unlocked">
+            QWidget{background-color: #d9d9d9;}
+        </style>
+        <style id="login">
+            QDialog{background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #616763, stop: 1 #89928c);}
+        </style>
+        <style id="default_launch">
+            QPushButton{
+                background-color: rgba(255,0,0,80%);
+                border-radius: 10px;
+                font-size: 12pt;
+                font-weight:60;
+                color: #ffffff;
+            }
+        </style>
+        <style id="transparent_background">
+            background-color: transparent;
+            font-size: 20pt;
+        </style>
+        <style id="no_background">
+            background:none;
+        </style>
+        <style id="bad_password">
+            background-color: #ffffff;
+            border-radius: 5px;
+            font-size: 16pt; 
+            font-weight:40; 
+            color: rgb(255,0,0);
+        </style>
+        <style id="good_password">
+            background-color: #ffffff;
+            border-radius: 5px;
+            font-size: 16pt; 
+            font-weight:40; 
+            color: rgb(0,255,0);
+        </style>
+        <style id="no_password">
+            background-color: #ffffff;
+            border-radius: 5px;
+            font-size: 16pt; 
+            font-weight:40; 
+            color: #494842;
+        </style>
+        <style id="text">
+            QLabel {font-size: 22pt;}
+        </style>
+    </styles>
+</resources>

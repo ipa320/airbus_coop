@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>avancement_station_plugin</name>
+  <version>0.0.0</version>
+  <description>The avancement_station_plugin package</description>
+  <maintainer email="frle@todo.todo">frle</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>cobot_gui</build_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>cobot_gui</run_depend>
+  <run_depend>rospy</run_depend>
+
+  <export>
+    <agidoc src="agidoc.xml"/>
+  </export>
+
+</package>

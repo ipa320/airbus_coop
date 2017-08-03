@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf8'?>
+<plugin>
+  <import module="avancement_mission_plugin.plugin" class="AvancementMissionPlugin"/>
+  <description>A Python plugin for displaying into cobot_gui launcher.</description>
+  <version>0.0.0</version>
+  <setup>
+    <icon>${avancement_mission_plugin}/resources/images/ic_launcher.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>

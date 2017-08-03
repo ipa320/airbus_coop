@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf8'?>
+<dashboards-register>
+  <dashboard label="IIWA" package="iiwa_dashboard"/>
+  <dashboard label="UR10" package="ur10_dashboard"/>
+  <dashboard label="PMA"  package="pma_dashboard"/>
+  <dashboard label="LWR"  package="lwr_dashboard"/>
+<dashboard label="Tuto" package="tuto_dashboard" />
+</dashboards-register>

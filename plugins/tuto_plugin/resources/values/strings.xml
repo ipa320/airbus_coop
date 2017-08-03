@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf8'?>
+<resources>
+    <strings default-lng="en">
+        <string id="hello">
+            <en>Hello world !</en>
+            <fr>Bonjour le monde !</fr>
+            <de>Hallo Welt !</de>
+            <es>Hola Mundo !</es>
+        </string>
+    
+    
+        <string id="tuto">
+            <en>Hello tuto !</en>
+            <fr>Bonjour tuto !</fr>
+        </string>
+       </strings>
+</resources>

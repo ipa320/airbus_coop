@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+    <strings default-lng="en">
+         <string id="alarms_waiting">
+            <en>alarms waiting ...</en>
+            <fr>alarmes en attente ...</fr>
+        </string> 
+        <string id="language_selection">
+            <en>The language selected is</en>
+            <fr>La langue sélectionnée est</fr>
+            <de>Die gewählte Sprache</de>
+            <es>El idioma seleccionado es</es>
+        </string> 
+        <string id="app_mode">
+            <en>Switching AUTOMATIC to MANUAL mode</en>
+            <fr>Commutation du mode automatique à manuel</fr>
+        </string>
+        <string id="auto">
+            <en>AUTO</en>
+            <fr>AUTO</fr>
+        </string>  
+        <string id="manu">
+            <en>MANU</en>
+            <fr>MANU</fr>
+        </string>  
+        <string id="aborted">
+            <en>Aborted</en>
+            <fr>Avorté</fr>
+        </string>
+        <string id="access_rights">
+            <en>Access rights</en>
+            <fr>Droits d'accès</fr>
+        </string>
+        <string id="account_manager">
+            <en>Account manager</en>
+            <fr>Gestion des comptes</fr>
+        </string>
+        <string id="actions">
+            <en>Actions</en>
+            <fr>Actions</fr>
+        </string>
+        <string id="add">
+            <en>Add</en>
+            <fr>Ajouter</fr>
+        </string>
+        <string id="add_user">
+            <en>Add user account</en>
+            <fr>Ajouter compte utilisateur</fr>
+        </string>
+        <string id="confirm_password">
+            <en>Confirm password</en>
+            <fr>Confirmer le mot de passe</fr>
+        </string>
+        <string id="confirm_your_password">
+            <en>Confirm your password</en>
+            <fr>Confirmez votre mot de passe</fr>
+        </string>
+        <string id="connection">
+            <en>Connection</en>
+            <fr>Connection</fr>
+        </string>
+        <string id="current">
+            <en>Current</en>
+            <fr>Courant</fr>
+        </string>
+        <string id="current_password">
+            <en>Current password</en>
+            <fr>Mot de passe actuel</fr>
+        </string>
+        <!-- Emergency stop widget traduction-->
+        <string id="emergency_stop">
+            <en>The system was stopped, be careful before restarting the applications !</en>
+            <fr>Le système a été arrêt, faite attention avant de redémarrer les applications !</fr>
+        </string>
+        <string id="release_emergency_stop">
+            <en>Release emergency stop</en>
+            <fr>Déverrouillé l'arrêt d'urgence</fr>
+        </string>
+        <!-- End of traduction -->
+        <string id="disconnection">
+            <en>Disconnection</en>
+            <fr>Déconnection</fr>
+        </string>
+        <string id="exit">
+            <en>Exit</en>
+            <fr>Quitter</fr>
+        </string>
+        <string id="invalid_password">
+            <en>Invalid password !</en>
+            <fr>Mot de passe incorrect !</fr>
+        </string>
+        <string id="invalid_user_id">
+            <en>Invalid user id !</en>
+            <fr>Identifiant utilisateur incorrect !</fr>
+        </string>
+        <string id="launch">
+            <en>Launch</en>
+            <fr>Lanceur</fr>
+        </string>
+        <string id="login">
+            <en>Login</en>
+            <fr>Connexion</fr>
+        </string>
+        <string id="modif">
+            <en>Modif</en>
+            <fr>Modifier</fr>
+        </string>
+        <string id="modif_user_account">
+            <en>Modif user account</en>
+            <fr>Modifier compte utilisateur</fr>
+        </string>
+        <string id="name">
+            <en>Name</en>
+            <fr>Nom</fr>
+        </string>
+        <string id="new_password">
+            <en>New password</en>
+            <fr>Nouveau mot de passe</fr>
+        </string>
+        <string id="next_step">
+            <en>Next step</en>
+            <fr>Etape suivante</fr>
+        </string>
+        <string id="off">
+            <en>Off</en>
+            <fr>Off</fr>
+        </string>
+        <string id="ok">
+            <en>Ok</en>
+            <fr>Ok</fr>
+        </string>
+        <string id="on">
+            <en>On</en>
+            <fr>On</fr>
+        </string>
+        <string id="open">
+            <en>Open</en>
+            <fr>Ouvrir</fr>
+        </string> 
+        <string id="close">
+            <en>Close</en>
+            <fr>Fermer</fr>
+        </string>
+        <string id="open_mission">
+            <en>Open mission</en>
+            <fr>Ouvrir une mission</fr>
+        </string>
+        <string id="parameters">
+            <en>Parameters</en>
+            <fr>Paramètres</fr>
+        </string>
+        <string id="password">
+            <en>Password</en>
+            <fr>Mot de passe</fr>
+        </string>
+        <string id="preempt">
+            <en>Preempt</en>
+            <fr>Préempter</fr>
+        </string>
+        <string id="remove">
+            <en>Remove</en>
+            <fr>Supprimer</fr>
+        </string>
+        <string id="remove_user_account">
+            <en>Remove user account</en>
+            <fr>Supprimer compte utilisateur</fr>
+        </string>
+        <string id="rights">
+            <en>Rights</en>
+            <fr>Droits</fr>
+        </string>
+        <string id="select_access_rights">
+            <en>Select access rights</en>
+            <fr>Sélectionner un droits accès</fr>
+        </string>
+        <string id="select_user">
+            <en>Select user</en>
+            <fr>Sélectionner un utilisateur</fr>
+        </string>
+        <string id="settings">
+            <en>Settings</en>
+            <fr>Paramètres</fr>
+        </string>
+        <string id="fields_not_filled">
+            <en>Some fields are not filled</en>
+            <fr>Certains champs ne sont pas remplis</fr>
+        </string>
+        <string id="start">
+            <en>Start</en>
+            <fr>Démarrer</fr>
+        </string>
+        <string id="status">
+            <en>Status</en>
+            <fr>Statut</fr>
+        </string>
+        <string id="stop">
+            <en>Stop</en>
+            <fr>Arrêter</fr>
+        </string>
+        <string id="passwords_different">
+            <en>The passwords are different</en>
+            <fr>Les mots de passe sont différents</fr>
+        </string>
+        <string id="add_user_success">
+            <en>The user was added successfully</en>
+            <fr>L'utilisateur a été ajouté avec succès</fr>
+        </string>
+        <string id="user_mv_success">
+            <en>The user was modified successfully</en>
+            <fr>L'utilisateur a été modifié avec succès</fr>
+        </string>
+        <string id="user_rm_success">
+            <en>The user was removed successfully</en>
+            <fr>L'utilisateur a été supprimé avec succès</fr>
+        </string>
+        <string id="time">
+            <en>Time</en>
+            <fr>Temps</fr>
+        </string>
+        <string id="user">
+            <en>User</en>
+            <fr>Utilisateur</fr>
+        </string>
+        <string id="user_account">
+            <en>User account</en>
+            <fr>Compte utilisateur</fr>
+        </string>
+        <string id="user_guide">
+            <en>User guide</en>
+            <fr>Guide utilisateur</fr>
+        </string>
+        <string id="user_id">
+            <en>User id</en>
+            <fr>Identifiant</fr>
+        </string>
+        <string id="user_list">
+            <en>User list</en>
+            <fr>Liste des utilisateurs</fr>
+        </string>
+        <string id="traductor">
+            <en>Traductor</en>
+            <fr>Traducteur</fr>
+        </string>
+        <string id="language">
+            <en>Language</en>
+            <fr>Langue</fr>
+        </string> 
+    </strings>
+</resources>

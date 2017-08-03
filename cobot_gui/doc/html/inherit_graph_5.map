@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classcobot__gui_1_1account_1_1accounts__ui_1_1AddUserAccountWidget.html" title="Add user account ui. " alt="" coords="141,5,326,46"/>
+<area shape="rect" id="node3" href="$classcobot__gui_1_1account_1_1accounts__ui_1_1ModifUserAccountWidget.html" title="Modif user account ui. " alt="" coords="137,70,329,111"/>
+<area shape="rect" id="node4" href="$classcobot__gui_1_1account_1_1accounts__ui_1_1RemoveUserAccountWidget.html" title="Remove user account ui. " alt="" coords="129,135,338,177"/>
+<area shape="rect" id="node5" href="$classcobot__gui_1_1account_1_1accounts__ui_1_1Widget.html" title="cobot_gui.account.accounts\l_ui.Widget" alt="" coords="141,201,326,242"/>
+<area shape="rect" id="node6" href="$classcobot__gui_1_1python__qt__extend_1_1qpopup_1_1QPopup.html" title="Popup object. " alt="" coords="151,266,316,307"/>
+<area shape="rect" id="node7" href="$classcobot__gui_1_1account_1_1accounts__ui_1_1UserAccountPopup.html" title="User accounts popup ui. " alt="" coords="391,233,577,274"/>
+<area shape="rect" id="node8" href="$classcobot__gui_1_1plugin_1_1plugin__provider_1_1PluginsGroupPopup.html" title="cobot_gui.plugin.plugin\l_provider.PluginsGroupPopup" alt="" coords="387,298,581,339"/>
+</map>

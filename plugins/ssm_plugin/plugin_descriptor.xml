@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf8'?>
+<plugin>
+  <import module="ssm_plugin.ssm_introspection" class="SSMIntrospection"/>
+  <description>This plugin allow the execution and interaction with a SCXML described Smart State Machine.</description>
+  <version>1.0.0</version>
+  <setup>
+    <icon>${ssm_plugin}/resources/images/ic_sub_ssm.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters>
+        <param name="ssm_server_name" value="/ssm"/>
+    </parameters>
+  </setup>
+</plugin>

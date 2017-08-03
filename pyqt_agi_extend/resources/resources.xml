@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<resources>
+    <images path="${pyqt_agi_extend}/resources/icons">
+        <img label="jHand"  src="handle.png"              width="90"  height="90"  auto-scale="true" preload="false"/>
+        <img label="joyX"   src="horizontal_joystick.png" width="256" height="256" auto-scale="true" preload="false"/>
+        <img label="joyXY"  src="simple_joystick.png"     width="256" height="256" auto-scale="true" preload="false"/>
+        <img label="joyY"   src="vertical_joystick.png"   width="256" height="256" auto-scale="true" preload="false"/>
+    </images>
+    <uis path="${pyqt_agi_extend}/resources/ui">
+        <ui label="keyboard" src="numeric_keyboard.ui"/>
+    </uis>
+    <yamls />
+    <traductions />
+    <styles theme="default">
+        <sheet name="QAgiSilderButton">
+            <sheet name="background">
+                <default>
+                    QLabel {
+                        background-color:#646464;
+                        border: 1px solid black;
+                        border-radius: 5px;
+                    }
+                </default>
+            </sheet>
+            <sheet name="off">
+                <default>
+                    QLabel {
+                        background-color: qlineargradient(x1:0.5, y1:0.994318, x2:0.507752, y2:0, stop:0 rgba(146,146,146,255), stop:1 rgba(146,146,146,150));
+                        border: 1px solid black;
+                        border-radius: 5px;
+                        font-size: 14pt;
+                        color: #ffffff;
+                        qproperty-alignment: AlignCenter;
+                    }
+                </default>
+            </sheet>
+            <sheet name="on">
+                <default>
+                    QLabel {
+                        background-color: qlineargradient(x1:0.5, y1:0.994318,x2:0.507752, y2:0,stop:0 rgba(51,166,255,255),stop:1 rgba(51,166,255,150));
+                        border: 1px solid black;
+                        border-radius: 5px;
+                        font-size: 14pt;
+                        color: #ffffff;
+                        qproperty-alignment: AlignCenter;
+                    }
+                </default>
+            </sheet>
+        </sheet>
+    </styles>
+</resources>

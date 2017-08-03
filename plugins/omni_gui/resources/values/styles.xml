@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+   <styles> 
+        <style id="rviz">
+            background-color: #1c2434;
+            border-radius: 5px;
+        </style>
+        <style id="dashboard_background">
+            background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1c2434, stop: 1 #4d596f);
+            border-radius:5px;
+        </style>
+        <style id="dashboard_text">
+            background-color: transparent;
+            font-size: 18pt;
+            font-weight:40;
+            color: #ffffff;
+        </style>
+    </styles>
+</resources> 

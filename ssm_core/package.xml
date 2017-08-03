@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>ssm_core</name>
+  <version>0.0.0</version>
+  <description>The ssm_core_v2 package</description>
+  <maintainer email="rosace@todo.todo">rosace</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>smach</build_depend>
+  <build_depend>smach_ros</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  
+  <run_depend>rospy</run_depend>
+  <run_depend>smach</run_depend>
+  <run_depend>smach_ros</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+
+</package>

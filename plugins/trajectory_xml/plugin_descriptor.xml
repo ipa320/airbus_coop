@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<plugin>
+  <import module="trajectory_xml.plugin" class="TrajectoryXmlPlugin"/>
+  <description>A Python plugin for displaying the trajectory xml interface plugin in cobot_gui.</description>
+  <version>1.0</version>
+  <setup>
+    <icon>${trajectory_xml}/resources/images/ic_launch.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>
