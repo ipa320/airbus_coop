@@ -10,23 +10,10 @@
   
   <buildtool_depend>catkin</buildtool_depend>
   
-  <run_depend>aldo_plugin</run_depend>
-  <run_depend>application_status</run_depend>
-  <run_depend>avancement_mission_plugin</run_depend>
-  <run_depend>avancement_station_plugin</run_depend>
-  <run_depend>etat_materiel_plugin</run_depend>
-  <run_depend>omni_gui</run_depend>
-  <run_depend>plugin_helicoptere</run_depend>
   <run_depend>plugin_log_manager</run_depend>
   <run_depend>plugin_node_manager</run_depend>
   <run_depend>plugin_rqt</run_depend>
   <run_depend>plugin_rviz</run_depend>
-  <run_depend>sara_learning_plugin</run_depend>
-  <run_depend>ssm_plugin</run_depend>
-  <run_depend>trajectory_xml</run_depend>
-  <run_depend>tuto_plugin</run_depend>
-  <run_depend>ur10_effector_plugin</run_depend>
-  <run_depend>ur10_plugin</run_depend>
   
   <export>
    <metapackage/>

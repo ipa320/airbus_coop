@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="scxml_file"      	value="${ssm_core}/resources/TestParallel2.scxml"/>
+  <param name="scxml_file"      	value="${ssm_core}/resources/Test.scxml"/>
   <param name="ssm_server_name" 	value="ssm"/>
   <param name="ssm_log_path"    	value="${ssm_core}/ssm_log/"/>
   <param name="ssm_autostart"   	value="True"/>

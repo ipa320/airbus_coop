@@ -16,7 +16,7 @@ install(DIRECTORY config doc launch resources
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS scripts/cobot_gui_node.py scripts/main.py src/cobot_gui/autorun.py
+catkin_install_python(PROGRAMS scripts/cobot_gui_node.py src/cobot_gui/autorun.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
