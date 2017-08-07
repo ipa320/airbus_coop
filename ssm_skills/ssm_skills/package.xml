@@ -1,0 +1,18 @@
+<package>
+  <name>ssm_skills</name>
+  <version>1.0.0</version>
+  <description>
+  This package provides ssm skills components.
+  </description>
+  <maintainer email="ludovic.delval.external@airbus.com">Ludovic DELVAL</maintainer>
+  
+  <license>AIRBUS</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend/>
+  
+  <export>
+   <metapackage />
+  </export>
+</package>

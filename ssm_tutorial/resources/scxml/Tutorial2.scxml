@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="Tutorial2" qt:editorversion="4.2.1" initial="Parent1">
+    <qt:editorinfo initialGeometry="74.83;-3.80;-20;-20;40;40"/>
+    <state id="Parent1">
+        <qt:editorinfo geometry="323.65;51.14;-146.48;-265.26;715.93;420.65" scenegeometry="323.65;51.14;177.17;-214.12;715.93;420.65"/>
+        <transition type="external" event="Success" target="Parallel1">
+            <qt:editorinfo endTargetFactors="57.91;3.01" startTargetFactors="57.18;96.99" movePoint="-37.36;3.85"/>
+        </transition>
+        <initial>
+            <qt:editorinfo geometry="-61.54;-118.09;-20;-20;40;40" scenegeometry="262.11;-66.95;242.11;-86.95;40;40"/>
+            <transition type="external" target="Child1">
+                <qt:editorinfo movePoint="-37.98;10.77"/>
+            </transition>
+        </initial>
+        <state id="Child1">
+            <qt:editorinfo geometry="-62.91;21.59;-60;-50;120;100" scenegeometry="260.74;72.73;200.74;22.73;120;100"/>
+            <transition type="external" event="Ok" target="Child2">
+                <qt:editorinfo endTargetFactors="8.82;53.32" movePoint="11.88;38.15"/>
+            </transition>
+            <transition type="external" event="Error" target="Final_9">
+                <qt:editorinfo movePoint="-21.39;30.20"/>
+            </transition>
+        </state>
+        <state id="Child2">
+            <qt:editorinfo geometry="158.01;17.75;-60;-217.77;337.15;325.77" scenegeometry="481.66;68.89;421.66;-148.88;337.15;325.77"/>
+            <transition type="external" event="Success" target="Final">
+                <qt:editorinfo movePoint="12.58;-1.33"/>
+            </transition>
+            <transition type="external" event="Fail" target="Final_8">
+                <qt:editorinfo movePoint="-17.62;39.01"/>
+            </transition>
+            <initial>
+                <qt:editorinfo geometry="-9.28;-110.93;-20;-20;40;40" scenegeometry="472.38;-42.04;452.38;-62.04;40;40"/>
+                <transition type="external" target="Child21"/>
+            </initial>
+            <state id="Child21">
+                <qt:editorinfo geometry="102.88;-105.50;-60;-50;120;100" scenegeometry="584.54;-36.61;524.54;-86.61;120;100"/>
+                <transition type="external" event="Succes" target="Child22">
+                    <qt:editorinfo movePoint="-27.13;16.27"/>
+                </transition>
+                <transition type="external" event="Fail" target="Final_15">
+                    <qt:editorinfo movePoint="6.77;10.85"/>
+                </transition>
+            </state>
+            <state id="Child22">
+                <qt:editorinfo geometry="161.20;34.19;-60;-50;120;100" scenegeometry="642.86;103.08;582.86;53.08;120;100"/>
+                <transition type="external" event="Success" target="Final_14">
+                    <qt:editorinfo movePoint="25.76;6.78"/>
+                </transition>
+            </state>
+            <final id="Final_14">
+                <qt:editorinfo geometry="2.93;35.54;-20;-20;40;40" scenegeometry="484.59;104.43;464.59;84.43;40;40"/>
+            </final>
+            <final id="Final_15">
+                <qt:editorinfo geometry="237.15;-108.21;-20;-20;40;40" scenegeometry="718.81;-39.32;698.81;-59.32;40;40"/>
+            </final>
+        </state>
+        <final id="Final">
+            <qt:editorinfo geometry="516.03;-115.54;-20;-20;40;40" scenegeometry="839.68;-64.40;819.68;-84.40;40;40"/>
+        </final>
+        <final id="Final_8">
+            <qt:editorinfo geometry="510.16;115.39;-20;-20;40;40" scenegeometry="833.81;166.53;813.81;146.53;40;40"/>
+        </final>
+        <final id="Final_9">
+            <qt:editorinfo geometry="12.96;114.84;-20;-20;40;40" scenegeometry="336.61;165.98;316.61;145.98;40;40"/>
+        </final>
+        <transition type="external" event="Error" target="Final_11">
+            <qt:editorinfo movePoint="6.30;-1.26"/>
+        </transition>
+        <transition type="external" event="Fail" target="Parallel1">
+            <qt:editorinfo endTargetFactors="73.10;3.01" startTargetFactors="72.79;95.34" movePoint="44.05;5.03"/>
+        </transition>
+    </state>
+    <state id="State3">
+        <qt:editorinfo geometry="611.88;823.33;-255.50;-50;232;100" scenegeometry="611.88;823.33;356.38;773.33;232;100"/>
+        <transition type="external" event="Out" target="Final_4">
+            <qt:editorinfo movePoint="20.14;7.55"/>
+        </transition>
+    </state>
+    <final id="Final_4">
+        <qt:editorinfo geometry="787.83;823.33;-20;-20;40;40" scenegeometry="787.83;823.33;767.83;803.33;40;40"/>
+    </final>
+    <parallel id="Parallel1">
+        <qt:editorinfo geometry="454.61;571.23;-295.64;-306.66;739.56;449.54" scenegeometry="454.61;571.23;158.97;264.57;739.56;449.54"/>
+        <transition type="external" event="Fail" target="State3" cond="ChildParallel1.Fail AND ChildParallel2.Success ">
+            <qt:editorinfo endTargetFactors="29.92;10.34" startTargetFactors="36.51;97.21" movePoint="-29.50;3.85"/>
+        </transition>
+        <state id="ChildParallel2">
+            <qt:editorinfo geometry="307.86;-179.75;-60;-50;151;100" scenegeometry="762.47;391.48;702.47;341.48;151;100"/>
+        </state>
+        <state id="ChildParallel1">
+            <qt:editorinfo geometry="-180.26;-94.25;-92.86;-144.56;481.64;360.43" scenegeometry="274.35;476.98;181.49;332.42;481.64;360.43"/>
+            <state id="ChildParallel10">
+                <qt:editorinfo geometry="103.73;-22.57;-51.11;-48.24;157.05;118.48" scenegeometry="378.08;454.41;326.97;406.17;157.05;118.48"/>
+                <transition type="external" event="Success" target="ChildParallel11">
+                    <qt:editorinfo movePoint="39.89;3.07"/>
+                </transition>
+                <transition type="external" event="Fail" target="Final_13">
+                    <qt:editorinfo localGeometry="197.18;0"/>
+                </transition>
+            </state>
+            <state id="ChildParallel11">
+                <qt:editorinfo geometry="115.78;145.87;-60;-50;148;100" scenegeometry="390.13;622.85;330.13;572.85;148;100"/>
+                <transition type="external" event="Success" target="Final_12">
+                    <qt:editorinfo movePoint="12.59;-22.66"/>
+                </transition>
+                <transition type="external" event="Fail" target="Final_13"/>
+            </state>
+            <initial>
+                <qt:editorinfo geometry="-30.77;-44.76;-20;-20;40;40" scenegeometry="243.58;432.22;223.58;412.22;40;40"/>
+                <transition type="external" target="ChildParallel10">
+                    <qt:editorinfo endTargetFactors="6.22;23.04"/>
+                </transition>
+            </initial>
+            <final id="Final_12">
+                <qt:editorinfo geometry="-45.31;145.87;-20;-20;40;40" scenegeometry="229.04;622.85;209.04;602.85;40;40"/>
+            </final>
+            <final id="Final_13">
+                <qt:editorinfo geometry="325.38;145.87;-20;-28;46;48" scenegeometry="599.73;622.85;579.73;594.85;46;48"/>
+            </final>
+        </state>
+        <transition type="external" event="Success" target="State3">
+            <qt:editorinfo endTargetFactors="73.58;12.93" movePoint="32.72;8.82"/>
+        </transition>
+    </parallel>
+    <final id="Final_11">
+        <qt:editorinfo geometry="978.20;-3.80;-20;-20;40;40" scenegeometry="978.20;-3.80;958.20;-23.80;40;40"/>
+    </final>
+</scxml>

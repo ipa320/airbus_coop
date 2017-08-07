@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<skills>
+	<skill name="Input"		pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="Input"/>
+	<skill name="isPrime"	pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="isPrime"/>
+	<skill name="Primes"	pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="Primes"/>
+ </skills>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="Test_mission" qt:editorversion="4.2.2" initial="Init">
+    <qt:editorinfo initialGeometry="725.71;57.90;-20;-20;40;40"/>
+    <state id="Init">
+        <qt:editorinfo scenegeometry="345.22;264.82;284.69;172.98;882.03;658.84" geometry="345.22;264.82;-60.53;-91.84;882.03;658.84"/>
+        <initial>
+            <qt:editorinfo scenegeometry="374.55;302.67;354.55;282.67;40;40" geometry="29.33;37.85;-20;-20;40;40"/>
+            <transition type="external" target="ReadHome"/>
+        </initial>
+        <state id="Home">
+            <qt:editorinfo scenegeometry="572.21;466.49;512.21;416.49;120;100" geometry="226.99;201.67;-60;-50;120;100"/>
+            <transition type="external" event="succeeded" target="StabInit">
+                <qt:editorinfo movePoint="45.83;5.09"/>
+            </transition>
+            <datamodel>
+                <data id="CartesianSpeed" expr="1.2"/>
+                <data id="CartesianAcc" expr="0.6"/>
+                <data id="skill" expr="UR10CartesianMotion">
+                    <qt:editorinfo geometry="1125.21;2946.74;0;0;0;0"/>
+                </data>
+            </datamodel>
+        </state>
+        <state id="StabInit">
+            <qt:editorinfo scenegeometry="572.47;639.64;512.47;589.64;120;100" geometry="227.25;374.82;-60;-50;120;100"/>
+            <transition type="external" event="success" target="Final_1">
+                <qt:editorinfo movePoint="36.67;9.17"/>
+            </transition>
+            <datamodel>
+                <data id="skill" expr="InitStabilizatorSkill"/>
+            </datamodel>
+        </state>
+        <final id="Final_1">
+            <qt:editorinfo scenegeometry="572.47;767.22;552.47;747.22;40;40" geometry="227.25;502.40;-20;-20;40;40"/>
+        </final>
+        <transition type="external" event="success" target="Mission">
+            <qt:editorinfo movePoint="42.78;6.11"/>
+        </transition>
+        <state id="ReadHome">
+            <qt:editorinfo scenegeometry="572.21;302.51;512.21;252.51;120;100" geometry="226.99;37.69;-60;-50;120;100"/>
+            <transition type="external" event="success" target="Home">
+                <qt:editorinfo movePoint="39.72;4.07"/>
+            </transition>
+            <datamodel>
+                <data id="skill" expr="readTargetPoint"/>
+                <data id="station_id" expr="Home"/>
+                <data id="point_id" expr="Home">
+                    <qt:editorinfo geometry="-44.05;38.87;0;0;0;0"/>
+                </data>
+            </datamodel>
+        </state>
+    </state>
+    <state id="Mission">
+        <qt:editorinfo scenegeometry="592.05;1335.56;70.17;900.54;1424.86;2188.04" geometry="592.05;1335.56;-521.88;-435.02;1424.86;2188.04"/>
+        <initial>
+            <qt:editorinfo scenegeometry="129.44;1245.93;109.44;1225.93;40;40" geometry="-465.20;-87.04;-20;-20;40;40"/>
+            <transition type="external" target="ReadMovePlateform"/>
+        </initial>
+        <state id="MovePlatform">
+            <qt:editorinfo scenegeometry="848.72;1224.98;509.61;1071.83;758.32;407.88" geometry="254.08;-110.58;-339.11;-153.15;758.32;407.88"/>
+            <initial>
+                <qt:editorinfo scenegeometry="619.67;1187.13;599.67;1167.13;40;40" geometry="-222.57;-41.74;-20;-20;40;40"/>
+                <transition type="external" target="MovaBase"/>
+            </initial>
+            <state id="MovaBase">
+                <qt:editorinfo scenegeometry="908.47;1191.76;774.66;1141.76;173.81;100" geometry="66.23;-37.11;-133.81;-50;173.81;100"/>
+                <transition type="external" event="success" target="MedMeshNav"/>
+                <datamodel>
+                    <data id="skill" expr="MovePlatform"/>
+                </datamodel>
+            </state>
+            <state id="MedMeshNav">
+                <qt:editorinfo scenegeometry="1181.45;1190.19;1045.03;1140.19;196.42;100" geometry="339.21;-38.68;-136.42;-50;196.42;100"/>
+                <transition type="external" event="success" target="Stabilize">
+                    <qt:editorinfo movePoint="37.89;5.41"/>
+                </transition>
+                <datamodel>
+                    <data id="skill" expr="ScanMatcherPlatform"/>
+                </datamodel>
+            </state>
+            <state id="Stabilize">
+                <qt:editorinfo scenegeometry="1090.77;1321.10;1030.77;1271.10;120;100" geometry="248.53;93.53;-60;-50;120;100"/>
+                <transition type="external" event="success" target="Final_3"/>
+                <datamodel>
+                    <data id="skill" expr="StabilizeSkill"/>
+                </datamodel>
+            </state>
+            <final id="Final_3">
+                <qt:editorinfo scenegeometry="764.67;1316.62;744.67;1296.62;40;40" geometry="-77.57;89.05;-20;-20;40;40"/>
+            </final>
+            <transition type="external" event="success" target="ReadMoveArm">
+                <qt:editorinfo movePoint="50.53;2.59"/>
+            </transition>
+        </state>
+        <state id="Process">
+            <qt:editorinfo scenegeometry="831.84;2043.75;342.43;1802.78;1132.60;1199.27" geometry="239.79;708.19;-489.41;-240.97;1132.60;1199.27"/>
+            <initial>
+                <qt:editorinfo scenegeometry="338.44;1794.54;318.44;1774.54;40;40" geometry="-304.24;21.57;-20;-20;40;40"/>
+                <transition type="external" target="CamAcq">
+                    <qt:editorinfo endTargetFactors="1.29;25.40"/>
+                </transition>
+            </initial>
+            <state id="CamAcq">
+                <qt:editorinfo scenegeometry="818;2096.71;636.12;1914.74;804.76;559.86" geometry="-13.84;52.96;-181.88;-181.97;804.76;559.86"/>
+                <initial>
+                    <qt:editorinfo scenegeometry="503.86;1807.88;483.86;1787.88;40;40" geometry="-121.09;-32.31;-20;-20;40;40"/>
+                    <transition type="external" target="PtCamClose"/>
+                </initial>
+                <state id="PtCamClose">
+                    <qt:editorinfo scenegeometry="722.16;1798.31;585.74;1748.31;196.42;100" geometry="97.21;-41.88;-136.42;-50;196.42;100"/>
+                    <transition type="external" event="succeeded" target="PtCam"/>
+                    <datamodel>
+                        <data id="skill" expr="UR10CartesianMotion"/>
+                        <data id="CartesianSpeed" expr="1.2"/>
+                        <data id="useOffset" expr="1">
+                            <qt:editorinfo geometry="225.21;1159.39;0;0;0;0"/>
+                        </data>
+                        <data id="offset_z" expr="0.01"/>
+                        <data id="CartesianAcc" expr="0.6">
+                            <qt:editorinfo geometry="165.21;1099.39;0;0;0;0"/>
+                        </data>
+                        <data id="useCorrection" expr="1">
+                            <qt:editorinfo geometry="195.21;1129.39;0;0;0;0"/>
+                        </data>
+                        <data id="tool" expr="1">
+                            <qt:editorinfo geometry="-14.05;1556.23;0;0;0;0"/>
+                        </data>
+                    </datamodel>
+                </state>
+                <state id="PtCam">
+                    <qt:editorinfo scenegeometry="992.89;1781.81;856.47;1731.81;196.42;100" geometry="367.94;-58.38;-136.42;-50;196.42;100"/>
+                    <transition type="external" event="succeeded" target="CameraTriggerPt"/>
+                    <datamodel>
+                        <data id="CartesianSpeed" expr="0.1">
+                            <qt:editorinfo geometry="315.21;1249.39;0;0;0;0"/>
+                        </data>
+                        <data id="CartesianAcc" expr="0.2">
+                            <qt:editorinfo geometry="345.21;1279.39;0;0;0;0"/>
+                        </data>
+                        <data id="useCorrection" expr="1">
+                            <qt:editorinfo geometry="375.21;1309.39;0;0;0;0"/>
+                        </data>
+                        <data id="skill" expr="UR10CartesianMotion">
+                            <qt:editorinfo geometry="1185.21;3006.74;0;0;0;0"/>
+                        </data>
+                        <data id="tool" expr="1">
+                            <qt:editorinfo geometry="285.21;1219.39;0;0;0;0"/>
+                        </data>
+                    </datamodel>
+                </state>
+                <state id="CameraTriggerPt">
+                    <qt:editorinfo scenegeometry="1154.06;1908.24;1000.25;1858.24;213.81;116" geometry="529.11;69.35;-153.81;-50;213.81;116"/>
+                    <transition type="external" event="success" target="Final_4"/>
+                    <transition type="external" event="approach" target="PtCamClose">
+                        <qt:editorinfo endTargetFactors="89.70;92.14"/>
+                    </transition>
+                    <transition type="external" event="fail" target="CamOffset"/>
+                    <datamodel>
+                        <data id="skill" expr="CameraUR10_Trigger"/>
+                    </datamodel>
+                </state>
+                <final id="Final_4">
+                    <qt:editorinfo scenegeometry="1186.17;2079.53;1166.17;2059.53;40;40" geometry="561.22;239.34;-20;-20;40;40"/>
+                </final>
+                <state id="CamOffset">
+                    <qt:editorinfo scenegeometry="992.64;2146.48;932.64;2096.48;120;100" geometry="367.69;307.59;-60;-50;120;100"/>
+                    <transition type="external" event="success" target="PtCam">
+                        <qt:editorinfo endTargetFactors="41.46;92.18"/>
+                    </transition>
+                    <transition type="external" event="fail" target="Final_4"/>
+                    <datamodel>
+                        <data id="skill" expr="ComputeOffset"/>
+                    </datamodel>
+                </state>
+                <transition type="external" event="fail" target="Final_5">
+                    <qt:editorinfo movePoint="10.83;21.65"/>
+                </transition>
+                <transition type="external" event="success" target="Vissage">
+                    <qt:editorinfo movePoint="50.52;5.41"/>
+                </transition>
+            </state>
+            <final id="Final_5">
+                <qt:editorinfo scenegeometry="347.38;2386.76;327.38;2366.76;40;40" geometry="-295.30;612.49;-20;-20;40;40"/>
+            </final>
+            <state id="Vissage">
+                <qt:editorinfo scenegeometry="942.93;2677.85;799.44;2537.25;612.20;434.44" geometry="111.09;634.10;-143.49;-140.60;612.20;434.44"/>
+                <initial>
+                    <qt:editorinfo scenegeometry="706.54;2397.35;686.54;2377.35;40;40" geometry="-55;-21.38;-20;-20;40;40"/>
+                    <transition type="external" target="PtClose"/>
+                </initial>
+                <state id="PtClose">
+                    <qt:editorinfo scenegeometry="890.44;2397.58;754.02;2347.58;196.42;100" geometry="128.90;-21.15;-136.42;-50;196.42;100"/>
+                    <transition type="external" event="succeeded" target="PtVis"/>
+                    <datamodel>
+                        <data id="tool" expr="2">
+                            <qt:editorinfo geometry="405.21;2226.74;0;0;0;0"/>
+                        </data>
+                        <data id="CartesianSpeed" expr="0.6">
+                            <qt:editorinfo geometry="435.21;2256.74;0;0;0;0"/>
+                        </data>
+                        <data id="CartesianAcc" expr="0.6">
+                            <qt:editorinfo geometry="465.21;2286.74;0;0;0;0"/>
+                        </data>
+                        <data id="useCorrection" expr="1">
+                            <qt:editorinfo geometry="495.21;2316.74;0;0;0;0"/>
+                        </data>
+                        <data id="useOffset" expr="1">
+                            <qt:editorinfo geometry="525.21;2346.74;0;0;0;0"/>
+                        </data>
+                        <data id="offset_z" expr="0.01">
+                            <qt:editorinfo geometry="555.21;2376.74;0;0;0;0"/>
+                        </data>
+                        <data id="skill" expr="UR10CartesianMotion">
+                            <qt:editorinfo geometry="1215.21;3036.74;0;0;0;0"/>
+                        </data>
+                    </datamodel>
+                </state>
+                <state id="PtVis">
+                    <qt:editorinfo scenegeometry="1147.96;2394.20;1011.54;2344.20;196.42;100" geometry="386.42;-24.53;-136.42;-50;196.42;100"/>
+                    <transition type="external" event="succeeded" target="TriggerVisseuse">
+                        <qt:editorinfo movePoint="48.72;-5.41"/>
+                    </transition>
+                    <datamodel>
+                        <data id="CartesianAcc" expr="0.1">
+                            <qt:editorinfo geometry="585.21;2406.74;0;0;0;0"/>
+                        </data>
+                        <data id="useCorrection" expr="1">
+                            <qt:editorinfo geometry="615.21;2436.74;0;0;0;0"/>
+                        </data>
+                        <data id="skill" expr="UR10CartesianMotion">
+                            <qt:editorinfo geometry="1245.21;3066.74;0;0;0;0"/>
+                        </data>
+                    </datamodel>
+                </state>
+                <state id="TriggerVisseuse">
+                    <qt:editorinfo scenegeometry="1150.25;2564.54;1013.83;2514.54;196.42;116" geometry="388.71;147.11;-136.42;-50;196.42;116"/>
+                    <transition type="external" event="succeeded" target="PtCloseOut"/>
+                    <transition type="external" event="failed" target="PtCloseOut">
+                        <qt:editorinfo endTargetFactors="91.94;75.46"/>
+                    </transition>
+                    <datamodel>
+                        <data id="skill" expr="UR10TriggerAction"/>
+                    </datamodel>
+                </state>
+                <state id="PtCloseOut">
+                    <qt:editorinfo scenegeometry="774.47;2548.03;638.05;2498.03;196.42;100" geometry="12.93;129.30;-136.42;-50;196.42;100"/>
+                    <transition type="external" event="succeeded" target="Final_6">
+                        <qt:editorinfo movePoint="43.31;5.41"/>
+                    </transition>
+                    <datamodel>
+                        <data id="tool" expr="2">
+                            <qt:editorinfo geometry="645.21;2466.74;0;0;0;0"/>
+                        </data>
+                        <data id="CartesianSpeed" expr="0.1">
+                            <qt:editorinfo geometry="675.21;2496.74;0;0;0;0"/>
+                        </data>
+                        <data id="CartesianAcc" expr="0.1">
+                            <qt:editorinfo geometry="705.21;2526.74;0;0;0;0"/>
+                        </data>
+                        <data id="useCorrection" expr="1">
+                            <qt:editorinfo geometry="735.21;2556.74;0;0;0;0"/>
+                        </data>
+                        <data id="useOffset" expr="1">
+                            <qt:editorinfo geometry="765.21;2586.74;0;0;0;0"/>
+                        </data>
+                        <data id="offset_z" expr="0.01">
+                            <qt:editorinfo geometry="795.21;2616.74;0;0;0;0"/>
+                        </data>
+                        <data id="skill" expr="UR10CartesianMotion">
+                            <qt:editorinfo geometry="1275.21;3096.74;0;0;0;0"/>
+                        </data>
+                    </datamodel>
+                </state>
+                <final id="Final_6">
+                    <qt:editorinfo scenegeometry="939.79;2671.32;919.79;2651.32;40;40" geometry="178.25;252.59;-20;-20;40;40"/>
+                </final>
+                <transition type="external" event="succeeded" target="Final_5"/>
+            </state>
+            <transition type="external" event="succeeded" target="ReadMoveArm">
+                <qt:editorinfo movePoint="-15.55;0" localGeometry="-94.80;-756.04" endTargetFactors="16.17;89.08"/>
+            </transition>
+            <transition type="external" event="fail" target="ReadMoveArm">
+                <qt:editorinfo movePoint="82.92;10.36" endTargetFactors="77.76;89.08" startTargetFactors="62.04;1.33"/>
+            </transition>
+        </state>
+        <transition type="external" event="Out" target="Final_9">
+            <qt:editorinfo movePoint="10.19;9.17"/>
+        </transition>
+        <state id="ReadMovePlateform">
+            <qt:editorinfo scenegeometry="244.87;1248.52;181.96;1198.52;192.83;100" geometry="-347.18;-87.04;-62.91;-50;192.83;100"/>
+            <datamodel>
+                <data id="skill" expr="readNavigationSequence"/>
+            </datamodel>
+            <transition type="external" event="next" target="MovePlatform">
+                <qt:editorinfo movePoint="27.21;2.59" endTargetFactors="1.31;42.76"/>
+            </transition>
+            <transition type="external" event="Out" target="Final_10">
+                <qt:editorinfo movePoint="20.73;7.77"/>
+            </transition>
+        </state>
+        <final id="Final_10">
+            <qt:editorinfo scenegeometry="295.40;1390.18;275.40;1370.18;40;40" geometry="-299.24;57.21;-20;-20;40;40"/>
+        </final>
+        <state id="ReadMoveArm">
+            <qt:editorinfo scenegeometry="876.34;1589.72;801.25;1539.72;150.19;100" geometry="284.29;254.16;-75.09;-50;150.19;100"/>
+            <transition type="external" event="next1" target="Process">
+                <qt:editorinfo movePoint="46.64;3.89" endTargetFactors="50.52;0.98"/>
+            </transition>
+            <datamodel>
+                <data id="skill" expr="readArmSequence"/>
+            </datamodel>
+            <transition type="external" event="next0" target="TransitionPoint">
+                <qt:editorinfo endTargetFactors="10.10;57.31"/>
+            </transition>
+            <transition type="external" event="Out" target="Unstabilize"/>
+        </state>
+        <state id="TransitionPoint">
+            <qt:editorinfo scenegeometry="1204.35;1598.78;1126.94;1548.78;154.81;100" geometry="612.30;263.22;-77.41;-50;154.81;100"/>
+            <datamodel>
+                <data id="CartesianSpeed" expr="1.2"/>
+                <data id="CartesianAcc" expr="0.6"/>
+                <data id="skill" expr="UR10CartesianMotion">
+                    <qt:editorinfo geometry="1125.21;2946.74;0;0;0;0"/>
+                </data>
+            </datamodel>
+            <transition type="external" event="succeeded" target="ReadMoveArm">
+                <qt:editorinfo movePoint="-42.76;10.36" localGeometry="-46.07;79.03;-152.31;62.19" endTargetFactors="92.57;84.62"/>
+            </transition>
+        </state>
+        <state id="Unstabilize">
+            <qt:editorinfo scenegeometry="487.15;1603.97;427.15;1553.97;120;100" geometry="-104.90;268.41;-60;-50;120;100"/>
+            <transition type="external" event="success" target="ReadMovePlateform">
+                <qt:editorinfo endTargetFactors="82.97;88.36"/>
+            </transition>
+        </state>
+    </state>
+    <final id="Final_9">
+        <qt:editorinfo scenegeometry="363.62;3243.02;343.62;3223.02;40;40" geometry="363.62;3243.02;-20;-20;40;40"/>
+    </final>
+    <datamodel>
+        <data id="skill_file"/>
+        <data id="sequence_file"/>
+        <data id="tool" expr="2"/>
+        <data id="CartesianSpeed" expr="1.2">
+            <qt:editorinfo geometry="64.98;975.79;0;0;0;0"/>
+        </data>
+        <data id="CartesianAcc" expr="0.6">
+            <qt:editorinfo geometry="94.98;1005.79;0;0;0;0"/>
+        </data>
+        <data id="useCorrection" expr="0"/>
+        <data id="useOffset" expr="0"/>
+        <data id="offset_x" expr="0"/>
+        <data id="offset_y" expr="0"/>
+        <data id="offset_z" expr="0"/>
+        <data id="seekCam" expr="0"/>
+    </datamodel>
+</scxml>
