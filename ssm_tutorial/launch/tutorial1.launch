@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="scxml_file"      value="${ssm_tutorial}/resources/scxml/Tutorial1.scxml"/>
-  <param name="ssm_log_path"    value="${ssm_tutorial}/ssm_log/"/>
+  <param name="scxml_file"      	value="${ssm_tutorial}/resources/scxml/Tutorial1.scxml"/>
+  <param name="ssm_server_name" 	value="ssm"/>
+  <param name="ssm_log_path"    	value="${ssm_core}/ssm_log/"/>
+  <param name="ssm_autostart"   	value="True"/>
   
   <node name="ssm_main" pkg="ssm_core" type="ssm_main.py" respawn="false" output="screen">  
   </node>
