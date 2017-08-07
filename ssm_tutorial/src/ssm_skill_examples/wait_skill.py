@@ -5,7 +5,7 @@
 # Copyright Airbus Group SAS 2015
 # All rigths reserved.
 #
-# File Name : loop_skill.py
+# File Name : time_skill.py
 # Authors : Ludovic DELVAL
 #
 # If you find any bug or if you have any question please contact
@@ -16,14 +16,7 @@
 ################################################################################
 
 import rospy
-import numpy
-import tf
 from ssm_core import ssm_state
-from std_msgs.msg import Int16
-
-import xml.etree.ElementTree as etree
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
-from common_lib.pt_xml import read_cartesian
 
 
 class waitTime(ssm_state.ssmState):
