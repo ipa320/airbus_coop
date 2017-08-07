@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="scxml_file"      value="${ssm_tutorial}/resources/scxml/Tutorial1.scxml"/>
+  <param name="ssm_log_path"    value="${ssm_tutorial}/ssm_log/"/>
+  
+  <node name="smach_viewer" pkg="smach_viewer" type="smach_viewer.py" respawn="false">  
+  </node>
+  
+  <node name="ssm_main" pkg="ssm_core" type="ssm_main.py" respawn="false" output="screen">  
+  </node>
+  
+  
+        
+</launch>

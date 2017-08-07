@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
-<launch>
-  <node pkg="cobot_gui" type="cobot_gui_node.py" name="cobot_gui_node" output="screen">
-    <param name="config" value="${cobot_gui}/config/default.conf"/>
-  </node>
-</launch>
+
+  <arg name="config_path" default="${cobot_gui}/config"/>
+  <arg name="file_name" default="default.conf"/>
+
+  <launch>
+    <node pkg="cobot_gui" type="cobot_gui_node.py" name="cobot_gui_node" output="screen">
+      <param name="config" value="$(arg config_path)/$(arg file_name)"/>
+    </node>
+  </launch>
