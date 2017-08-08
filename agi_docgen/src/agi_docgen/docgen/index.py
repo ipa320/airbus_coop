@@ -45,7 +45,7 @@ class AbstractIndex(HtmlElementTree):
         return html.tostring(self.getroot())
     
 class Index(AbstractIndex):
-    
+    os.system("cp -r "+env.ROSDOC_ROOT+"/resources %s"%env.OUTPUT)  
     def __init__(self, workspace_dir):
         AbstractIndex.__init__(self)
         
@@ -56,7 +56,7 @@ class Index(AbstractIndex):
         self._menu.generate(self)
         
 if __name__ == '__main__':
-    print os.path.join(env.ROSDOC_ROOT,'scripts')
+    print env.ROSDOC_GEN
     sys.path.append(os.path.join(env.ROSDOC_ROOT,'scripts'))
     
     index = Index(os.path.join(env.ROS_WS,"src"))

@@ -426,8 +426,8 @@ def digraph_test():
     
     print str(digraph)
     
-    digraph.saveDot("/home/ihm-pma/Documents/dot_test/digraph_test.dot")
-    digraph.dotToPng("/home/ihm-pma/Documents/dot_test/digraph_test.png")
+    digraph.saveDot("/tmp/digraph_test.dot")
+    digraph.dotToPng("/tmp/digraph_test.png")
 
 def getSubGraph(name):
     
@@ -472,7 +472,5 @@ if __name__ == '__main__':
 #     
 #     print str(graph)
 #     
-#     graph.saveDot("/home/ihm-pma/Documents/dot_test/subgraph_test.dot")
-#     graph.dotToPng("/home/ihm-pma/Documents/dot_test/subgraph_test.png")
-    
-    
+#     graph.saveDot("/tmp/subgraph_test.dot")
+#     graph.dotToPng("/tmp/subgraph_test.png")
