@@ -2,7 +2,7 @@
 <scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="TestParallel" qt:editorversion="4.2.1" initial="State_1">
     <qt:editorinfo initialGeometry="78.04;-600.64;-20;-20;40;40"/>
     <datamodel>
-        <data id="skill_file" expr="${ssm_core}/resources/register_skill/skills.xml"/>
+        <data id="skill_file" expr="${ssm_tutorial}/resources/register_skill/skills.xml"/>
     </datamodel>
     <state id="State_1">
         <qt:editorinfo scenegeometry="65.82;-499.43;5.82;-553;120;100" geometry="65.82;-499.43;-60;-53.57;120;100"/>
