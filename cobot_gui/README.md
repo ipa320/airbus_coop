@@ -6,6 +6,7 @@ This repository holds a graphical user interface tool
 ## Contents
 
 1. <a href="#1--execution">Execution</a>
+2. <a href="#2--configuration">Configuration</a>
 
 
 ## 1. Execution: <a id="1--execution"/> 
@@ -19,8 +20,6 @@ By default:
 roslaunch cobot_gui default.launch config_path:=${cobot_gui}/config file_name:=default.conf
 
 ```
-
-2. <a href="#2--configuration">Configuration</a>
 
 
 ## 2. Configuration: <a id="2--configuration"/> 
@@ -129,10 +128,10 @@ Then you can pick which dashboard(s) you want to use by calling it(them).
 </launcher>
 ```
 
-In the launcher, you specified which plugins you want to launch.
-You specifie in 'default-view' the plugin name you want to start on and in 'default-mode' if you want to start in manual('manu') or automatic('auto'). Some buttons can be hidden / not work in some mode depending on the plugin.
-In the 'src' you specifie the path to the plugins register xml file then you list the plugins you want to use. **The order matter !** . In will be in this order that your plugins are gonna be displayed.
-If you want to group multiple plugins under one button, you can use <group/> and specifie an icon.
+In the launcher, you choose which plugins you want to launch.
+You can set in 'default-view' the plugin name you want to start on and in 'default-mode' if you want to start in manual('manu') or automatic('auto'). Some buttons can be hidden / not work in some mode depending on the plugin.
+In the 'src' you enter the path to the plugins register xml file then you list the plugins you want to use. **The order matter !** . It will be in this order that your plugins are gonna be displayed.
+If you want to group multiple plugins under one button, you can use <group/> and set a path to an icon.
 
 
 
