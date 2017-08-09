@@ -364,7 +364,7 @@ class ssmMainStateMachine(ssmStateMachine):
         the state machine. 
         """
         ##Create a the log file if ssm_enable_log is True
-        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+        if(rospy.get_param("ssm_enable_log", False) == True):
             date_str = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_")
             self.userdata.logfile = get_pkg_dir_from_prefix(rospy.get_param("ssm_log_path", default="${ssm_core}/ssm_log/")) + date_str +"log.txt"
             try:
@@ -377,7 +377,7 @@ class ssmMainStateMachine(ssmStateMachine):
     
         container_outcome = super(ssmMainStateMachine,self).execute(parent_ud)
         
-        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+        if(rospy.get_param("ssm_enable_log", False) == True):
             file = open(self.userdata.logfile, "a")
             file.write(StrTimeStamped() +"SMART STATE MACHINE Finished \n")
             file.close()

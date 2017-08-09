@@ -13,7 +13,7 @@ class onEntry():
         self._script = script
     
     def execute(self, ud):
-        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+        if(rospy.get_param("ssm_enable_log", False) == True):
             file = open(ud.logfile, "a")
             for log in self._logs:
                 if(log == "outcome"):
@@ -44,7 +44,7 @@ class onExit():
             except RuntimeError as msg:
                 rospy.logerr("[SSM : onExit] : %s"%msg)
                 
-        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+        if(rospy.get_param("ssm_enable_log", False) == True):
             file = open(ud.logfile, "a")
             for log in self._logs:
                 if(log == "outcome"):
