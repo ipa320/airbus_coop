@@ -17,7 +17,9 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-	packages=['ssm_tutorial'],
+	packages=['ssm_tutorial',
+			'ssm_test_skills',
+			'ssm_skill_examples'],
 	package_dir={'': 'src'},
 )
 
