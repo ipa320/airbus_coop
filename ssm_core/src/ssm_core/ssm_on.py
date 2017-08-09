@@ -13,15 +13,16 @@ class onEntry():
         self._script = script
     
     def execute(self, ud):
-        file = open(ud.logfile, "a")
-        for log in self._logs:
-            if(log == "outcome"):
-                rospy.logwarn("[SSM : onEntry] : Log of the outcome expected. This is not possible in <onentry>")
-            elif(log == ""):
-                file.write(StrTimeStamped() + self._logs[log] +"\n")
-            else:
-                file.write(StrTimeStamped() + self._logs[log] + " " +str(ud[log])+"\n")
-        file.close()
+        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+            file = open(ud.logfile, "a")
+            for log in self._logs:
+                if(log == "outcome"):
+                    rospy.logwarn("[SSM : onEntry] : Log of the outcome expected. This is not possible in <onentry>")
+                elif(log == ""):
+                    file.write(StrTimeStamped() + self._logs[log] +"\n")
+                else:
+                    file.write(StrTimeStamped() + self._logs[log] + " " +str(ud[log])+"\n")
+            file.close()
         
         if(self._script is not None):        
             try:
@@ -43,13 +44,14 @@ class onExit():
             except RuntimeError as msg:
                 rospy.logerr("[SSM : onExit] : %s"%msg)
                 
-        file = open(ud.logfile, "a")
-        for log in self._logs:
-            if(log == "outcome"):
-                file.write(StrTimeStamped() + self._logs[log] + " " +str(outcome)+"\n")
-            elif(log == ""):
-                file.write(StrTimeStamped() + self._logs[log] +"\n")
-            else:
-                file.write(StrTimeStamped() + self._logs[log] + " " +str(ud[log])+"\n")
-        file.close()
+        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+            file = open(ud.logfile, "a")
+            for log in self._logs:
+                if(log == "outcome"):
+                    file.write(StrTimeStamped() + self._logs[log] + " " +str(outcome)+"\n")
+                elif(log == ""):
+                    file.write(StrTimeStamped() + self._logs[log] +"\n")
+                else:
+                    file.write(StrTimeStamped() + self._logs[log] + " " +str(ud[log])+"\n")
+            file.close()
         return outcome

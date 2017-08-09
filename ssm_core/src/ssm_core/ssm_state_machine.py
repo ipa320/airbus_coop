@@ -363,21 +363,23 @@ class ssmMainStateMachine(ssmStateMachine):
         this flag has been set, it will prevent more states from being added to
         the state machine. 
         """
-        ##Create a the log file
-        date_str = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_")
-        self.userdata.logfile = get_pkg_dir_from_prefix(rospy.get_param("ssm_log_path", default="${ssm_core}/ssm_log/")) + date_str +"log.txt"
-        try:
-            file = open(self.userdata.logfile, "a")
-            file.write(StrTimeStamped() +"SMART STATE MACHINE Started \n")
-            file.close()
-        except:
-            rospy.logerr("Log Fail !")
-            return 'preempt'
-        # This will prevent preempts from getting propagated to non-existent children
+        ##Create a the log file if ssm_enable_log is True
+        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+            date_str = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_")
+            self.userdata.logfile = get_pkg_dir_from_prefix(rospy.get_param("ssm_log_path", default="${ssm_core}/ssm_log/")) + date_str +"log.txt"
+            try:
+                file = open(self.userdata.logfile, "a")
+                file.write(StrTimeStamped() +"SMART STATE MACHINE Started \n")
+                file.close()
+            except:
+                rospy.logerr("Log Fail !")
+                return 'preempt'
+    
         container_outcome = super(ssmMainStateMachine,self).execute(parent_ud)
-
-        file = open(self.userdata.logfile, "a")
-        file.write(StrTimeStamped() +"SMART STATE MACHINE Finished \n")
-        file.close()
+        
+        if(rospy.get_param("ssm_enable_log", default="False")=="True"):
+            file = open(self.userdata.logfile, "a")
+            file.write(StrTimeStamped() +"SMART STATE MACHINE Finished \n")
+            file.close()
         
         return container_outcome        
