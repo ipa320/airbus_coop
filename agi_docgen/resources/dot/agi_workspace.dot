@@ -1,7 +1,0 @@
-digraph AgiWorksapce {
-nodesep=0.1;
-node [ shape=plaintext];
-ROS_WORKSPACE [ shape=box style=filled color="#6495ED"];
-src [ shape=box style=filled color="#D3D3D3"];
-ROS_WORKSPACE -> src;
-}
