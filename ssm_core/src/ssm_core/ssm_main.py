@@ -110,19 +110,7 @@ class ssmMain:
         if(msg.data):
             self._status_pub.publish(-1)
         else:
-            self._status_pub.publish(2)       
-
-
-    
-if __name__ == '__main__':
-    
-    rospy.init_node('SCXML', log_level=rospy.INFO)
-    
-    SSM = ssmMain()
-    if(rospy.get_param('ssm_autostart', False) == True):
-        if(SSM._init_SSM()):
-            SSM.start(Empty)
-    rospy.spin()
+            self._status_pub.publish(2)
     
     
     
