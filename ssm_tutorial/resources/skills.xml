@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <skills>
 	<!-- Tutotial 1 Skills -->
-	<skill name="Input"		pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="Input"/>
-	<skill name="isPrime"	pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="isPrime"/>
-	<skill name="Primes"	pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="Primes"/>
+	<skill name="Input"		pkg="ssm_tutorial" 	module="ssm_tutorial1.skills" 	class="Input"/>
+	<skill name="isPrime"	pkg="ssm_tutorial" 	module="ssm_tutorial1.skills" 	class="isPrime"/>
+	<skill name="Primes"	pkg="ssm_tutorial" 	module="ssm_tutorial1.skills" 	class="Primes"/>
 	<!-- Test Skills -->
-	<skill name="Test1"		pkg="ssm_tutorial" 	module="src.ssm_test_skills.skills" class="Test1"/>
-	<skill name="Test2"		pkg="ssm_tutorial" 	module="src.ssm_test_skills.skills" class="Test2"/>
-	<skill name="Test3"		pkg="ssm_tutorial" 	module="src.ssm_test_skills.skills" class="Test3"/>
+	<skill name="Test1"		pkg="ssm_tutorial" 	module="ssm_test_skills.skills" class="Test1"/>
+	<skill name="Test2"		pkg="ssm_tutorial" 	module="ssm_test_skills.skills" class="Test2"/>
+	<skill name="Test3"		pkg="ssm_tutorial" 	module="ssm_test_skills.skills" class="Test3"/>
 	
  </skills>
