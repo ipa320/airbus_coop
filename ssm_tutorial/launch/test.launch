@@ -4,6 +4,7 @@
   <param name="ssm_server_name" 	value="ssm"/>
   <param name="ssm_log_path"    	value="${ssm_core}/ssm_log/"/>
   <param name="ssm_autostart"   	value="True"/>
+  <param name="ssm_enable_log"		value="False"/>
   
   <node name="ssm_main" pkg="ssm_core" type="ssm_main.py" respawn="false" output="screen">  
   </node>
