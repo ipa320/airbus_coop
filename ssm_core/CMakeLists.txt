@@ -27,3 +27,7 @@ catkin_package(
 install(DIRECTORY launch resources
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
+
+catkin_install_python(PROGRAMS src/ssm_core/ssm_main.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
