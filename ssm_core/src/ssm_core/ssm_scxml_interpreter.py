@@ -478,7 +478,7 @@ class ssmInterpreter:
 if __name__ == '__main__':
     
     rospy.init_node('SCXML',log_level=rospy.INFO)
-    file = get_pkg_dir_from_prefix(rospy.get_param('scxml_file', default=("${ssm_core}/resources/TestParallel2.scxml")))
+    file = get_pkg_dir_from_prefix(rospy.get_param('scxml_file', default=("${ssm_core}/resources/default.scxml")))
     interpreter = ssmInterpreter(file)
     SSM = interpreter.readFile()
     SSM.check_consistency()
