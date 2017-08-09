@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="output_path" default="/tmp"/>
-  <arg name="pkg_name"/>
+  <arg name="ros_pkg"/>
 
   <node pkg="agi_docgen" type="index.py" name="agi_docgen" output="screen">
     <param name="output_path" value="$(arg output_path)"/>
-    <param name="pkgdir" value="$(arg pkg_name)"/>
+    <param name="pkg_dir" value="$(arg ros_pkg)"/>
   </node>
 
 </launch>

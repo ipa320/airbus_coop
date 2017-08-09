@@ -14,6 +14,7 @@
 #
 ################################################################################
 import os
+import rospy
 from copy import copy
 from copy import deepcopy
 from agi_docgen import env
@@ -114,9 +115,10 @@ class PackagesMenuItem(AbstractMenuItem):
         return self
         
     def _parse(self, directory):
-        
+        ros_pkg = None
         stack = directory.split('/')[-1]
-        
+        if rospy.has_param('/agi_docgen/pkg_dir'):
+          ros_pkg = rospy.get_param('/agi_docgen/pkg_dir')
         for filename in os.listdir(directory):
             # If file is a stack -> iter
             if filename == stack:
@@ -126,7 +128,10 @@ class PackagesMenuItem(AbstractMenuItem):
                 self._xml_pkg_dir.append(directory)
                 rpath = directory.replace(self._base_dir+"/","")
                 spath = rpath.split("/")
-                self._gen_menu_(self.getRoot(), spath[:-1], spath[-1])
+                if ros_pkg in spath:
+                  self._gen_menu_(self.getRoot(), [], ros_pkg)
+                else:
+                  self._gen_menu_(self.getRoot(), spath[:-1], spath[-1])
                 continue
             # If available directory -> iter
             elif os.path.isdir(os.path.join(directory,filename)):
@@ -134,9 +139,7 @@ class PackagesMenuItem(AbstractMenuItem):
             # Go to next list filename
             else:
                 continue
-            
     def _gen_menu_(self, parent, stacks, package):
-        
         if len(stacks) > 0:
             substack = None
             stack = stacks[0]
