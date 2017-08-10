@@ -6,13 +6,30 @@ import traceback
 
 from contextlib import contextmanager
 from roslib.packages import get_pkg_dir
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
 from std_msgs.msg import Empty, Bool
 
 import rospy
 import smach
 
 __all__ = ['StateMachine']
+
+# RE
+RE_PREFIXED_TAG = "$"
+RE_PREFIXED_BEGIN_TAG = "${"
+RE_PREFIXED_END_TAG = "}"
+
+def get_pkg_dir_from_prefix(path, ros_package_path=None):
+    
+    if RE_PREFIXED_TAG not in path:
+        return path
+    
+    splitpath = path.split(RE_PREFIXED_END_TAG)
+    after_prefix_path = splitpath[-1]
+    prefix = splitpath[0].split(RE_PREFIXED_BEGIN_TAG)[-1]
+    rpath = get_pkg_dir(prefix)+after_prefix_path
+    
+    return rpath
+
 
 def StrTimeStamped():
     return datetime.datetime.now().strftime("%Y_%m_%d_%H:%M:%S.%f   - ")

@@ -14,10 +14,5 @@ roslaunch ssm_core ssm.launch
 
 ```
 
-
-
-
-
-
 <a href="#top">top</a>
 
