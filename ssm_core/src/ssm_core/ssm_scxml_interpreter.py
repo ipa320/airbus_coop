@@ -80,7 +80,7 @@ class ssmInterpreter:
             We return the constructed state machine
         '''
         
-        skill_provider_pkg = self.root.find("datamodel/data[@id='skill_file']")
+        skill = self.root.find("datamodel/data[@id='skill_file']")
         if(skill is None):
             rospy.logerr("[SCXML Interpreter] : No Skill Register found !!")
             self.CheckBool = False
