@@ -30,9 +30,24 @@ import re
 
 
 from roslib.packages import get_pkg_dir
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
 import xml.etree.ElementTree as etree
-        
+
+# RE
+RE_PREFIXED_TAG = "$"
+RE_PREFIXED_BEGIN_TAG = "${"
+RE_PREFIXED_END_TAG = "}"
+
+def get_pkg_dir_from_prefix(path, ros_package_path=None):
+    
+    if RE_PREFIXED_TAG not in path:
+        return path
+    
+    splitpath = path.split(RE_PREFIXED_END_TAG)
+    after_prefix_path = splitpath[-1]
+    prefix = splitpath[0].split(RE_PREFIXED_BEGIN_TAG)[-1]
+    rpath = get_pkg_dir(prefix)+after_prefix_path
+    
+    return rpath
 
 class EmptyState(ssm_state.ssmState):
     def __init__(self):
@@ -65,7 +80,7 @@ class ssmInterpreter:
             We return the constructed state machine
         '''
         
-        skill = self.root.find("datamodel/data[@id='skill_file']")
+        skill_provider_pkg = self.root.find("datamodel/data[@id='skill_file']")
         if(skill is None):
             rospy.logerr("[SCXML Interpreter] : No Skill Register found !!")
             self.CheckBool = False

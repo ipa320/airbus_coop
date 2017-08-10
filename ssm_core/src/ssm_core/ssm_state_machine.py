@@ -4,8 +4,6 @@ import threading
 import datetime
 import traceback
 
-from contextlib import contextmanager
-from roslib.packages import get_pkg_dir
 from std_msgs.msg import Empty, Bool
 
 import rospy
@@ -13,22 +11,6 @@ import smach
 
 __all__ = ['StateMachine']
 
-# RE
-RE_PREFIXED_TAG = "$"
-RE_PREFIXED_BEGIN_TAG = "${"
-RE_PREFIXED_END_TAG = "}"
-
-def get_pkg_dir_from_prefix(path, ros_package_path=None):
-    
-    if RE_PREFIXED_TAG not in path:
-        return path
-    
-    splitpath = path.split(RE_PREFIXED_END_TAG)
-    after_prefix_path = splitpath[-1]
-    prefix = splitpath[0].split(RE_PREFIXED_BEGIN_TAG)[-1]
-    rpath = get_pkg_dir(prefix)+after_prefix_path
-    
-    return rpath
 
 
 def StrTimeStamped():
@@ -383,7 +365,7 @@ class ssmMainStateMachine(ssmStateMachine):
         ##Create a the log file if ssm_enable_log is True
         if(rospy.get_param("ssm_enable_log", False) == True):
             date_str = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_")
-            self.userdata.logfile = get_pkg_dir_from_prefix(rospy.get_param("ssm_log_path", default="${ssm_core}/ssm_log/")) + date_str +"log.txt"
+            self.userdata.logfile = rospy.get_param("ssm_log_path", default="/tmp/") + date_str +"log.txt"
             try:
                 file = open(self.userdata.logfile, "a")
                 file.write(StrTimeStamped() +"SMART STATE MACHINE Started \n")
