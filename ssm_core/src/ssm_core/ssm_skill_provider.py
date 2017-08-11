@@ -8,8 +8,7 @@ import rospy
 
 from roslib.packages import get_pkg_dir
 from xml.etree import ElementTree
-
-from pyqt_agi_extend import QtAgiCore
+from importlib import import_module
 
 class SkillProvider(object):
     
@@ -34,7 +33,8 @@ class SkillProvider(object):
                 in_module       = skill.attrib["module"]
                 skill_class     = skill.attrib["class"]
                 skill_class_ref = None
-                skill_class_ref = QtAgiCore.QAgiPackages.__pkg__(in_pkg).__module__(in_module).__import__(skill_class)
+                skill_class_ref = import_module(in_module, in_pkg).__getattribute__(skill_class)
+                
                 return skill_class_ref
             except Exception as ex:
                 rospy.logerr('Import fail from Skill "%s" !'%name)

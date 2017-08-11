@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="Foo">
+	<datamodel>
+        <data id="skill_file" expr="${ssm_core}/resources/empty_register.xml"/>
+    </datamodel>
+    <state id="Foo">
+        <transition type="external" target="Bar" event="next">
+        </transition>
+    </state>
+    <state id="Bar">
+        <transition type="external" event="next" target="final"/>
+    </state>
+    <final id="final">
+    </final>
+</scxml>

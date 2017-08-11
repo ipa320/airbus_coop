@@ -30,9 +30,24 @@ import re
 
 
 from roslib.packages import get_pkg_dir
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
 import xml.etree.ElementTree as etree
-        
+
+# RE
+RE_PREFIXED_TAG = "$"
+RE_PREFIXED_BEGIN_TAG = "${"
+RE_PREFIXED_END_TAG = "}"
+
+def get_pkg_dir_from_prefix(path, ros_package_path=None):
+    
+    if RE_PREFIXED_TAG not in path:
+        return path
+    
+    splitpath = path.split(RE_PREFIXED_END_TAG)
+    after_prefix_path = splitpath[-1]
+    prefix = splitpath[0].split(RE_PREFIXED_BEGIN_TAG)[-1]
+    rpath = get_pkg_dir(prefix)+after_prefix_path
+    
+    return rpath
 
 class EmptyState(ssm_state.ssmState):
     def __init__(self):
@@ -472,21 +487,6 @@ class ssmInterpreter:
                 io_keys.add(log.attrib['label']) 
                 
         return list(io_keys)
-        
-
-    
-if __name__ == '__main__':
-    
-    rospy.init_node('SCXML',log_level=rospy.INFO)
-    file = get_pkg_dir_from_prefix(rospy.get_param('scxml_file', default=("${ssm_core}/resources/TestParallel2.scxml")))
-    interpreter = ssmInterpreter(file)
-    SSM = interpreter.readFile()
-    SSM.check_consistency()
-    sis = smach_ros.IntrospectionServer('server_name', SSM, '/SM_ROOT')
-    sis.start()
-    SSM.execute()
-    rospy.spin()
-    sis.stop()
     
     
         

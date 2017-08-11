@@ -15,9 +15,10 @@
 #
 ################################################################################
 
-from ssm_core_v2 import ssm_state
-
 import rospy
+from ssm_core import ssm_state
+
+
 
         
 class Input(ssm_state.ssmState):
