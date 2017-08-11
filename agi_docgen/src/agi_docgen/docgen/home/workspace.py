@@ -16,7 +16,8 @@
 from agi_docgen import env
 from agi_docgen.common.html import HtmlElement
 from agi_docgen.digraph.digraph import *
-
+import catkin_pkg.workspaces
+import os
 
 class RosWorkspace(HtmlElement):
     
@@ -63,13 +64,10 @@ class RosWorkspace(HtmlElement):
         connection_register = []
         
         for directory in packages_dir:
-            ros_wss = catkin_pkg.workspaces.get_spaces()
-            ros_ws = os.path.dirname(ROS_WSs[0])
-            rpkg = directory.replace(ros_ws,"")
-            
+            rpkg = directory
             path = rpkg.split('/')
             
-            for i in range(0,len(path)-1):
+            for i in range(1,len(path)-1):
                 
                 conn = "%s->%s"%(path[i], path[i+1])
                 

@@ -120,8 +120,8 @@ if __name__ == '__main__':
     
     digraph.connect(subs,pubs)
     
-    digraph.saveDot("/home/ihm-pma/Documents/dot_test/SubscribersModel.dot")
-    digraph.dotToPng("/home/ihm-pma/Documents/dot_test/SubscribersModel.png")
+    digraph.saveDot("/tmp/SubscribersModel.dot")
+    digraph.dotToPng("/tmp/SubscribersModel.png")
 
     
     

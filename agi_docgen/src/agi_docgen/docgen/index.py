@@ -16,11 +16,14 @@
 
 import os
 import sys
+import rospy
+import rospkg
 
 from agi_docgen.common import html
 from agi_docgen.common.html import HtmlElementTree
 from agi_docgen import env
 from agi_docgen.docgen.menu import Menu
+import catkin_pkg.workspaces
 
 class AbstractIndex(HtmlElementTree):
     
@@ -45,21 +48,45 @@ class AbstractIndex(HtmlElementTree):
         return html.tostring(self.getroot())
     
 class Index(AbstractIndex):
-    
-    def __init__(self, workspace_dir):
+    os.system("cp -r "+env.ROSDOC_ROOT+"/resources/* %s"%env.OUTPUT)
+    os.system("mkdir -p "+env.ROSDOC_DOT+"/gen")
+    def __init__(self, dir_path):
         AbstractIndex.__init__(self)
         
         self._menu = Menu()
-        self._menu.parse(workspace_dir)
+        self._menu.parse(dir_path)
         self.setNavigation(self._menu)
         # Generate all html documentations
         self._menu.generate(self)
-        
+
 if __name__ == '__main__':
-    print os.path.join(env.ROSDOC_ROOT,'scripts')
+  rospy.init_node('index')
+
+  rospy.loginfo("Output path: %s"%env.ROSDOC_GEN)
+
+  if rospy.has_param('/agi_docgen/pkg_dir'):
+    ROS_PKG = rospy.get_param('/agi_docgen/pkg_dir')
+    rospack = rospkg.RosPack()
+    try:
+      ROS_WS = rospack.get_path(ROS_PKG)
+      dir_path = ROS_WS
+      rospy.loginfo("Generating documentation for the package: %s"%ROS_PKG)
+    except:
+      ROS_WS = ROS_PKG
+      dir_path = ROS_WS + "/src"
+      rospy.loginfo("Generationg documentation for the workspace: %s"%ROS_PKG)
+      if not os.path.isdir(ROS_PKG+"/src"):
+        rospy.logerr("Please define a valid workspace, %s doesn't contain a workspace"%ROS_WS)
+        sys.exit(0)
+  else:
+    ROS_WSs = catkin_pkg.workspaces.get_spaces()
+    ROS_WS = os.path.dirname(ROS_WSs[0])
+    dir_path = ROS_WS + "/src"
+    rospy.loginfo("Generationg documentation for the current workspace: %s"%ROS_WS)
+    sys.path.append(os.path.join(ROS_WS,'src'))
     sys.path.append(os.path.join(env.ROSDOC_ROOT,'scripts'))
-    
-    index = Index(os.path.join(env.ROS_WS,"src"))
-    index.save()
-    
-    
+
+  index = Index(dir_path)
+  index.save()
+
+

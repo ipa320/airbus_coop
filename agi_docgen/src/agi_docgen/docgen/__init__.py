@@ -13,3 +13,8 @@
 #
 #
 ################################################################################
+import os
+from agi_docgen import env
+
+os.system("cp -r "+env.ROSDOC_ROOT+"/resources/* %s"%env.OUTPUT)
+os.system("mkdir -p "+env.ROSDOC_RSC+"/gen")

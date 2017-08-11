@@ -10,7 +10,7 @@ catkin_python_setup()
 
 catkin_package()
 
-install(DIRECTORY resources
+install(DIRECTORY resources launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
