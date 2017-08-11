@@ -29,7 +29,6 @@
         </transition>
         <datamodel>
             <data id="skill" expr="Primes"/>
-            <data id="skill" expr="Primes"/>
         </datamodel>
         <transition type="external" event="Continue" target="Input Number">
             <qt:editorinfo localGeometry="-141.58;0" endTargetFactors="68.67;77.22" movePoint="13.24;4.07"/>

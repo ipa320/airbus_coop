@@ -2,7 +2,7 @@
 <package>
   <name>ssm_core</name>
   <version>0.0.0</version>
-  <description>The ssm_core_v2 package</description>
+  <description>The ssm_core package</description>
   <maintainer email="rosace@todo.todo">rosace</maintainer>
   <license>TODO</license>
 

@@ -21,7 +21,6 @@
 import ssm_scxml_interpreter
 import ssm_introspection
 import ssm_core.srv
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
 from std_msgs.msg import Int8, Empty, Bool
 
 import rospy
@@ -71,7 +70,7 @@ class ssmMain:
         return result
         
     def readSCXML(self):
-        file = get_pkg_dir_from_prefix(rospy.get_param('scxml_file', default=("${ssm_core}/resources/Test.scxml")))
+        file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(rospy.get_param('scxml_file', default=("${ssm_core}/resources/default.scxml")))
         try:
             interpreter = ssm_scxml_interpreter.ssmInterpreter(file)
             self._SSM = interpreter.readFile()
@@ -110,19 +109,7 @@ class ssmMain:
         if(msg.data):
             self._status_pub.publish(-1)
         else:
-            self._status_pub.publish(2)       
-
-
-    
-if __name__ == '__main__':
-    
-    rospy.init_node('SCXML', log_level=rospy.INFO)
-    
-    SSM = ssmMain()
-    if(rospy.get_param('ssm_autostart', False) == True):
-        if(SSM._init_SSM()):
-            SSM.start(Empty)
-    rospy.spin()
+            self._status_pub.publish(2)
     
     
     
