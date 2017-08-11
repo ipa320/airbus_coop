@@ -70,7 +70,7 @@ class ssmMain:
         return result
         
     def readSCXML(self):
-        file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(rospy.get_param('scxml_file', default=("${ssm_core}/resources/default.scxml")))
+        file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(rospy.get_param('/ssm_core/scxml_file', default=("${ssm_core}/resources/default.scxml")))
         try:
             interpreter = ssm_scxml_interpreter.ssmInterpreter(file)
             self._SSM = interpreter.readFile()
