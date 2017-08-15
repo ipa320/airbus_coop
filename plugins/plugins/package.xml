@@ -14,6 +14,7 @@
   <run_depend>plugin_node_manager</run_depend>
   <run_depend>plugin_rqt</run_depend>
   <run_depend>plugin_rviz</run_depend>
+  <run_depend>ssm_plugin</run_depend>
   
   <export>
    <metapackage/>
