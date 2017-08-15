@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 <package>
   <name>ssm_core</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The ssm_core package</description>
-  <maintainer email="rosace@todo.todo">rosace</maintainer>
-  <license>TODO</license>
+
+  <license>Apache 2.0</license>
+
+  <maintainer email="led@ipa.fhg.de">Ludovic Delval</maintainer>
+  <author email="led@ipa.fhg.de">Ludovic Delval</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>rospy</build_depend>
   <build_depend>smach</build_depend>
   <build_depend>smach_ros</build_depend>

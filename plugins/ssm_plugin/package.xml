@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='utf8'?>
 <package>
   <name>ssm_plugin</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The ssm_plugin package</description>
-  <maintainer email="ihm-pma@todo.todo">ihm-pma</maintainer>
-  <license>TODO</license>
+
+  <license>Apache 2.0</license>
+
+  <maintainer email="led@ipa.fhg.de">Ludovic Delval</maintainer>
+  <author email="led@ipa.fhg.de">Ludovic Delval</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>cobot_gui</build_depend>
   <build_depend>pyqt_agi_extend</build_depend>
   <build_depend>rospy</build_depend>
