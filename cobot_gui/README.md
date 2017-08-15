@@ -11,13 +11,13 @@ This repository holds a graphical user interface tool
 
 ## 1. Execution: <a id="1--execution"/> 
 ```
-roslaunch cobot_gui default.launch config_path:=${PKG_NAME}/folder file_name:=file.conf
+roslaunch cobot_gui default.launch config_path:='${PKG_NAME}/folder' file_name:='file.conf'
 
 ```
 
 By default:
 ```
-roslaunch cobot_gui default.launch config_path:=${cobot_gui}/config file_name:=default.conf
+roslaunch cobot_gui default.launch config_path:='${cobot_gui}/config' file_name:='default.conf'
 
 ```
 
