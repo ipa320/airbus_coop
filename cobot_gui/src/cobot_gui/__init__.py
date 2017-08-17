@@ -1,4 +1,3 @@
-
 from cobot_gui.util import CobotGuiException 
 
 from cobot_gui.account import User, Privilege
