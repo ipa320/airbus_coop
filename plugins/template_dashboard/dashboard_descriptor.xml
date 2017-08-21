@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf8'?>
+<plugin>
+  <import module="template_dashboard.dashboard" class="TemplateDashboard"/>
+  <description>A Python template for displaying a dashboard into cobot_gui.</description>
+  <version>0.0.1</version>
+  <setup>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>
