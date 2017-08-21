@@ -1,18 +1,3 @@
-################################################################################
-#
-# Copyright Airbus Group SAS 2015
-# All rigths reserved.
-#
-# File Name : plugin.py
-# Authors : Martin Matignon
-#
-# If you find any bug or if you have any question please contact
-# Adolfo Suarez Roos <adolfo.suarez@airbus.com>
-# Martin Matignon <martin.matignon.external@airbus.com>
-#
-#
-################################################################################
-
 from roslib.packages import get_pkg_dir
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *

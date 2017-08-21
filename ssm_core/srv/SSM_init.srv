@@ -1,17 +1,18 @@
-################################################################################
+# Copyright 2017 Fraunhofer Institute for Manufacturing Engineering and Automation (IPA)
+# Copyright 2015 Airbus
 #
-# Copyright Airbus Group SAS 2015
-# All rigths reserved.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# File Name : SSM_start.srv
-# Authors : Ludovic DELVAL
+#   http://www.apache.org/licenses/LICENSE-2.0
 #
-# If you find any bug or if you have any question please contact
-# Adolfo Suarez Roos <adolfo.suarez@airbus.com>
-# Ludovic DELVAL <Ludovic.DELVAL.external@airbus.com>
-#
-#
-################################################################################
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 std_msgs/String file_scxml
 ---
