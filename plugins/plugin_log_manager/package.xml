@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
 <package>
-
   <name>plugin_log_manager</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The plugin_log_manager package</description>
-  <maintainer email="cobotgui@todo.todo">cobotgui</maintainer>
-  <license>TODO</license>
+
+  <license>Apache 2.0</license>
+
+  <maintainer email="nhg@ipa.fhg.de">Nadia Hammoudeh Garcia</maintainer>
+  <author email="martin.matignon.external@airbus.com">Matignon Martin</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>cobot_gui</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>rqt_console</build_depend>
-
   <run_depend>cobot_gui</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>rqt_console</run_depend>

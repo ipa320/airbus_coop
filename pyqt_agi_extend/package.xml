@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <package>
   <name>pyqt_agi_extend</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The pyqt_agi_extend package</description>
 
-  <maintainer email="martin.matignon.external@airbus.com">Martin Matignon</maintainer>
+  <license>Apache 2.0</license>
 
-  <license>Airbus Group SAS 2015</license>
+  <maintainer email="led@ipa.fhg.de">Ludovic Delval</maintainer>
+  <author email="martin.matignon.external@airbus.com">Martin Matignon</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roslib</build_depend>

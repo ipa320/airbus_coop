@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <package>
   <name>cobot_gui</name>
-  <version>2.0.1</version>
+  <version>0.0.1</version>
   <description>The cobot_gui package</description>
 
-  <maintainer email="martin.matignon.external@airbus.com">Martin Matignon</maintainer>
+  <license>Apache 2.0</license>
 
-  <license>Airbus Group SAS 2015</license>
+  <maintainer email="led@ipa.fhg.de">Ludovic Delval</maintainer>
+  <author email="martin.matignon.external@airbus.com">Martin Matignon</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   
@@ -24,5 +25,6 @@
     <rosdoc config="rosdoc.yaml" />
     <agidoc src="agidoc.xml"/>
   </export>
+
 </package>
 
