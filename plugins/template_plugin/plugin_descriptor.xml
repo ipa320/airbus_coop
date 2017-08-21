@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf8'?>
+<plugin>
+  <import module="template_plugin.plugin" class="TemplatePlugin"/>
+  <description>The template plugin.</description>
+  <version>0.0.1</version>
+  <setup>
+    <icon>${template_plugin}/resources/images/ic_launcher.png</icon>
+    <access-rights>operator</access-rights>
+    <parameters/>
+  </setup>
+</plugin>
