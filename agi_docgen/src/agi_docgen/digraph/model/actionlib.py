@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# Copyright 2017 Fraunhofer Institute for Manufacturing Engineering and Automation (IPA)
 # Copyright 2015 Airbus
+# Copyright 2017 Fraunhofer Institute for Manufacturing Engineering and Automation (IPA)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 
 from agi_docgen.digraph.digraph import *
 from agi_docgen.digraph.model.topic import *

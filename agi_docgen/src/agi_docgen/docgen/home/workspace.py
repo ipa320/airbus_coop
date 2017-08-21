@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #
+# Copyright 2015 Airbus
 # Copyright 2017 Fraunhofer Institute for Manufacturing Engineering and Automation (IPA)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
