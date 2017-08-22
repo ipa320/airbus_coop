@@ -142,12 +142,15 @@ class TemplatePlugin(plugin.Plugin):
 if __name__ == "__main__":
     
     import sys
+    import signal
     
     rospy.init_node("template_plugin_node")
     
     a = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     
     window = plugin.getStandAloneInstance("template_plugin", TemplatePlugin, "en")
     window.setWindowTitle("TemplatePlugin")
     window.show()
-    a.exec_()
+    
+    sys.exit(a.exec_())

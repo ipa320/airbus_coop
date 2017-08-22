@@ -398,14 +398,19 @@ class SSMIntrospection(plugin.Plugin):
 if __name__ == "__main__":
     
     import sys
+    import signal
     
-    rospy.init_node("ssm_introspection")
+    rospy.init_node("ssm_plugin_node")
     
     a = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     
     window = plugin.getStandAloneInstance("ssm_plugin", SSMIntrospection, "en")
     window.setWindowTitle("ssmIntrospection")
     window.show()
-    a.exec_()
+    
+    sys.exit(a.exec_())
+
+
     
     
