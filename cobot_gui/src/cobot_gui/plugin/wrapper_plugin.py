@@ -199,7 +199,7 @@ class WrapperPlugin(QWidget):
         raise NotImplementedError("Need to surchage onDestroy(self)")
     
     def tryToDestroy(self):
-        
+        rospy.logdebug("Closing : %s"%self._plugin_name)
         try:
             self.onDestroy()
         except Exception as ex:

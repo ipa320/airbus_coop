@@ -43,7 +43,15 @@ if __name__ == "__main__":
     
     set_boot_configuration(config)
     
-    subprocess.Popen(['rosrun', 'cobot_gui','autorun.py'])
+    sub_p = subprocess.Popen(['rosrun', 'cobot_gui','autorun.py'])
+    
+    r = rospy.Rate(10)
+    while (rospy.is_shutdown()==False):
+        if(sub_p.poll() == None):
+            r.sleep()
+        else:
+            sys.exit(0)
+    
     
 #@endcond
 
