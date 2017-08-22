@@ -48,8 +48,8 @@ class RqtGuiWrapperClass(Main):
             argv = sys.argv
         
         # extract --args and everything behind manually since argparse can not handle that
-        arguments = argv[1:]
-        
+        #arguments = argv[1:]
+        arguments = []
         # extract plugin specific args when not being invoked in standalone mode programmatically
         if not standalone:
             plugin_args = []
