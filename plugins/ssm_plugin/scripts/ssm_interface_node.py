@@ -28,15 +28,18 @@ from cobot_gui import plugin
 if __name__ == "__main__":
     
     import sys
+    import signal
     
-    rospy.init_node("ssm_introspection_node")
+    rospy.init_node("ssm_plugin_node")
     
     a = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     
-    window = plugin.getStandAloneInstance("ssm_plugin", SSMIntrospection)
-    window.setWindowTitle("SSM interface")
+    window = plugin.getStandAloneInstance("ssm_plugin", SSMIntrospection, "en")
+    window.setWindowTitle("ssmIntrospection")
     window.show()
-    a.exec_()
+    
+    sys.exit(a.exec_())
     
 #End of file
 
