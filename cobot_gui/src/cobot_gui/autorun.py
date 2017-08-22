@@ -50,7 +50,6 @@ class GuiApplication(QApplication):
         
     def cleanGui(self):
         self.gui.shutdown()
-        rospy.signal_shutdown("ClosingWindows")
     
 def run():
     
@@ -85,13 +84,14 @@ def run():
     #Set the ctrl+c signal for cleanup
     def signal_handler(signal, frame):
         app.quit()
-    
+        
     signal.signal(signal.SIGINT, signal_handler)
     
+    #set the rospy shutdown signal
+    rospy.on_shutdown(app.quit)
+    
     #return of app
-    status = app.exec_()
-
-    sys.exit(status)
+    sys.exit(app.exec_())
 
 
 if __name__ == "__main__":
