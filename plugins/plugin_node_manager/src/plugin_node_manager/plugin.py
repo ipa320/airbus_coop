@@ -68,6 +68,6 @@ class PluginNodeManager(Plugin):
         pass
     
     def onDestroy(self):
-        pass
+        self.monitoring.onClose()
     
 #End of file

@@ -39,18 +39,25 @@ from plugin_node_manager.res import R
 class ThreadNodePingAll(QThread):
     def __init__(self):
         QThread.__init__(self)
+        self.stopFlag = False
+        
+    def __del__(self):
+        self.quit()
+        self.wait()
+        
+    def stop(self):
+        self.stopFlag = True
         
     def run(self):
         
-        while not rospy.is_shutdown():
-            
+        while not self.stopFlag:       
             try:
                 alive_nodes, dead_nodes = rosnode_ping_all()
                 self.emit(SIGNAL("pingStates"), alive_nodes, dead_nodes)
             except:
                 pass
-            
-            time.sleep(2.0)
+            rospy.sleep(2.0)
+        
 
 class TableMonitoringNodes:
     
@@ -62,7 +69,6 @@ class TableMonitoringNodes:
                         SIGNAL('clicked()'),self.onCleanup)
         
         self._datamodel = QStandardItemModel(0, 5)
-        
         
         self._parent._table_monitor.setModel(self._datamodel)
         self._parent._table_monitor.verticalHeader().setVisible(False)
@@ -95,6 +101,9 @@ class TableMonitoringNodes:
             self._table_dict = {}
             self._init_node_table()
             self._deaded_nodes_alarm_register = []
+            
+    def onClose(self):
+        self.thread_rosnode_ping_all.stop()
     
     def _init_node_table(self):
         
