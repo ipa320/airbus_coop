@@ -20,38 +20,20 @@ from roslib.packages import get_pkg_dir
 import sys
 import os
 import subprocess
+import signal
 from xml.etree import ElementTree
 
 from pyqt_agi_extend import QtAgiCore
 
 # Load my resources file
 from cobot_gui.res import R
+from cobot_gui import autorun
 
-def set_boot_configuration(config):
-    
-    autorun = ElementTree.Element('boot')
-    autorun.set('config', config)
-    tree = ElementTree.ElementTree(autorun)
-    
-    tree.write(R.DIR+'/autorun.xml', encoding='utf8', method='xml')
 
 if __name__ == "__main__":
     
-    rospy.init_node('cobot_gui_autorun_%d' % os.getpid())
-    
-    config = rospy.get_param("~config", "${cobot_gui}/config/default.conf")
-    
-    set_boot_configuration(config)
-    
-    sub_p = subprocess.Popen(['rosrun', 'cobot_gui','autorun.py'])
-    
-    r = rospy.Rate(10)
-    while (rospy.is_shutdown()==False):
-        if(sub_p.poll() == None):
-            r.sleep()
-        else:
-            sys.exit(0)
-    
+    autorun.run()
+
     
 #@endcond
 
