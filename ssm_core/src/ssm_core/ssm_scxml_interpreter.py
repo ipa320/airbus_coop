@@ -193,7 +193,7 @@ class ssmInterpreter:
     def constructParallel(self, current_level, parent, current_openSM, mainSM):
         ID = current_level.attrib.get('id')
         if(ID is None):
-            rospy.logerr("[SCXML Interpreter] : No ID for a State !!!!" )
+            rospy.logerr("[SCXML Interpreter] No ID for a State !!!!" )
             self.CheckBool = False
             return
         
@@ -211,23 +211,23 @@ class ssmInterpreter:
         for transition in current_level.findall('transition'):                       
             event = transition.attrib.get('event')
             if(event is None):
-                rospy.logerr("[SCXML Interpreter] : No Transition Event for %s !!!!" % ID)
+                rospy.logerr("[SCXML Interpreter] No Transition Event for %s !!!!" % ID)
                 self.CheckBool = False
                 return
             target = transition.attrib.get('target')
             if(target is None):
-                rospy.logerr("[SCXML Interpreter] : No Transition Target for %s !!!!" % ID)
+                rospy.logerr("[SCXML Interpreter] No Transition Target for %s !!!!" % ID)
                 self.CheckBool = False
                 return
             cond = transition.attrib.get('cond')
             if(target is None):
-                rospy.logerr("[SCXML Interpreter] : No Transition Condition  for %s !!!!" % ID)
+                rospy.logerr("[SCXML Interpreter] No Transition Condition  for %s !!!!" % ID)
                 self.CheckBool = False
                 return
         
             map_list = self.convertToConcurenceMap(cond)
             if(len(map_list) == 0):
-                rospy.logerr("[SCXML Interpreter] : Error during the convertion event to map for %s !!!!" % ID)
+                rospy.logerr("[SCXML Interpreter] Error during the convertion event to map for %s !!!!" % ID)
                 self.CheckBool = False
                 return 
             
