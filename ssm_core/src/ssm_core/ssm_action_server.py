@@ -110,10 +110,6 @@ class ssmActionServer(object):
             self._as.set_succeeded(self._result,"SSM has been executed without error.")
         
 
-if __name__ == '__main__':
-    rospy.init_node('test')
-    server = ssmAction()
-    rospy.spin()
     
     
         

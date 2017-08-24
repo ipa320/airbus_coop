@@ -22,7 +22,7 @@ from std_msgs.msg import Empty
     
 if __name__ == '__main__':
     
-    rospy.init_node('SCXML', log_level=rospy.INFO)
+    rospy.init_node('ssm_main', log_level=rospy.INFO)
     SSM = ssmMain()
     if(rospy.get_param('ssm_autostart', False) == True):
        if(SSM._init_SSM()):
