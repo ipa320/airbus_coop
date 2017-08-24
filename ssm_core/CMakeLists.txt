@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   smach
   smach_ros
+  actionlib
   message_generation
 )
 
@@ -15,19 +16,24 @@ add_service_files(
   SSM_init.srv
 )
 
+add_action_files(
+  DIRECTORY action 
+  FILES SSM.action
+)
+
 generate_messages(
   DEPENDENCIES
   std_msgs   
 )
 
 catkin_package(
-  CATKIN_DEPENDS rospy smach smach_ros message_runtime std_msgs
+  CATKIN_DEPENDS rospy smach smach_ros message_runtime std_msgs actionlib
 )
 
 install(DIRECTORY launch resources
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS nodes/ssm_node.py
+catkin_install_python(PROGRAMS nodes/ssm_node.py nodes/ssm_action_server_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

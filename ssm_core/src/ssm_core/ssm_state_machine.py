@@ -205,8 +205,6 @@ class ssmStateMachine(smach.StateMachine):
                         (outcome, self._current_label, transition_target))
         return None
 
-        
-    
     def execute(self, parent_ud = smach.UserData()):
         """Run the state machine on entry to this state.
         This will set the "closed" flag and spin up the execute thread. Once
@@ -367,10 +365,6 @@ class ssmMainStateMachine(ssmStateMachine):
             self._preempt_pause = True
         else:
             self.request_preempt()
-        
-        
-
-        
     
     def execute(self, parent_ud = smach.UserData()):
         """Run the state machine on entry to this state.

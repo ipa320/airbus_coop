@@ -1,0 +1,8 @@
+#goal definition
+string scxml_file
+---
+#result definition
+string outcome
+---
+#feedback
+string current_active_states
