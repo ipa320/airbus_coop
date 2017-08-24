@@ -94,6 +94,11 @@ class CobotGuiImages():
         self.logo_airbus_group = DIR_COBOTGUI_IMAGES+'/logo_airbus_group.png'
         self.wellcome_base = DIR_COBOTGUI_IMAGES+'/wellcome_base.png'
         self.icon_emergency_stop = DIR_COBOTGUI_IMAGES+'/icon_emergency_stop.png'
+        self.status_error = DIR_COBOTGUI_IMAGES+'/status_error.png'
+        self.status_warning = DIR_COBOTGUI_IMAGES+'/status_warning.png'
+        self.status_stale = DIR_COBOTGUI_IMAGES+'/status_stale.png'
+        self.status_ok = DIR_COBOTGUI_IMAGES+'/status_ok.png'
+
     def findById(self, id=""):
         try:
             return getattr(self,id)

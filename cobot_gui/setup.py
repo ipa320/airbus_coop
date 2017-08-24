@@ -26,6 +26,7 @@ d = generate_distutils_setup(
 	'cobot_gui.util',
 	'cobot_gui.control_mode',
 	'cobot_gui.dashboard',
+	'cobot_gui.diagnostics',
 	'cobot_gui.emergency',
 	'cobot_gui.plugin',
 	'cobot_gui.timestamp',
