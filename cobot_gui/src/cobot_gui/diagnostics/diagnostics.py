@@ -26,32 +26,29 @@ from python_qt_binding.QtCore import *
 from python_qt_binding import loadUi
 
 from pyqt_agi_extend.QtAgiGui import QAgiSilderButton
-from cobot_gui.alarm import Alarm
-from cobot_gui.emergency import EmergencyStopState
 from cobot_gui.res import R
 from diagnostic_msgs.msg import DiagnosticStatus
-from pyqt_agi_extend.QtAgiGui import QAgiMessageBox
+from rqt_robot_dashboard.widgets import MonitorDashWidget, ConsoleDashWidget
 
+from rqt_gui.main import Main
+from rqt_gui.main import Base
+
+#from plugin_rqt import RqtGuiWrapperClass
 ## @class DiagnosticsStatus
 ## @brief Class for difine different control status.
-class DiagnosticsStatus:
-    
-    OK = 0
-    WARN = 1
-    ERROR = 2
-    STALE = 3
 
-    TOSTR = {OK : 'Ok',
-             WARN : 'Warning',
-             ERROR : 'Error',
-             STALE : 'Stale'}
+    
+#OK = 0
+#WARN = 1
+#ERROR = 2
+#STALE = 3
+
 
 class DiagnosticsWidget(QPushButton):
     
     def __init__(self, context):
         """! The constructor."""
         QPushButton.__init__(self)
-
         self.state = 3
         self.msg = "No diagnostics data"
         self._context = context
@@ -60,19 +57,22 @@ class DiagnosticsWidget(QPushButton):
         self.setIcon(R.getIconById("status_stale"))
         self.setIconSize(QSize(50,50))
         self.connect(self,SIGNAL('clicked(bool)'),self._trigger_button)
+        self.setToolTip(self.msg)
 
     def _trigger_button(self, checked):
-        """Called when user click on ermergency stop button.
-        @param checked: Button status (True/False).
-        @type checked: bool.
-        """
-        msg_box = QAgiMessageBox()
-        msg_box.setText(self.msg)
-        #msg_box.setIcon(QAgiMessageBox.Critical)
-        msg_box.setStandardButtons(QAgiMessageBox.Ok)
-        msg_box.button(QAgiMessageBox.Ok).setMinimumSize(100,40)
-        msg_box.exec_()
 
+        #layout = QGridLayout(self)
+        #layout.setContentsMargins(0, 0, 0, 0)
+        #self.RqtGuiWrapper = RqtGuiWrapperClass(self._context)
+        #self.layout.addWidget(self.RqtGuiWrapper)
+        #_wrapper_rqt = RqtGuiWrapperClass()
+        #_wrapper_rqt.__init__(self)
+        #layout.addWidget(_wrapper_rqt.main(), 0, 0, 0, 0)
+
+        self._console = ConsoleDashWidget(self._context, minimal=False)
+        self._monitor = MonitorDashWidget(self._context)
+        return self._console
+        return self._monitor
 
     def onDestroy(self):
         """Called when appli closes."""
@@ -81,21 +81,19 @@ class DiagnosticsWidget(QPushButton):
     def toplevel_state_callback(self, msg):
         self.state = msg.level
         self.msg = msg.message
+
         if self.state == 0:
           self.setIcon(R.getIconById("status_ok"))
-          self.setIconSize(QSize(50,50))
         if self.state == 1 :
           self.setIcon(R.getIconById("status_warning"))
-          self.setIconSize(QSize(50,50))
         if self.state == 2 :
           self.setIcon(R.getIconById("status_error"))
-          self.setIconSize(QSize(50,50))
         if self.state == 3 :
           self.setIcon(R.getIconById("status_stale"))
-          self.setIconSize(QSize(50,50))
-        
+        self.setIconSize(QSize(50,50))
+
+
 if __name__ == "__main__":
-    
     from cobot_gui.context import Context
     rospy.init_node('unittest_diagnostics_ui')
     a = QApplication(sys.argv)

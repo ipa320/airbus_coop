@@ -1,1 +1,1 @@
-from diagnostics import DiagnosticsStatus, DiagnosticsWidget
+from diagnostics import DiagnosticsWidget
