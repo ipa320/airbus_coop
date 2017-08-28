@@ -28,12 +28,14 @@ from python_qt_binding import loadUi
 from pyqt_agi_extend.QtAgiGui import QAgiSilderButton
 from cobot_gui.res import R
 from diagnostic_msgs.msg import DiagnosticStatus
-from rqt_robot_dashboard.widgets import MonitorDashWidget, ConsoleDashWidget
+from pyqt_agi_extend.QtAgiGui import QAgiPopup
 
 from rqt_gui.main import Main
 from rqt_gui.main import Base
 
-#from plugin_rqt import RqtGuiWrapperClass
+from python_qt_binding import loadUi
+from rqt_robot_monitor.robot_monitor import RobotMonitorWidget
+
 ## @class DiagnosticsStatus
 ## @brief Class for difine different control status.
 
@@ -60,19 +62,8 @@ class DiagnosticsWidget(QPushButton):
         self.setToolTip(self.msg)
 
     def _trigger_button(self, checked):
-
-        #layout = QGridLayout(self)
-        #layout.setContentsMargins(0, 0, 0, 0)
-        #self.RqtGuiWrapper = RqtGuiWrapperClass(self._context)
-        #self.layout.addWidget(self.RqtGuiWrapper)
-        #_wrapper_rqt = RqtGuiWrapperClass()
-        #_wrapper_rqt.__init__(self)
-        #layout.addWidget(_wrapper_rqt.main(), 0, 0, 0, 0)
-
-        self._console = ConsoleDashWidget(self._context, minimal=False)
-        self._monitor = MonitorDashWidget(self._context)
-        return self._console
-        return self._monitor
+        popup = DiagnosticsPopup(self)
+        popup.show_()
 
     def onDestroy(self):
         """Called when appli closes."""
@@ -92,6 +83,16 @@ class DiagnosticsWidget(QPushButton):
           self.setIcon(R.getIconById("status_stale"))
         self.setIconSize(QSize(50,50))
 
+class DiagnosticsPopup(QAgiPopup):
+  
+    def __init__(self, parent):
+        """! The constructor."""
+        QAgiPopup.__init__(self, parent)
+        self._parent = parent
+        self.setRelativePosition(QAgiPopup.TopRight, QAgiPopup.BottomRight)
+
+        loadUi(R.layouts.diagnostics_popup, self)
+        self.adjustSize()
 
 if __name__ == "__main__":
     from cobot_gui.context import Context
