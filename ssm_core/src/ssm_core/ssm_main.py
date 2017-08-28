@@ -50,8 +50,8 @@ class ssmMain:
             self._init_SSM()
             
     def _init_SSM_srv(self, msg):
-        rospy.set_param('scxml_file', str(msg.file_scxml.data))
-        response = Bool
+        rospy.set_param('/ssm_node/scxml_file', str(msg.file_scxml.data))
+        response = Bool()
         response.data = False
         if(self._loading == False):
             self._loading = True

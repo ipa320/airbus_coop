@@ -20,16 +20,18 @@ from std_msgs.msg import String, Empty
 import threading
 import smach
 import rospy
+import ssm_core.msg
 from ast import literal_eval
 
 
 
 class ssmIntrospection():
-    def __init__(self, state_machine):
+    def __init__(self, state_machine, action_server = None):
         """Traverse the smach tree starting at root, and construct introspection
         proxies for getting and setting debug state."""
 
         self._state_machine = state_machine
+        self._as = action_server
         self._tree_view = {}
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
         self._update_pub = rospy.Publisher(self._server_name + "/ssm_status", String, queue_size = 1)
@@ -58,6 +60,10 @@ class ssmIntrospection():
                 
     def _update_tree_view_cb(self, *args, **kwargs):
         self._update_pub.publish(str(self._tree_view))
+        if(self._as is not None):
+            feedback = ssm_core.msg.SSMFeedback()
+            feedback.current_active_states = str(self._tree_view) 
+            self._as.publish_feedback(feedback)
         
     def _status_request_cb(self, msg):
         self._update_pub.publish(str(self._tree_view))

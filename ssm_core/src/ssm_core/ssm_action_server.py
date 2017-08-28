@@ -61,7 +61,7 @@ class ssmActionServer(object):
             interpreter = ssm_scxml_interpreter.ssmInterpreter(file_)
             self._SSM = interpreter.convertSCXML()
             self._SSM.check_consistency()
-            self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
+            self._introspection = ssm_introspection.ssmIntrospection(self._SSM, self._as)
             self._introspection.start()
         except Exception as e:
             rospy.logerr(e)
