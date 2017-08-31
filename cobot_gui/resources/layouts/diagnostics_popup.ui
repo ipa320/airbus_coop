@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>RobotMonitorWidget</class>
- <widget class="QWidget" name="RobotMonitorWidget">
+ <widget class="QWidget" name="robot_monitor_widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>788</width>
+    <height>569</height>
+   </rect>
+  </property>
   <property name="minimumSize">
    <size>
     <width>200</width>
-    <height>150</height>
+    <height>505</height>
    </size>
-  </property>
-  <property name="windowTitle">
-   <string>Runtime Monitor</string>
   </property>
   <layout class="QVBoxLayout" name="vlayout_top">
    <property name="spacing">
@@ -26,54 +31,6 @@
      <property name="handleWidth">
       <number>9</number>
      </property>
-     <widget class="QTreeWidget" name="err_flattree">
-      <property name="minimumSize">
-       <size>
-        <width>75</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="sortingEnabled">
-       <bool>false</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string notr="true">Error Device</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Message</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QTreeWidget" name="warn_flattree">
-      <property name="minimumSize">
-       <size>
-        <width>75</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="sortingEnabled">
-       <bool>false</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string notr="true">Warned Device</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Message</string>
-       </property>
-      </column>
-     </widget>
      <widget class="QTreeWidget" name="tree_all_devices">
       <property name="minimumSize">
        <size>
@@ -114,14 +71,6 @@
    </item>
   </layout>
  </widget>
-<customwidgets>
-  <customwidget>
-   <class>RobotMonitorWidget</class>
-   <extends>QWidget</extends>
-   <header>rqt_robot_monitor.robot_monitor</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
-
