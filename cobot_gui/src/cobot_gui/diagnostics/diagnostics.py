@@ -41,23 +41,26 @@ import rqt_robot_monitor.util_robot_monitor as util
 class DiagnosticsWidget(QPushButton):
     
     DIAGNOSTICS_TOPLEVEL_TOPIC_NAME = rospy.get_param('diagnostics_toplevel_topic_name','/diagnostics_toplevel_state')
+    state = "status_stale"
+    msg = "No diagnostic messages received"
 
     def __init__(self, context):
         """! The constructor."""
         QPushButton.__init__(self)
         self._context = context
-        self._context.addCloseEventListner(self.onDestroy)
-        self.state = "status_stale"
-        self.msg = "No diagnostic messages received"
-        self.setToolTip(self.msg)
-        self.setIcon(R.getIconById(self.state))
-        self.setIconSize(QSize(40,40))
-        self.connect(self,SIGNAL('clicked(bool)'),self._trigger_button)
+
+        # Diagnostics top level: update the color of the button depending on the current diagnostics toplevel message
+        self.connect(self, SIGNAL("stateChanged"), self.update_state)
+        self.emit(SIGNAL('stateChanged'), self.state, self.msg)
         self._diagnostics_toplevel_state_sub = rospy.Subscriber(self.DIAGNOSTICS_TOPLEVEL_TOPIC_NAME , DiagnosticStatus, self.toplevel_state_callback)
 
-    def _trigger_button(self, checked):
-        popup = DiagnosticsPopup(self)
-        popup.show_()
+        # Diagnostics: when button pressed open a new window with a detailed list of components and diagnostic messages
+        self.connect(self,SIGNAL('clicked(bool)'),self._trigger_button)
+
+    def update_state(self, state, msg):
+        self.setIcon(R.getIconById(state))
+        self.setIconSize(QSize(40,40))
+        self.setToolTip(msg)
 
     def toplevel_state_callback(self, msg):
         self.state = msg.level
@@ -73,24 +76,25 @@ class DiagnosticsWidget(QPushButton):
         if msg.level == 3 :
           self.state= "status_stale"
           self.msg = "STALE"
+        self.emit(SIGNAL('stateChanged'), self.state, self.msg)
 
-        self.setToolTip(self.msg)
-        self.setIcon(R.getIconById(self.state))
-        self.setIconSize(QSize(40,40))
-
-    def onDestroy(self):
-        """Called when appli closes."""
-        self._keep_running = False
+    def _trigger_button(self, checked):
+        popup = DiagnosticsPopup(self, self._context)
+        popup.show_()
 
 class DiagnosticsPopup(QAgiPopup):
 
-    def __init__(self, parent):
+    def __init__(self, parent, context):
         """! The constructor."""
         QAgiPopup.__init__(self, parent)
+        self._context = context
         self._parent = parent
         self.setRelativePosition(QAgiPopup.TopRight, QAgiPopup.BottomRight)
         loadUi(R.layouts.diagnostics_popup, self)
         DIAGNOSTICS_TOPIC_NAME = rospy.get_param('diagnostics_topic_name','/diagnostics_agg')
+        self._context.addDiagnosticsListner(self.update_diag)
+        #self.connect(SIGNAL("DiagnosticChanged"), self.update_diag)
+        #self.emit(self,SIGNAL('DiagnosticChanged'), True)
         self._diagnostics_agg_sub = rospy.Subscriber(DIAGNOSTICS_TOPIC_NAME, DiagnosticArray, self.message_cb)
         self._inspectors = {}
         self._current_msg = None
@@ -98,6 +102,12 @@ class DiagnosticsPopup(QAgiPopup):
         self._original_base_color = palette.base().color()
         self._original_alt_base_color = palette.alternateBase().color()
         self._tree = StatusItem(self.tree_all_devices.invisibleRootItem())
+        self.adjustSize()
+
+    def update_diag(self):
+        print "diagnostic changed"
+        self._tree.prune()
+        self.tree_all_devices.resizeColumnToContents(0)
         self.adjustSize()
 
     def message_cb(self,msg):
@@ -110,21 +120,15 @@ class DiagnosticsPopup(QAgiPopup):
             for p in path:
                 tmp_tree = tmp_tree[p]
             tmp_tree.update(status, util.get_resource_name(status.name))
-        self._tree.prune()
-        self.tree_all_devices.resizeColumnToContents(0)
-        self.adjustSize()
+        self.emit(SIGNAL('diagnosticChanged'))
+
 
 if __name__ == "__main__":
     from cobot_gui.context import Context
-    rospy.init_node('unittest_diagnostics_ui')
-    a = QApplication(sys.argv)
-    utt_appli = QMainWindow()
-    context = Context(utt_appli)
-    diag = DiagnosticsWidget(context)
-    diag.setIconSize(QSize(40,40))
-    utt_appli.setCentralWidget(diag)
-    utt_appli.show()
-    a.exec_()
-    diag.onDestroy()
+    app = QApplication(sys.argv)
+    main = QMainWindow()
+    main.setCentralWidget(TranslatorUi(Context(main)))
+    main.show()
+    app.exec_()
     
 #End of file
