@@ -37,8 +37,8 @@ class EmergencyStopState:
 
 ## @class EmergencyStopButton
 class EmergencyStopButton(QPushButton):
-    
-    EMERGENCY_STOP_TOPIC_NAME = '/emergency_stop/state'
+
+    EMERGENCY_STOP_TOPIC_NAME = rospy.get_param('emergency_stop_topic_name','/emergency_stop/state')
     
     def __init__(self, context):
         """! The constructor."""
