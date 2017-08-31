@@ -41,7 +41,6 @@ import rqt_robot_monitor.util_robot_monitor as util
 class DiagnosticsWidget(QPushButton):
     
     DIAGNOSTICS_TOPLEVEL_TOPIC_NAME = rospy.get_param('diagnostics_toplevel_topic_name','/diagnostics_toplevel_state')
-    DIAGNOSTICS_TOPIC_NAME = rospy.get_param('diagnostics_topic_name','/diagnostics')
 
     def __init__(self, context):
         """! The constructor."""
@@ -50,6 +49,9 @@ class DiagnosticsWidget(QPushButton):
         self._context.addCloseEventListner(self.onDestroy)
         self.state = "status_stale"
         self.msg = "No diagnostic messages received"
+        self.setToolTip(self.msg)
+        self.setIcon(R.getIconById(self.state))
+        self.setIconSize(QSize(40,40))
         self.connect(self,SIGNAL('clicked(bool)'),self._trigger_button)
         self._diagnostics_toplevel_state_sub = rospy.Subscriber(self.DIAGNOSTICS_TOPLEVEL_TOPIC_NAME , DiagnosticStatus, self.toplevel_state_callback)
 
@@ -73,7 +75,7 @@ class DiagnosticsWidget(QPushButton):
           self.msg = "STALE"
 
         self.setToolTip(self.msg)
-        self.setIcon(R.getIconById("status_stale"))
+        self.setIcon(R.getIconById(self.state))
         self.setIconSize(QSize(40,40))
 
     def onDestroy(self):
@@ -81,13 +83,15 @@ class DiagnosticsWidget(QPushButton):
         self._keep_running = False
 
 class DiagnosticsPopup(QAgiPopup):
+
     def __init__(self, parent):
         """! The constructor."""
         QAgiPopup.__init__(self, parent)
         self._parent = parent
         self.setRelativePosition(QAgiPopup.TopRight, QAgiPopup.BottomRight)
         loadUi(R.layouts.diagnostics_popup, self)
-        self._diagnostics_agg_sub = rospy.Subscriber(self.DIAGNOSTICS_TOPIC_NAME, DiagnosticArray, self.message_cb)
+        DIAGNOSTICS_TOPIC_NAME = rospy.get_param('diagnostics_topic_name','/diagnostics_agg')
+        self._diagnostics_agg_sub = rospy.Subscriber(DIAGNOSTICS_TOPIC_NAME, DiagnosticArray, self.message_cb)
         self._inspectors = {}
         self._current_msg = None
         palette = self.tree_all_devices.palette()
