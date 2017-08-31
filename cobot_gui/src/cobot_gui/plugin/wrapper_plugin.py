@@ -162,6 +162,7 @@ class WrapperPlugin(QWidget):
         try:
             self.onCreate(param)
         except Exception as ex:
+            rospy.logerr("GUI ERROR : %s"%str(ex))
             self.getContext().sendAlarm(Alarm.WARNING, str(ex))
     
     def onPause(self):
@@ -172,6 +173,8 @@ class WrapperPlugin(QWidget):
         try:
             self.onPause()
         except Exception as ex:
+            
+            rospy.logerr("GUI ERROR : %s"%str(ex))
             self.getContext().sendAlarm(Alarm.WARNING, str(ex))
     
     def onResume(self):
@@ -181,6 +184,7 @@ class WrapperPlugin(QWidget):
         try:
             self.onResume()
         except Exception as ex:
+            rospy.logerr("GUI ERROR : %s"%str(ex))
             self.getContext().sendAlarm(Alarm.WARNING, str(ex))
     
     def onControlModeChanged(self, mode):
@@ -199,10 +203,11 @@ class WrapperPlugin(QWidget):
         raise NotImplementedError("Need to surchage onDestroy(self)")
     
     def tryToDestroy(self):
-        
+        rospy.logdebug("Closing : %s"%self._plugin_name)
         try:
             self.onDestroy()
         except Exception as ex:
+            rospy.logerr("GUI ERROR : %s"%str(ex))
             self.getContext().sendAlarm(Alarm.WARNING, str(ex))
     
     def closeEvent(self, event):

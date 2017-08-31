@@ -1,3 +1,4 @@
 <?xml version='1.0' encoding='utf8'?>
 <dashboards-register>
+	<dashboard label="Template"     	 package="template_dashboard" />
 </dashboards-register>

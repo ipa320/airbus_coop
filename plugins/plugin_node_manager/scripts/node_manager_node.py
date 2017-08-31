@@ -16,24 +16,30 @@
 # limitations under the License.
 
 import rospy
-from roslib.packages import get_pkg_dir
 import sys
-import os
-import subprocess
-import signal
-from xml.etree import ElementTree
 
-from pyqt_agi_extend import QtAgiCore
+from python_qt_binding.QtGui import *
+from python_qt_binding.QtCore import *
 
-# Load my resources file
-from cobot_gui.res import R
-from cobot_gui import autorun
+from plugin_node_manager.plugin import PluginNodeManager
 
+from cobot_gui import plugin
 
 if __name__ == "__main__":
     
-    autorun.run()
-
+    import sys
+    import signal
     
-#@endcond
+    rospy.init_node("node_manager_node")
+    
+    a = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    
+    window = plugin.getStandAloneInstance("plugin_node_manager", PluginNodeManager, "en")
+    window.setWindowTitle("NodeManager")
+    window.show()
+    
+    sys.exit(a.exec_())
+    
+#End of file
 

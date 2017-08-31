@@ -270,8 +270,8 @@ class SSMIntrospection(plugin.Plugin):
               
         fdial = QFileDialog()
         try:
-            rospy.get_param("scxml_file")
-            default_f = rospy.get_param("scxml_file")
+            rospy.get_param("/ssm_node/scxml_file")
+            default_f = rospy.get_param("/ssm_node/scxml_file")
             
         except KeyError:
             default_f = QtAgiCore.get_pkg_dir_from_prefix("${ssm_core}")
@@ -282,7 +282,7 @@ class SSMIntrospection(plugin.Plugin):
 
         self._scxml_model.setHorizontalHeaderLabels([scxmlfile[0]])
 
-        rospy.set_param('scxml_file',scxmlfile[0])
+        rospy.set_param('/ssm_node/scxml_file',scxmlfile[0])
         
         self._load_SSM()
         
@@ -290,7 +290,7 @@ class SSMIntrospection(plugin.Plugin):
             
     def _load_SSM(self):
         try:
-            rospy.get_param("scxml_file")
+            rospy.get_param("/ssm_node/scxml_file")
             self._ssm_loaded = True
             self._wait_ssm_isready()
             if(self._ssm_status != -10):
@@ -393,19 +393,24 @@ class SSMIntrospection(plugin.Plugin):
         self.onPause()
         
     def onDestroy(self):
-        self._preempt_ssm(False)
+        self._preempt_ssm()
         
 if __name__ == "__main__":
     
     import sys
+    import signal
     
-    rospy.init_node("ssm_introspection")
+    rospy.init_node("ssm_plugin_node")
     
     a = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     
     window = plugin.getStandAloneInstance("ssm_plugin", SSMIntrospection, "en")
     window.setWindowTitle("ssmIntrospection")
     window.show()
-    a.exec_()
+    
+    sys.exit(a.exec_())
+
+
     
     

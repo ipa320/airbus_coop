@@ -18,6 +18,8 @@
 import rospy
 import sys
 import os
+import signal
+
 from roslib.packages import get_pkg_dir
 from xml.etree import ElementTree
 
@@ -33,30 +35,27 @@ from pyqt_agi_extend import QtAgiCore
 
 # Load my generated resources file
 from cobot_gui.res import R
-
-def get_boot_configuration():
-    
-    file_dir = R.DIR+'/autorun.xml'
-    
-    autorun = ElementTree.parse(file_dir)
-    config = autorun.getroot()
-    config = config.attrib['config']
-    config = get_pkg_dir_from_prefix(config)
-    
-    os.remove(file_dir)
-    
-    return config
+from PyQt4.Qt import QApplication
+from PyQt4.uic.Compiler.qtproxies import QtGui
 
 FULL_SCREEN_ARGS = ["full-screen"   ,"full"   ,"f",
                     "-full-screen"  ,"-full"  ,"-f",
                     "--full-screen" ,"--full" ,"--f"]
 
-if __name__ == "__main__":
+class GuiApplication(QApplication):
+    
+    def __init__(self, args):
+        QApplication.__init__(self, args)
+        self.gui = None
+        
+    def cleanGui(self):
+        self.gui.shutdown()
+    
+def run():
     
     name = 'rqt_gui_py_node_%d' % os.getpid()
     rospy.init_node(name, disable_signals=True)
-    
-    app = QApplication(sys.argv)
+    app = GuiApplication(sys.argv)
     
     splash = CobotGuiSplash()
     splash.start()
@@ -64,7 +63,9 @@ if __name__ == "__main__":
     window = QMainWindow()
     
     gui = CobotGuiMain(splash)
-    gui.setupUserConfig(get_boot_configuration())
+    config = rospy.get_param("~config", "${cobot_gui}/config/default.conf")
+    config = get_pkg_dir_from_prefix(config)
+    gui.setupUserConfig(config)
     
     window.setCentralWidget(gui)
     window.setGeometry(gui.geometry())
@@ -76,10 +77,24 @@ if __name__ == "__main__":
         window.show()
     
     splash.close()
+    #Set the gui signal for cleanup
+    app.gui = gui
+    app.connect(app, SIGNAL("aboutToQuit()"), app.cleanGui)
     
-    app.exec_()
+    #Set the ctrl+c signal for cleanup
+    def signal_handler(signal, frame):
+        app.quit()
+        
+    signal.signal(signal.SIGINT, signal_handler)
     
-    gui.shutdown()
+    #set the rospy shutdown signal
+    rospy.on_shutdown(app.quit)
+    
+    #return of app
+    sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    main()
     
 #@endcond
-

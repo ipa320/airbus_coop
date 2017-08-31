@@ -15,25 +15,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import rospy
-from roslib.packages import get_pkg_dir
-import sys
-import os
-import subprocess
-import signal
-from xml.etree import ElementTree
+from distutils.core import setup
+from catkin_pkg.python_setup import generate_distutils_setup
 
-from pyqt_agi_extend import QtAgiCore
+d = generate_distutils_setup(
+	packages=['template_plugin'],
+	package_dir={'': 'src'},
+)
 
-# Load my resources file
-from cobot_gui.res import R
-from cobot_gui import autorun
-
-
-if __name__ == "__main__":
-    
-    autorun.run()
-
-    
-#@endcond
-
+setup(**d)

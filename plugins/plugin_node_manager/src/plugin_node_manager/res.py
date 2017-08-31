@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
 # Copyright 2015 Airbus
 # Copyright 2017 Fraunhofer Institute for Manufacturing Engineering and Automation (IPA)
