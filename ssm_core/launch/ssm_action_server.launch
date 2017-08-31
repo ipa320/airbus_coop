@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="ssm_server_name" 	value="ssm"/>
+  <param name="ssm_log_path"    	value="/tmp/"/>
+  <param name="ssm_enable_log"		value="False"/>
+  <node name="ssm_node" pkg="ssm_core" type="ssm_action_server_node.py" respawn="false" output="screen">
+  </node>
+        
+</launch>

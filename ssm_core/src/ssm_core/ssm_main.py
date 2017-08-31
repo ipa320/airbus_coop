@@ -24,6 +24,7 @@ from std_msgs.msg import Int8, Empty, Bool
 
 import rospy
 import sys
+import os
 import smach_ros
 
 class ssmMain:
@@ -49,8 +50,8 @@ class ssmMain:
             self._init_SSM()
             
     def _init_SSM_srv(self, msg):
-        rospy.set_param('scxml_file', str(msg.file_scxml.data))
-        response = Bool
+        rospy.set_param('/ssm_node/scxml_file', str(msg.file_scxml.data))
+        response = Bool()
         response.data = False
         if(self._loading == False):
             self._loading = True
@@ -69,12 +70,21 @@ class ssmMain:
         return result
         
     def readSCXML(self):
-
-        path = "${ssm_core}/resources/"+rospy.get_param('/ssm_node/scxml_file')+".scxml"
-        file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(path)
+        
+        ##test file existence if the whole path has been given
+        file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(rospy.get_param('/ssm_node/scxml_file'))
+        if(os.path.isfile(file) == False):
+            ##test file existence if only the name of the file was given (suppose to be in the resources dir of ssm_core
+            path = "${ssm_core}/resources/"+rospy.get_param('/ssm_node/scxml_file')+".scxml"
+            file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(path)
+            if(os.path.isfile(file) == False):
+                rospy.logerr("[SSM] %s not found. Either give only the name of file without the scxml extension and put it in the resource folder.\n Or give the full path (${pkg}/dir/file.scxml)" 
+                             %rospy.get_param('/ssm_node/scxml_file'))
+                return False
+            
         try:
             interpreter = ssm_scxml_interpreter.ssmInterpreter(file)
-            self._SSM = interpreter.readFile()
+            self._SSM = interpreter.convertSCXML()
             self._SSM.check_consistency()
             self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
             self._introspection.start()

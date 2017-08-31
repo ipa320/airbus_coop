@@ -83,4 +83,12 @@ class ssmState(smach.State):
         @param ud: Userdata for the scope in which this state is executing
         """
         raise NotImplementedError()
+    
+class EmptyState(ssmState):
+    def __init__(self):
+        ssmState.__init__(self,outcomes=["next"])
+        
+    def execution(self, ud):
+        ud.skill = "Empty"
+        return "next"
 
