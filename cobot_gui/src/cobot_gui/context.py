@@ -79,7 +79,6 @@ class Context(QObject):
     alarmTrigger         = SIGNAL('alarmTriggered')
     emergencyStopRequest = SIGNAL('emergencyStopRequested')
     shutingdownRequest   = SIGNAL('shutingdownRequested')
-    diagnosticRequest   = SIGNAL('diagnosticChanged')
     
     def __init__(self, parent):
         QObject.__init__(self, parent)
@@ -121,9 +120,6 @@ class Context(QObject):
         
     def addCloseEventListner(self, listener):
         self.connect(self, self.shutingdownRequest, listener)
-
-    def addDiagnosticsListner(self, listener):
-        self.connect(self, self.diagnosticRequest, listener)
         
     addShutingdownEventListner = addCloseEventListner
         

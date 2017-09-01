@@ -87,15 +87,11 @@ class DiagnosticsPopup(QAgiPopup):
     def __init__(self, parent, context):
         """! The constructor."""
         QAgiPopup.__init__(self, parent)
+
         self._context = context
         self._parent = parent
         self.setRelativePosition(QAgiPopup.TopRight, QAgiPopup.BottomRight)
         loadUi(R.layouts.diagnostics_popup, self)
-        DIAGNOSTICS_TOPIC_NAME = rospy.get_param('diagnostics_topic_name','/diagnostics_agg')
-        self._context.addDiagnosticsListner(self.update_diag)
-        #self.connect(SIGNAL("DiagnosticChanged"), self.update_diag)
-        #self.emit(self,SIGNAL('DiagnosticChanged'), True)
-        self._diagnostics_agg_sub = rospy.Subscriber(DIAGNOSTICS_TOPIC_NAME, DiagnosticArray, self.message_cb)
         self._inspectors = {}
         self._current_msg = None
         palette = self.tree_all_devices.palette()
@@ -104,8 +100,13 @@ class DiagnosticsPopup(QAgiPopup):
         self._tree = StatusItem(self.tree_all_devices.invisibleRootItem())
         self.adjustSize()
 
+        # Diagnostics subscriber
+        DIAGNOSTICS_TOPIC_NAME = rospy.get_param('diagnostics_topic_name','/diagnostics_agg')
+        self.connect(self,SIGNAL("UpdateDiagnostics"), self.update_diag)
+        self._diagnostics_agg_sub = rospy.Subscriber(DIAGNOSTICS_TOPIC_NAME, DiagnosticArray, self.message_cb)
+
     def update_diag(self):
-        print "diagnostic changed"
+        #update the tree
         self._tree.prune()
         self.tree_all_devices.resizeColumnToContents(0)
         self.adjustSize()
@@ -120,8 +121,7 @@ class DiagnosticsPopup(QAgiPopup):
             for p in path:
                 tmp_tree = tmp_tree[p]
             tmp_tree.update(status, util.get_resource_name(status.name))
-        self.emit(SIGNAL('diagnosticChanged'))
-
+        self.emit(SIGNAL('UpdateDiagnostics'))
 
 if __name__ == "__main__":
     from cobot_gui.context import Context
