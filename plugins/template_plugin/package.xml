@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>template_plugin</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The template_plugin package.</description>
   
   <license>Apache 2.0</license>

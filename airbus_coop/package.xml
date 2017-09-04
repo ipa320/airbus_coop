@@ -7,7 +7,6 @@
   <license>Apache 2.0</license>
 
   <url type="website">http://ros.org/wiki/airbus_coop</url>
-  <!-- <url type="bugtracker"></url> -->
 
   <maintainer email="nhg@ipa.fhg.de">Nadia Hammoudeh Garcia</maintainer>
   <author email="nhg@ipa.fhg.de">Nadia Hammoudeh Garcia</author>
@@ -16,16 +15,17 @@
 
   <run_depend>agi_docgen</run_depend>
   <run_depend>cobot_gui</run_depend>
-  <run_depend>plugin_log_manager</run_depend>
-  <run_depend>plugin_node_manager</run_depend>
-  <run_depend>plugin_rqt</run_depend>
-  <run_depend>plugin_rviz</run_depend>
   <run_depend>pyqt_agi_extend</run_depend>
   <run_depend>ssm_core</run_depend>
   <run_depend>ssm_plugin</run_depend>
   <run_depend>ssm_tutorial</run_depend>
+  <run_depend>plugin_log_manager</run_depend>
+  <run_depend>plugin_node_manager</run_depend>
+  <run_depend>plugin_rqt</run_depend>
+  <run_depend>plugin_rviz</run_depend>
 
   <export>
     <metapackage/>
   </export>
+
 </package>
