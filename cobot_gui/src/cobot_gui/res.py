@@ -94,6 +94,11 @@ class CobotGuiImages():
         self.logo_airbus_group = DIR_COBOTGUI_IMAGES+'/logo_airbus_group.png'
         self.wellcome_base = DIR_COBOTGUI_IMAGES+'/wellcome_base.png'
         self.icon_emergency_stop = DIR_COBOTGUI_IMAGES+'/icon_emergency_stop.png'
+        self.status_error = DIR_COBOTGUI_IMAGES+'/status_error.png'
+        self.status_warning = DIR_COBOTGUI_IMAGES+'/status_warning.png'
+        self.status_stale = DIR_COBOTGUI_IMAGES+'/status_stale.png'
+        self.status_ok = DIR_COBOTGUI_IMAGES+'/status_ok.png'
+
     def findById(self, id=""):
         try:
             return getattr(self,id)
@@ -119,6 +124,7 @@ class CobotGuiLayouts():
         self.alarm_listview = DIR_COBOTGUI_LAYOUTS+'/alarm_listview.ui'
         self.languages_popup = DIR_COBOTGUI_LAYOUTS+'/languages_popup.ui'
         self.menu_launcher = DIR_COBOTGUI_LAYOUTS+'/menu_launcher.ui'
+        self.diagnostics_popup = DIR_COBOTGUI_LAYOUTS+'/diagnostics_popup.ui'
     def findById(self, id=""):
         try:
             return getattr(self,id)
@@ -633,6 +639,7 @@ class CobotGuiValues():
                 self.good_password = "background-color: #ffffff;border-radius: 5px;font-size: 16pt; font-weight:40; color: rgb(0,255,0);"
                 self.no_password = "background-color: #ffffff;border-radius: 5px;font-size: 16pt; font-weight:40; color: #494842;"
                 self.text = "QLabel {font-size: 22pt;}"
+                self.diagnostics = "QWidget{background-color: #ffff01;}"
             def findById(self, id=""):
                 try:
                     return getattr(self,id)

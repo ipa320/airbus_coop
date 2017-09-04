@@ -23,13 +23,14 @@ d = generate_distutils_setup(
 	packages=['cobot_gui',
 	'cobot_gui.account',
 	'cobot_gui.alarm',
-	'cobot_gui.util',
 	'cobot_gui.control_mode',
 	'cobot_gui.dashboard',
+	'cobot_gui.diagnostics',
 	'cobot_gui.emergency',
 	'cobot_gui.plugin',
 	'cobot_gui.timestamp',
-	'cobot_gui.translator'],
+	'cobot_gui.translator',
+	'cobot_gui.util'],
 	package_dir={'': 'src'},
 )
 

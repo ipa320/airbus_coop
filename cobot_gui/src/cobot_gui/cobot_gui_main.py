@@ -37,6 +37,7 @@ from dashboard import DashboardProvider
 
 from util import CobotGuiException
 from emergency import EmergencyStopButton, EmergencyStopState
+from diagnostics import DiagnosticsWidget
 from account import User, \
                     Privilege, \
                     LoginDialog, \
@@ -136,6 +137,9 @@ class CobotGuiMain(QWidget):
         self.translator_widget = TranslatorUi(self._context)
         self.user_layout.addWidget(self.translator_widget)
         
+        self.diagnostic_widget = DiagnosticsWidget(self._context)
+        self.user_layout.addWidget(self.diagnostic_widget)
+
         self.emergency_stop = EmergencyStopButton(self._context)
         self.interruption_layout.addWidget(self.emergency_stop)
         
