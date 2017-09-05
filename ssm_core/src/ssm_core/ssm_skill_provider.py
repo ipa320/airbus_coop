@@ -52,11 +52,9 @@ class SkillProvider(object):
                 
                 return skill_class_ref
             except Exception as ex:
-                rospy.logerr('Import fail from Skill "%s" !'%name)
-                rospy.logerr(ex)
                 return None
         else:
-            rospy.logerr('Skill named "%s" no found in register file !'%name)
+            rospy.logerr('[SCXML Interpreter] Skill named "%s" not found in register file !'%name)
             return None
     
     
