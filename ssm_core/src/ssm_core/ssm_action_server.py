@@ -60,13 +60,21 @@ class ssmActionServer(object):
         try:
             interpreter = ssm_scxml_interpreter.ssmInterpreter(file_)
             self._SSM = interpreter.convertSCXML()
-            self._SSM.check_consistency()
-            self._introspection = ssm_introspection.ssmIntrospection(self._SSM, self._as)
-            self._introspection.start()
-        except Exception as e:
+        except Exception as e:  
+            rospy.logerr("[SSM] error during interpretation of the SCXML ")
             rospy.logerr(e)
             self._SSM = None
             return False
+        try:
+            self._SSM.check_consistency()
+        except Exception as e:  
+            rospy.logerr("[SSM] error during consistency checks.")
+            rospy.logerr(e)
+            self._SSM = None
+            return False
+
+        self._introspection = ssm_introspection.ssmIntrospection(self._SSM, self._as)
+        self._introspection.start()
         rospy.loginfo("[SSM] : %s file loaded and created." %file)
         return True      
     
