@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>cobot_gui</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>The cobot_gui package</description>
 
   <license>Apache 2.0</license>

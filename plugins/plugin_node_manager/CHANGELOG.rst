@@ -2,8 +2,8 @@
 Changelog for package plugin_node_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * added parent and change thread to remove message error when closing
 * fixed the closing of the thread
 * added a stand alone script for this plugin

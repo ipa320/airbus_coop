@@ -2,8 +2,8 @@
 Changelog for package plugin_rviz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * removed  old commented code
 * Added license files
 * Changed order in the the licensing header

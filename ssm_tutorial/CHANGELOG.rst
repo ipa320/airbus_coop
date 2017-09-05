@@ -2,8 +2,8 @@
 Changelog for package ssm_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * Added license files
 * Changed order in the the licensing header
 * added Airbus to the licensing header

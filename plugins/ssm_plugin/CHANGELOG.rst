@@ -2,8 +2,8 @@
 Changelog for package ssm_plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * fixed the scxml file parameter path in the gui
 * ctrl+c should close the windows in the stand alone script
 * ctrl+c command should now stop the stand alone app

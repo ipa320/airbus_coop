@@ -2,8 +2,8 @@
 Changelog for package cobot_gui
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * Diagnostics tool integrated
 * update the diagnostic plugin adding signals
 * minor fixes

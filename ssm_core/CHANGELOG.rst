@@ -2,8 +2,8 @@
 Changelog for package ssm_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * Changed error display to give the name of the state and the name of the problem
   Fixing a test if an attribute is given without is expr set.
 * add the feedback to the action server

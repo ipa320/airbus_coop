@@ -2,8 +2,8 @@
 Changelog for package plugin_rqt
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-09-05)
+------------------
 * renamed rqt plugin
 * add diagnoctics popup class
 * fixed rqt plugin
