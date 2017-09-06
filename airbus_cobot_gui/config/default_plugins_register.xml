@@ -4,5 +4,4 @@
   <plugin label="Rqt"            package="airbus_plugin_rqt" />
   <plugin label="NodeManager"    package="airbus_plugin_node_manager" />
   <plugin label="LogManager"     package="airbus_plugin_log_manager" />
-  <plugin label="Template"     	 package="template_plugin" />
 </plugins-register>
