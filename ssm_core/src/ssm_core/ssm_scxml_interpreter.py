@@ -167,7 +167,7 @@ class ssmInterpreter:
                 ##Parallel
                 for parallel in list_parallel:
                     ##Construct parallel state
-                    self.constructParallel(parallel, parent, current_SM, SSM)
+                    self.constructParallel(parallel, parent, current_SM, SSM, final_states)
 
                 for state in list_state:
                     if(state.find('state') is not None):
@@ -180,18 +180,23 @@ class ssmInterpreter:
                 current_SM.close()        
             ##Current level is finished
             if(self.CheckBool == False):
-                return
+                return None
             
             if(len(self._next_parent_list)==0):##There is no lower level
                 finish_ = True
             else:
                 self._current_parent_list = self._next_parent_list ##copy the new list of parent
                 self._current_SM_list = self._next_SM_list ##copy the list of State Machine
-            
-        return SSM
+        if(self.CheckBool == False):
+            return None
+        else:   
+            return SSM
     
-    def constructParallel(self, current_level, parent, current_openSM, mainSM):
+    def constructParallel(self, current_level, parent, current_openSM, mainSM, final_states):
+        
+        
         ID = current_level.attrib.get('id')
+
         if(ID is None):
             rospy.logerr("[SCXML Interpreter] No ID for a State !!!!" )
             self.CheckBool = False
@@ -224,24 +229,30 @@ class ssmInterpreter:
                 rospy.logerr("[SCXML Interpreter] No Transition Condition  for %s !!!!" % ID)
                 self.CheckBool = False
                 return
-        
+            ##if target a final state send we set on the outcome
+            for final_id in final_states:
+                if(target == final_id):
+                    target = event 
+
             map_list = self.convertToConcurenceMap(cond)
+
             if(len(map_list) == 0):
                 rospy.logerr("[SCXML Interpreter] Error during the convertion event to map for %s !!!!" % ID)
                 self.CheckBool = False
                 return 
             
             for map_ in map_list:
+                
                 outcome_ = event
                 outcomes_.append(outcome_)
                 outcomes_map[outcome_] = map_
-                transitions_[outcome_] = target                                      
-        
+                transitions_[outcome_] = target
+                                                    
         ##Add the datamodel
-        datamodel_ = self.get_datamodel(current_level,mainSM)
-        
+        datamodel_ = self.get_datamodel(current_level,mainSM, ID)
+
         ##Find the io_keys
-        keys_ = self.findIOkeys(current_level)
+        keys_ = self.findIOkeys(current_level, ID)
         
         newSM = ssm_concurrence.ssmConcurrence(outcomes_,outcome_map=outcomes_map,input_keys = keys_, output_keys = keys_) ##Define the empty concurence
         newSM._datamodel = datamodel_   
@@ -249,12 +260,12 @@ class ssmInterpreter:
         newSM._onExit = onExit
         #Add to the currently openned SM
         self.addToSM(current_openSM,ID,newSM,transitions_,keys_)
-        
         self._next_SM_list.append(newSM)
         
     def constructCompoundState(self, current_level, parent, current_openSM, mainSM, final_states):
         ##State is parent ==> it's a state machine
         ID = current_level.attrib.get('id')
+
         if(ID is None):
             rospy.logerr("[SCXML Interpreter] No ID for a State !!!!" )
             self.CheckBool = False
@@ -313,10 +324,10 @@ class ssmInterpreter:
                 transitions_[event] = target
 
         ##Add the datamodel
-        datamodel_ = self.get_datamodel(current_level,mainSM)
+        datamodel_ = self.get_datamodel(current_level,mainSM, ID)
             
         ##Find the io_keys
-        keys_ = self.findIOkeys(current_level)
+        keys_ = self.findIOkeys(current_level, ID)
         
         ##Add the intial state
         initial = current_level.find("initial")
@@ -337,6 +348,7 @@ class ssmInterpreter:
     def constructSimpleState(self, current_level, current_openSM, mainSM, final_states):
         
         ID = current_level.attrib.get('id')
+        
         if(ID is None):
             rospy.logerr("[SCXML Interpreter] No ID for a State !!!!" )
             self.CheckBool = False
@@ -364,22 +376,27 @@ class ssmInterpreter:
                     
             transitions_[event] = target
         
-        datamodel_ = self.get_datamodel(current_level,mainSM)
+        datamodel_ = self.get_datamodel(current_level,mainSM, ID)
         ##Find the skill
         skill_name = current_level.find("./datamodel/data[@id='skill']")
         if(skill_name is not None):
-            try:
-                State = self.skillProvider.load(skill_name.attrib.get('expr'))()
-            except Exception as ex:
-                rospy.logerr('Import fail from Skill "%s" !'%name)
-                rospy.logerr(ex)
+            if('expr' in skill_name.attrib):
+                try:
+                    State = self.skillProvider.load(skill_name.attrib.get('expr'))()
+                except Exception as ex:
+                    rospy.logerr('[SCXML Interpreter] Import fail from Skill "%s" in state : "%s"!'%(data.attrib['expr'],ID))
+                    rospy.logerr(ex)
+                    self.CheckBool = False
+                    return
+            else:
+                rospy.logerr('[SCXML Interpreter] Skill "expr" not defined in state "%s" !'%ID)
                 self.CheckBool = False
                 return
         else:
             rospy.logwarn("[SCXML Interpreter] No skill found for the state : %s. We use the EmptyState." %ID)
             State = ssm_state.EmptyState()
             
-        keys_ = self.findIOkeys(current_level)
+        keys_ = self.findIOkeys(current_level, ID)
         
         State.register_io_keys(keys_) 
         State._datamodel = datamodel_   
@@ -449,11 +466,15 @@ class ssmInterpreter:
         
         return map_list
     
-    def get_datamodel(self, state, mainSM):
+    def get_datamodel(self, state, mainSM, ID):
         datamodel_ = {}
         for data in state.findall('./datamodel/data'):  
             data_ID = data.attrib['id']
-            data_expr = data.attrib['expr']
+            if('expr' in data.attrib):
+                data_expr = data.attrib['expr']
+            else:
+                rospy.logwarn('[SCXML Interpreter] State : "%s". "expr" not defined for data "%s". It will be set to \"\"!'%(ID,data_ID))
+                data_expr = ""
             datamodel_[data_ID] = data_expr
             if(not(mainSM.userdata.__contains__(data_ID))):
                 mainSM.userdata.__setattr__(data_ID, data_expr)
@@ -489,25 +510,27 @@ class ssmInterpreter:
             
             return ssm_on.onExit(logs, script)
         
-    def findIOkeys(self, state):
+    def findIOkeys(self, state, ID):
         io_keys = set()
         for data in state.findall('.//datamodel/data'):
             ##Grab all data ID
             io_keys.add(data.attrib['id'])
             ##Grad all skills
             if(data.attrib['id'] == 'skill'):
-            ##Find the skill
-                if(data.attrib['expr'] is not None):
+                if('expr' in data.attrib):
                     try:
                         State = self.skillProvider.load(data.attrib['expr'])()
                     except Exception as ex:
-                        rospy.logerr('Import fail from Skill "%s" !'%data.attrib['expr'])
+                        rospy.logerr('[SCXML Interpreter] Import fail from Skill "%s" in state : "%s"!'%(data.attrib['expr'],ID))
                         rospy.logerr(ex)
                         return None
                 else:
-                    State = EmptyState()
-                for key in State.get_registered_input_keys():
-                    io_keys.add(str(key))
+                    rospy.logerr('[SCXML Interpreter] Skill "expr" not defined in state "%s" !'%ID)
+                    return None
+            else:
+                State = ssm_state.EmptyState()
+            for key in State.get_registered_input_keys():
+                io_keys.add(str(key))
                 
         for log in state.findall('.//onentry/log'):
             ##Grab all data ID
