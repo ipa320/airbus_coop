@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <skills>
 	<!-- Registering skills examples
-	<skill name="Input"		pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="Input"/>
-	<skill name="isPrime"	pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="isPrime"/>
-	<skill name="Primes"	pkg="ssm_tutorial" 	module="src.ssm_tutorial1.skills" 	class="Primes"/>
+	<skill name="Input"		pkg="airbus_ssm_tutorial" 	module="src.airbus_ssm_tutorial1.skills" 	class="Input"/>
+	<skill name="isPrime"	pkg="airbus_ssm_tutorial" 	module="src.airbus_ssm_tutorial1.skills" 	class="isPrime"/>
+	<skill name="Primes"	pkg="airbus_ssm_tutorial" 	module="src.airbus_ssm_tutorial1.skills" 	class="Primes"/>
 	-->	
  </skills>

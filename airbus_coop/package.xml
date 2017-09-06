@@ -18,7 +18,7 @@
   <run_depend>airbus_pyqt_extend</run_depend>
   <run_depend>airbus_ssm_core</run_depend>
   <run_depend>airbus_ssm_plugin</run_depend>
-  <run_depend>ssm_tutorial</run_depend>
+  <run_depend>airbus_ssm_tutorial</run_depend>
   <run_depend>airbus_plugin_log_manager</run_depend>
   <run_depend>airbus_plugin_node_manager</run_depend>
   <run_depend>airbus_plugin_rqt</run_depend>

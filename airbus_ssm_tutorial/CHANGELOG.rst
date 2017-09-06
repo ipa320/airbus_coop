@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package ssm_tutorial
+Changelog for package airbus_ssm_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.0.2 (2017-09-05)
@@ -24,7 +24,7 @@ Changelog for package ssm_tutorial
 * fixed tutorial1 launch file
 * fixed skills for tutorial 1
 * removed old scxml missions
-* moved moving arm skill and wait skill to ssm_tutorial
+* moved moving arm skill and wait skill to airbus_ssm_tutorial
 * removed logs
 * added missed packages
 * Contributors: ipa-led, ipa-nhg
