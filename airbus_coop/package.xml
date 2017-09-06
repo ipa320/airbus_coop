@@ -22,7 +22,7 @@
   <run_depend>airbus_plugin_log_manager</run_depend>
   <run_depend>airbus_plugin_node_manager</run_depend>
   <run_depend>airbus_plugin_rqt</run_depend>
-  <run_depend>plugin_rviz</run_depend>
+  <run_depend>airbus_plugin_rviz</run_depend>
 
   <export>
     <metapackage/>

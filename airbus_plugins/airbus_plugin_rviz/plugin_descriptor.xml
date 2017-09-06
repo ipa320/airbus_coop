@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 
 <plugin>
-    <import module="plugin_rviz.plugin" class="PluginRviz"/>
+    <import module="airbus_plugin_rviz.plugin" class="PluginRviz"/>
     <description>
         A Python plugin for displaying rviz in airbus_cobot_gui.
     </description>
     <version>1.2</version>
     <setup>
-        <icon>${plugin_rviz}/resources/images/ico_rviz_2.png</icon>
+        <icon>${airbus_plugin_rviz}/resources/images/ico_rviz_2.png</icon>
         <access-rights>operator</access-rights>
         <parameters>
-            <param name="yaml" value="${plugin_rviz}/resources/config/default.rviz"/>
+            <param name="yaml" value="${airbus_plugin_rviz}/resources/config/default.rviz"/>
         </parameters>
     </setup>
 </plugin>

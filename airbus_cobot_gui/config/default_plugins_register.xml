@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf8'?>
 <plugins-register>
-  <plugin label="Rviz"           package="plugin_rviz" />
+  <plugin label="Rviz"           package="airbus_plugin_rviz" />
   <plugin label="Rqt"            package="airbus_plugin_rqt" />
   <plugin label="NodeManager"    package="airbus_plugin_node_manager" />
   <plugin label="LogManager"     package="airbus_plugin_log_manager" />

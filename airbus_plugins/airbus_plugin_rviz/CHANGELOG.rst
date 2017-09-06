@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package plugin_rviz
+Changelog for package airbus_plugin_rviz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.0.2 (2017-09-05)

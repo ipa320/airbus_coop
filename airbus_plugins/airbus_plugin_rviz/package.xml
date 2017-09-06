@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>plugin_rviz</name>
+  <name>airbus_plugin_rviz</name>
   <version>0.0.2</version>
-  <description>The plugin_rviz package</description>
+  <description>The airbus_plugin_rviz package</description>
 
   <license>Apache 2.0</license>
 
