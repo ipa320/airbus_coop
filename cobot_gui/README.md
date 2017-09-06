@@ -1,4 +1,4 @@
-# agi_docgen
+# cobot_gui
 <a id="top"/> 
 
 This repository holds a graphical user interface tool

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>airbus_docgen</name>
+  <version>0.0.1</version>
+  <description>The airbus_docgen package</description>
+
+  <license>Apache 2.0</license>
+
+  <maintainer email="nhg@ipa.fhg.de">Nadia Hammoudeh Garcia</maintainer>
+  <author email="martin.matignon.external@airbus.com">Matignon Martin</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roslib</build_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>rospy</run_depend>
+
+</package>
