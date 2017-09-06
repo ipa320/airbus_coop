@@ -19,7 +19,7 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-	packages=['plugin_log_manager'],
+	packages=['airbus_plugin_log_manager'],
 	package_dir={'': 'src'},
 )
 

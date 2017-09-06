@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <plugin>
-    <import module="plugin_log_manager.plugin" class="PluginLogManager"/>
+    <import module="airbus_plugin_log_manager.plugin" class="PluginLogManager"/>
     <description>A Python plugin for displaying ros logs in airbus_cobot_gui.</description>
     <setup>
-        <icon>${plugin_log_manager}/resources/images/icon_log_manager.png</icon>
+        <icon>${airbus_plugin_log_manager}/resources/images/icon_log_manager.png</icon>
         <access-rights>operator</access-rights>
     </setup>
 </plugin>

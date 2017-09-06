@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>plugin_log_manager</name>
+  <name>airbus_plugin_log_manager</name>
   <version>0.0.2</version>
-  <description>The plugin_log_manager package</description>
+  <description>The airbus_plugin_log_manager package</description>
 
   <license>Apache 2.0</license>
 
