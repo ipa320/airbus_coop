@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ssm_plugin)
+project(airbus_ssm_plugin)
 
 find_package(catkin REQUIRED COMPONENTS
   ssm_core

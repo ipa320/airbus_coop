@@ -32,7 +32,7 @@ from python_qt_binding import loadUi
 # Constante(s) and Variable(s) declaration
 ########################################
 
-DIR_SSMPLUGIN_RESOURCES = os.path.join(get_pkg_dir('ssm_plugin'),'resources')
+DIR_SSMPLUGIN_RESOURCES = os.path.join(get_pkg_dir('airbus_ssm_plugin'),'resources')
 DIR_SSMPLUGIN_VALUES = DIR_SSMPLUGIN_RESOURCES+'/values'
 DIR_SSMPLUGIN_IMAGES = DIR_SSMPLUGIN_RESOURCES+'/images'
 DIR_SSMPLUGIN_LAYOUTS = DIR_SSMPLUGIN_RESOURCES+'/layouts'

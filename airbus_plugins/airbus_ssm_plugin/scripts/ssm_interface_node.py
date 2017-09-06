@@ -15,12 +15,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
+import rospy
+import sys
 
-d = generate_distutils_setup(
-	packages=['ssm_plugin'],
-	package_dir={'': 'src'},
-)
+from python_qt_binding.QtGui import *
+from python_qt_binding.QtCore import *
 
-setup(**d)
+from airbus_ssm_plugin.ssm_introspection import SSMIntrospection
+
+from airbus_cobot_gui import plugin
+
+if __name__ == "__main__":
+    
+    import sys
+    import signal
+    
+    rospy.init_node("airbus_ssm_plugin_node")
+    
+    a = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    
+    window = plugin.getStandAloneInstance("airbus_ssm_plugin", SSMIntrospection, "en")
+    window.setWindowTitle("ssmIntrospection")
+    window.show()
+    
+    sys.exit(a.exec_())
+    
+#End of file
+

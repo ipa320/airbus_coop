@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf8'?>
 <package>
-  <name>ssm_plugin</name>
+  <name>airbus_ssm_plugin</name>
   <version>0.0.2</version>
-  <description>The ssm_plugin package</description>
+  <description>The airbus_ssm_plugin package</description>
 
   <license>Apache 2.0</license>
 

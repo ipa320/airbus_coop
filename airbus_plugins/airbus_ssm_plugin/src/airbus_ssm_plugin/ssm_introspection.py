@@ -400,12 +400,12 @@ if __name__ == "__main__":
     import sys
     import signal
     
-    rospy.init_node("ssm_plugin_node")
+    rospy.init_node("airbus_ssm_plugin_node")
     
     a = QApplication(sys.argv)
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
-    window = plugin.getStandAloneInstance("ssm_plugin", SSMIntrospection, "en")
+    window = plugin.getStandAloneInstance("airbus_ssm_plugin", SSMIntrospection, "en")
     window.setWindowTitle("ssmIntrospection")
     window.show()
     

@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package ssm_plugin
+Changelog for package airbus_ssm_plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.0.2 (2017-09-05)
@@ -10,7 +10,7 @@ Changelog for package ssm_plugin
 * fixed encoding in resources files
 * Added license files
 * Changed order in the the licensing header
-* added licensing header to ssm_plugin package
+* added licensing header to airbus_ssm_plugin package
 * update and anify package.xml files
 * added ccm_plugin
 * Removed all hardware specific plugins and dashboard, cleaning up all the hardware specifics launchs / configs files
