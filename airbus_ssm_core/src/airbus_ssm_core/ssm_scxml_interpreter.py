@@ -83,7 +83,12 @@ class ssmInterpreter:
             self.CheckBool = False
             return
         else:
-            self.skillProvider = ssm_skill_provider.SkillProvider(get_pkg_dir_from_prefix(str(skill.attrib['expr'])))
+            try:
+                self.skillProvider = ssm_skill_provider.SkillProvider(get_pkg_dir_from_prefix(str(skill.attrib['expr'])))
+            except Exception as ex:
+                rospy.logerr(ex)
+                rospy.logerr('[SCXML Interpreter] Skill register XML not found.')
+                self.CheckBool = False
             
         return self.constructSSM()
     
@@ -127,7 +132,7 @@ class ssmInterpreter:
                 data_ID = data.attrib['id']
                 data_expr = data.attrib['expr']
                 SSM.userdata[data_ID] = data_expr
-                
+        
         '''
             Read the states in the scxml
             If there is a problem in a state the interpreter will return and failed
@@ -176,17 +181,20 @@ class ssmInterpreter:
                         self.constructSimpleState(state, current_SM, SSM, final_states)
 
                 
-                #open the current SM for construction
-                current_SM.close()        
+                
             ##Current level is finished
             if(self.CheckBool == False):
                 return None
+            else:
+                #close the current SM for construction
+                current_SM.close() 
             
             if(len(self._next_parent_list)==0):##There is no lower level
                 finish_ = True
             else:
                 self._current_parent_list = self._next_parent_list ##copy the new list of parent
                 self._current_SM_list = self._next_SM_list ##copy the list of State Machine
+                
         if(self.CheckBool == False):
             return None
         else:   
@@ -325,10 +333,12 @@ class ssmInterpreter:
 
         ##Add the datamodel
         datamodel_ = self.get_datamodel(current_level,mainSM, ID)
-            
+        if(datamodel_ is None):
+            return    
         ##Find the io_keys
         keys_ = self.findIOkeys(current_level, ID)
-        
+        if(keys_ is None):
+            return
         ##Add the intial state
         initial = current_level.find("initial")
         if(initial is None):
@@ -375,8 +385,8 @@ class ssmInterpreter:
                     target = event
                     
             transitions_[event] = target
-        
         datamodel_ = self.get_datamodel(current_level,mainSM, ID)
+
         ##Find the skill
         skill_name = current_level.find("./datamodel/data[@id='skill']")
         if(skill_name is not None):
@@ -384,7 +394,7 @@ class ssmInterpreter:
                 try:
                     State = self.skillProvider.load(skill_name.attrib.get('expr'))()
                 except Exception as ex:
-                    rospy.logerr('[SCXML Interpreter] Import fail from Skill "%s" in state : "%s"!'%(data.attrib['expr'],ID))
+                    rospy.logerr('[SCXML Interpreter] Import fail from Skill "%s" in state : "%s"!'%(skill_name.attrib['expr'],ID))
                     rospy.logerr(ex)
                     self.CheckBool = False
                     return
@@ -397,7 +407,9 @@ class ssmInterpreter:
             State = ssm_state.EmptyState()
             
         keys_ = self.findIOkeys(current_level, ID)
-        
+        if(keys_ is None):
+            return
+
         State.register_io_keys(keys_) 
         State._datamodel = datamodel_   
         State._onEntry = onEntry
