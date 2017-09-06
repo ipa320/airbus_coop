@@ -2,8 +2,8 @@
 Changelog for package airbus_cobot_gui
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2017-09-06)
+------------------
 * Merge pull request `#34 <https://github.com/ipa320/airbus_coop/issues/34>`_ from ipa-nhg/SeparateTemplates
   Separate templates
 * make airbus_cobot_gui independet to the templates

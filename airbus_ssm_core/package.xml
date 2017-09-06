@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>airbus_ssm_core</name>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <description>The airbus_ssm_core package</description>
 
   <license>Apache 2.0</license>

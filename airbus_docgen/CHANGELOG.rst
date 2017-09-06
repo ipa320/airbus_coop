@@ -2,8 +2,8 @@
 Changelog for package airbus_docgen
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2017-09-06)
+------------------
 * update changelog
 * Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
   Rename packages
