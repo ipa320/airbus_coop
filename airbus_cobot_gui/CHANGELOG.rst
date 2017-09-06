@@ -2,6 +2,23 @@
 Changelog for package airbus_cobot_gui
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#34 <https://github.com/ipa320/airbus_coop/issues/34>`_ from ipa-nhg/SeparateTemplates
+  Separate templates
+* make airbus_cobot_gui independet to the templates
+* Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
+  Rename packages
+* test cobot_gui renames
+* renamed packages
+* rename plugin_rviz to airbus_plugin_rviz
+* rename plugin_rqt to airbus_plugin_rqt
+* rename plugin_node_manager to airbus_plugin_node_manager
+* renamed plugin_log_manager to airbus_plugin_log_manager
+* rename pyqt_agi_extend to airbus_pyqt_extend
+* rename cobot_gui to airbus_cobot_gui
+* Contributors: Nadia Hammoudeh García, ipa-nhg
+
 0.0.2 (2017-09-05)
 ------------------
 * Diagnostics tool integrated

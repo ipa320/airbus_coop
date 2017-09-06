@@ -2,6 +2,13 @@
 Changelog for package airbus_plugin_rviz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
+  Rename packages
+* rename plugin_rviz to airbus_plugin_rviz
+* Contributors: Nadia Hammoudeh García, ipa-nhg
+
 0.0.2 (2017-09-05)
 ------------------
 * removed  old commented code

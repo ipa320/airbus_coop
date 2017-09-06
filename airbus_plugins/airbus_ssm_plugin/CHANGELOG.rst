@@ -2,6 +2,14 @@
 Changelog for package airbus_ssm_plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
+  Rename packages
+* renamed ssm_core to airbus_ssm_core
+* rename ssm_plugin to airbus_ssm_plugin
+* Contributors: Nadia Hammoudeh García, ipa-nhg
+
 0.0.2 (2017-09-05)
 ------------------
 * fixed the scxml file parameter path in the gui

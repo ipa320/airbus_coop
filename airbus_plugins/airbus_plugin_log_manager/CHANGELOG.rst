@@ -2,6 +2,14 @@
 Changelog for package airbus_plugin_log_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
+  Rename packages
+* test cobot_gui renames
+* renamed plugin_log_manager to airbus_plugin_log_manager
+* Contributors: Nadia Hammoudeh García, ipa-nhg
+
 0.0.2 (2017-09-05)
 ------------------
 * Added license files

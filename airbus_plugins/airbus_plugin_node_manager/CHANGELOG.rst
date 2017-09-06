@@ -2,6 +2,13 @@
 Changelog for package airbus_plugin_node_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
+  Rename packages
+* rename plugin_node_manager to airbus_plugin_node_manager
+* Contributors: Nadia Hammoudeh García, ipa-nhg
+
 0.0.2 (2017-09-05)
 ------------------
 * added parent and change thread to remove message error when closing
