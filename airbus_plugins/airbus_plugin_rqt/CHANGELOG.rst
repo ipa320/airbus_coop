@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package plugin_rqt
+Changelog for package airbus_plugin_rqt
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.0.2 (2017-09-05)

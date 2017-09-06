@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 
 <library path="src">
-    <import module="plugin_rqt.plugin" class="PluginRqt"/>
+    <import module="airbus_plugin_rqt.plugin" class="PluginRqt"/>
     <description>
         A Python plugin for displaying rqt in airbus_cobot_gui.
     </description>
     <setup>
-        <icon>${plugin_rqt}/resources/icon_rqt.png</icon>
+        <icon>${airbus_plugin_rqt}/resources/icon_rqt.png</icon>
         <access-rights>expert</access-rights>
     </setup>
 </library>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(plugin_rqt)
+project(airbus_plugin_rqt)
 
 find_package(catkin REQUIRED COMPONENTS
   airbus_cobot_gui
