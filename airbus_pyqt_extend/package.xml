@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>pyqt_agi_extend</name>
+  <name>airbus_pyqt_extend</name>
   <version>0.0.2</version>
-  <description>The pyqt_agi_extend package</description>
+  <description>The airbus_pyqt_extend package</description>
 
   <license>Apache 2.0</license>
 

@@ -24,7 +24,7 @@ from python_qt_binding.QtCore import *
 from python_qt_binding import loadUi
 from airbus_cobot_gui.res import R
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
-from pyqt_agi_extend.QtAgiGui import QAgiPopup
+from airbus_pyqt_extend.QtAgiGui import QAgiPopup
 from rqt_robot_monitor.status_item import StatusItem
 import rqt_robot_monitor.util_robot_monitor as util
 

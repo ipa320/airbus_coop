@@ -21,7 +21,7 @@ import rospy
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 
-from pyqt_agi_extend import QtAgiCore
+from airbus_pyqt_extend import QtAgiCore
 
 # Load my resources file
 from res import R

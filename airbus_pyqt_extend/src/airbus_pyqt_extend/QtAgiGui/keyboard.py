@@ -26,9 +26,9 @@ from python_qt_binding.QtCore import *
 
 from python_qt_binding import loadUi
 
-from pyqt_agi_extend.QtAgiCore import loadRsc
+from airbus_pyqt_extend.QtAgiCore import loadRsc
 
-rsc = loadRsc("pyqt_agi_extend")
+rsc = loadRsc("airbus_pyqt_extend")
 
 class NumericFloatKeyboard(QDialog):
     

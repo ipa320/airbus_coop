@@ -3,7 +3,7 @@ project(airbus_cobot_gui)
 
 find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
-  pyqt_agi_extend
+  airbus_pyqt_extend
   roslib
   rospy
 )

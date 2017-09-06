@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package pyqt_agi_extend
+Changelog for package airbus_pyqt_extend
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.0.2 (2017-09-05)
@@ -12,5 +12,5 @@ Changelog for package pyqt_agi_extend
 * missed python module
 * Review CMakelists and package files
 * fix setup.py files
-* clean and add pyqt_agi_extend
+* clean and add airbus_pyqt_extend
 * Contributors: ipa-led, ipa-nhg

@@ -29,7 +29,7 @@ from accounts import User, \
                      UserAccounts, \
                      base64
                      
-from pyqt_agi_extend.QtAgiGui import QAgiPopup, QAgiMessageBox
+from airbus_pyqt_extend.QtAgiGui import QAgiPopup, QAgiMessageBox
 
 from airbus_cobot_gui.dashboard import Dashboard, DashboardPopup
 

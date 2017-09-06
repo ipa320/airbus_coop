@@ -27,8 +27,8 @@ from airbus_cobot_gui.account import Privilege, User
 from airbus_cobot_gui.util import CobotGuiException, Parameters
 
 
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
-from pyqt_agi_extend.QtAgiGui import QAgiPopup
+from airbus_pyqt_extend.QtAgiCore import get_pkg_dir_from_prefix
+from airbus_pyqt_extend.QtAgiGui import QAgiPopup
 
 from airbus_cobot_gui.res import R
 

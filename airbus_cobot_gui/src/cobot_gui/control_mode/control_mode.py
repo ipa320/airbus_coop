@@ -25,7 +25,7 @@ from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 from python_qt_binding import loadUi
 
-from pyqt_agi_extend.QtAgiGui import QAgiSilderButton
+from airbus_pyqt_extend.QtAgiGui import QAgiSilderButton
 from airbus_cobot_gui.alarm import Alarm
 from airbus_cobot_gui.emergency import EmergencyStopState
 from airbus_cobot_gui.res import R

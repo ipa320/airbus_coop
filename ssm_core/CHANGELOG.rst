@@ -22,10 +22,10 @@ Changelog for package ssm_core
 * unnecessary re-declaration of param. gui_plugin should still work.
 * changed the launch file and the node / main to get the argument for the file you want to use
 * fixed a named changed
-* removed last reference to pyqt_agi_extend
+* removed last reference to airbus_pyqt_extend
 * some changes to set the default log path to be at /tmp/ and removed the ssm_log dir
-* removed a dependacy to pyqt_agi_extend
-* changed the skill provider so in doesn't depend on pyqt_agi_extend lib
+* removed a dependacy to airbus_pyqt_extend
+* changed the skill provider so in doesn't depend on airbus_pyqt_extend lib
 * fixed launch files
 * fixed setup and CMakeLists / package.xml
 * removed executable parts of main and interpreter and tranfered it to a node file (good practice).

@@ -23,7 +23,7 @@ import subprocess
 import signal
 from xml.etree import ElementTree
 
-from pyqt_agi_extend import QtAgiCore
+from airbus_pyqt_extend import QtAgiCore
 
 # Load my resources file
 from airbus_cobot_gui.res import R

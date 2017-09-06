@@ -6,7 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   roslib
   rospy
   rviz
-  pyqt_agi_extend
+  airbus_pyqt_extend
 )
 
 catkin_python_setup()

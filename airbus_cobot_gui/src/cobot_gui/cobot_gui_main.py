@@ -28,7 +28,7 @@ from python_qt_binding.QtCore import *
 
 from python_qt_binding import loadUi
 
-from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
+from airbus_pyqt_extend.QtAgiCore import get_pkg_dir_from_prefix
 
 from context import Context
 

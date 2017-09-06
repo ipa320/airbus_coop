@@ -29,7 +29,7 @@ from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 from python_qt_binding import loadUi
 
-from pyqt_agi_extend import QtAgiCore
+from airbus_pyqt_extend import QtAgiCore
 
 from airbus_cobot_gui import plugin, ControlMode, EmergencyStopState
 

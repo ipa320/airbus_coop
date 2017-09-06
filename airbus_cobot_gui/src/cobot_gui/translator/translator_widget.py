@@ -23,7 +23,7 @@ from python_qt_binding.QtCore import *
 from python_qt_binding import loadUi
 
 from airbus_cobot_gui.account import Privilege
-from pyqt_agi_extend.QtAgiGui import QAgiPopup
+from airbus_pyqt_extend.QtAgiGui import QAgiPopup
 
 from airbus_cobot_gui.res import R
 
