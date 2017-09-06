@@ -33,7 +33,7 @@ import sys
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 
-from cobot_gui import Plugin
+from airbus_cobot_gui import Plugin
 
 class RqtGuiWrapperClass(Main):
     

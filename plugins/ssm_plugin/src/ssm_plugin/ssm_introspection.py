@@ -31,7 +31,7 @@ from python_qt_binding import loadUi
 
 from pyqt_agi_extend import QtAgiCore
 
-from cobot_gui import plugin, ControlMode, EmergencyStopState
+from airbus_cobot_gui import plugin, ControlMode, EmergencyStopState
 
 from scxml import SCXMLState
 from ssm_core import ssm_main

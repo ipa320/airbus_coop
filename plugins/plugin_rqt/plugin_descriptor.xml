@@ -3,7 +3,7 @@
 <library path="src">
     <import module="plugin_rqt.plugin" class="PluginRqt"/>
     <description>
-        A Python plugin for displaying rqt in cobot_gui.
+        A Python plugin for displaying rqt in airbus_cobot_gui.
     </description>
     <setup>
         <icon>${plugin_rqt}/resources/icon_rqt.png</icon>

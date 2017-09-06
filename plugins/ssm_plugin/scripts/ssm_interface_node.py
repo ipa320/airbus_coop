@@ -23,7 +23,7 @@ from python_qt_binding.QtCore import *
 
 from ssm_plugin.ssm_introspection import SSMIntrospection
 
-from cobot_gui import plugin
+from airbus_cobot_gui import plugin
 
 if __name__ == "__main__":
     

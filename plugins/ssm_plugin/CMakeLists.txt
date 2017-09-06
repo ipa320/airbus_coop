@@ -3,7 +3,7 @@ project(ssm_plugin)
 
 find_package(catkin REQUIRED COMPONENTS
   ssm_core
-  cobot_gui
+  airbus_cobot_gui
   pyqt_agi_extend
   rospy
 )

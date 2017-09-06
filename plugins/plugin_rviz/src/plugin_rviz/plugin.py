@@ -22,7 +22,7 @@ from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 
 from pyqt_agi_extend.QtAgiCore import get_pkg_dir_from_prefix
-from cobot_gui import Plugin, ControlMode
+from airbus_cobot_gui import Plugin, ControlMode
 
 ## Finally import the RViz bindings themselves.
 import rviz

@@ -32,7 +32,7 @@ from python_qt_binding import loadUi
 from custom_rosnode import rosnode_ping_all, rosnode_cleanup
 from node_item import NodeItem
 
-from cobot_gui import Alarm
+from airbus_cobot_gui import Alarm
 
 from plugin_node_manager.res import R
 

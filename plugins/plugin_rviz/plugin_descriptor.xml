@@ -3,7 +3,7 @@
 <plugin>
     <import module="plugin_rviz.plugin" class="PluginRviz"/>
     <description>
-        A Python plugin for displaying rviz in cobot_gui.
+        A Python plugin for displaying rviz in airbus_cobot_gui.
     </description>
     <version>1.2</version>
     <setup>

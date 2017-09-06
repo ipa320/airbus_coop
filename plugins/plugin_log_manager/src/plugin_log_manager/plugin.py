@@ -29,7 +29,7 @@ from rqt_console.message import Message
 from rqt_console.message_data_model import MessageDataModel
 from rqt_console.message_proxy_model import MessageProxyModel
 
-from cobot_gui import Plugin, ControlMode
+from airbus_cobot_gui import Plugin, ControlMode
 
 class PluginLogManager(Plugin):
     """

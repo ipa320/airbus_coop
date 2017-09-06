@@ -34,7 +34,7 @@ from table_monitoring_nodes import TableMonitoringNodes
 
 from plugin_node_manager.res import R
 
-from cobot_gui import Plugin, ControlMode
+from airbus_cobot_gui import Plugin, ControlMode
 
 class PluginNodeManager(Plugin):
     

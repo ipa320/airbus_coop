@@ -2,7 +2,7 @@
 
 <plugin>
     <import module="plugin_log_manager.plugin" class="PluginLogManager"/>
-    <description>A Python plugin for displaying ros logs in cobot_gui.</description>
+    <description>A Python plugin for displaying ros logs in airbus_cobot_gui.</description>
     <setup>
         <icon>${plugin_log_manager}/resources/images/icon_log_manager.png</icon>
         <access-rights>operator</access-rights>
