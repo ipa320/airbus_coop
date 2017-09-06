@@ -1,7 +1,7 @@
 # airbus_ssm_core
 <a id="top"/> 
 
-###Smart State Machine (SSM)###
+###Smart State Machine (SSM)
 
 This repository holds a SMACH overhaul including an interpretor of SCXML files.([SCXML standard](https://www.w3.org/TR/scxml/)).
 It creates a finite state machine (based on SMACH) using the data on the scxml.
