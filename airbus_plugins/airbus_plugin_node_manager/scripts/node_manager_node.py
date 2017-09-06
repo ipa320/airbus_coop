@@ -21,7 +21,7 @@ import sys
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 
-from plugin_node_manager.plugin import PluginNodeManager
+from airbus_plugin_node_manager.plugin import PluginNodeManager
 
 from airbus_cobot_gui import plugin
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     a = QApplication(sys.argv)
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
-    window = plugin.getStandAloneInstance("plugin_node_manager", PluginNodeManager, "en")
+    window = plugin.getStandAloneInstance("airbus_plugin_node_manager", PluginNodeManager, "en")
     window.setWindowTitle("NodeManager")
     window.show()
     

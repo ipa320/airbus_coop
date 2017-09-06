@@ -56,7 +56,7 @@ class LaunchItem:
         self.combo_machines.addItem('cobotgui-dev:127.0.0.1')
         self.combo_machines.addItem('cobot:192.168.0.1')
         
-        rsc = os.path.join(get_pkg_dir('plugin_node_manager'),'resources')
+        rsc = os.path.join(get_pkg_dir('airbus_plugin_node_manager'),'resources')
         icon_launch = QIcon(rsc+'/launch.png')
         
         self.button_launch = QPushButton()

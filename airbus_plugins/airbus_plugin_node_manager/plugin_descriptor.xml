@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<plugin>
+    <!--<class import="airbus_plugin_node_manager.node_manager.PluginNodeManager"/>-->
+    <import module="airbus_plugin_node_manager.plugin" class="PluginNodeManager"/>
+    <description>
+        A Python plugin for displaying node manager in airbus_cobot_gui.
+    </description>
+    <setup>
+        <icon>${airbus_plugin_node_manager}/resources/images/icon_node_manager.png</icon>
+        <access-rights>operator</access-rights>
+    </setup>
+</plugin>
+

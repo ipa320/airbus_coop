@@ -32,7 +32,7 @@ from python_qt_binding import loadUi
 # Constante(s) and Variable(s) declaration
 ########################################
 
-DIR_PLUGINNODEMANAGER_RESOURCES = os.path.join(get_pkg_dir('plugin_node_manager'),'resources')
+DIR_PLUGINNODEMANAGER_RESOURCES = os.path.join(get_pkg_dir('airbus_plugin_node_manager'),'resources')
 DIR_PLUGINNODEMANAGER_IMAGES = DIR_PLUGINNODEMANAGER_RESOURCES+'/images'
 DIR_PLUGINNODEMANAGER_LAYOUTS = DIR_PLUGINNODEMANAGER_RESOURCES+'/layouts'
 DIR_PLUGINNODEMANAGER_VALUES = DIR_PLUGINNODEMANAGER_RESOURCES+'/values'

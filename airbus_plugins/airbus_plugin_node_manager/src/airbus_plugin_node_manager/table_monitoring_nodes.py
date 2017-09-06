@@ -34,7 +34,7 @@ from node_item import NodeItem
 
 from airbus_cobot_gui import Alarm
 
-from plugin_node_manager.res import R
+from airbus_plugin_node_manager.res import R
 
 class ThreadNodePingAll(QThread):
     def __init__(self):

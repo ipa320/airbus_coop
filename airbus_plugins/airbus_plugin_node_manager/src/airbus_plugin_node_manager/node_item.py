@@ -55,7 +55,7 @@ class NodeItem:
     
     def __init__(self, node_uri, node_name):
         
-        rsc = os.path.join(get_pkg_dir('plugin_node_manager'),'resources')
+        rsc = os.path.join(get_pkg_dir('airbus_plugin_node_manager'),'resources')
         
         self._icon_node_start = QIcon(rsc+'/start.png')
         self._icon_node_stop = QIcon(rsc+'/stop.png')

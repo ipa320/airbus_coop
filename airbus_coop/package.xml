@@ -20,7 +20,7 @@
   <run_depend>ssm_plugin</run_depend>
   <run_depend>ssm_tutorial</run_depend>
   <run_depend>airbus_plugin_log_manager</run_depend>
-  <run_depend>plugin_node_manager</run_depend>
+  <run_depend>airbus_plugin_node_manager</run_depend>
   <run_depend>plugin_rqt</run_depend>
   <run_depend>plugin_rviz</run_depend>
 

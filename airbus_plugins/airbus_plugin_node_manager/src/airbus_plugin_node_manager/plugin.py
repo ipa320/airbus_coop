@@ -32,7 +32,7 @@ from python_qt_binding import loadUi
 from table_monitoring_nodes import TableMonitoringNodes
 # from table_launch_nodes import TableLaunchNodes
 
-from plugin_node_manager.res import R
+from airbus_plugin_node_manager.res import R
 
 from airbus_cobot_gui import Plugin, ControlMode
 
