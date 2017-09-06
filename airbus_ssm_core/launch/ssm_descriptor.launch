@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="skill_xml_file" default="empty_register.xml"/>
+  <arg name="output_file" default="/tmp/descriptor.txt"/>
+  <node name="ssm_descriptor" pkg="airbus_ssm_core" type="ssm_state_descriptor.py" respawn="false" output="screen">
+  		<param name="skill_xml_file" value="$(arg scxml_file)"/>
+  		<param name="output_file" value="$(arg output_file)"/>
+  </node>
+        
+</launch>
