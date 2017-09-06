@@ -19,11 +19,11 @@ This is the SCXML file from the ssm_tutorial1
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <scxml initial="Input Number">
-	<datamodel>
+    <datamodel>
         <data id="skill_file" expr="${airbus_ssm_tutorial}/resources/skills.xml"/>
     </datamodel>
     <state id="Input Number">
-		<datamodel>
+        <datamodel>
             <data id="skill" expr="Input"/>
         </datamodel>
         <transition event="Out" target="Primes"/>
@@ -31,7 +31,7 @@ This is the SCXML file from the ssm_tutorial1
         <transition event="Retry" target="Input Number"/>
     </state>
     <state id="Primes">
-		<datamodel>
+        <datamodel>
             <data id="skill" expr="Primes"/>
         </datamodel>
         <transition event="Off" target="End"/>
@@ -56,7 +56,7 @@ To link a SCXML State to a Python SSM State (an overhaul of the SMACH State) the
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <scxml initial="Input Number">
-	<datamodel>
+     <datamodel>
         <data id="skill_file" expr="${airbus_ssm_tutorial}/resources/skills.xml"/>
     </datamodel>
     ...
@@ -83,9 +83,9 @@ For example the skill.xml of the ssm_tutorial :
 2. Set a SSMState on your SCXML state using a data in the datanodel of the SCXML state.
 ```
 <state id="IsPrime">
-	<datamodel>
-		<data id="skill" expr="isPrime"/>
-	</datamodel>
+    <datamodel>
+        <data id="skill" expr="isPrime"/>
+    </datamodel>
 	...
 </state>
 ```
@@ -118,7 +118,7 @@ For example :
 ```
 roslaunch airbus_ssm_core ssm.launch scxml_file:=${airbus_ssm_core}/resources/defaulf.scxml
 ```
-There is a service to 'load' a new SCXML file on the :
+There is a service to 'load' a new SCXML file :
 - server_name + '/srv/init' (default : '/ssm/srv/init')
 
 You can also use topics :
