@@ -16,7 +16,7 @@
 # limitations under the License.
 
 import rospy
-from ssm_core import ssm_state
+from airbus_ssm_core import ssm_state
         
 class Input(ssm_state.ssmState):
     ##Describe a loop which check if i_for < cond_for

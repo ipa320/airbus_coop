@@ -17,7 +17,7 @@
 
 
 import rospy
-from ssm_core import ssm_state
+from airbus_ssm_core import ssm_state
 
 
 class waitTime(ssm_state.ssmState):

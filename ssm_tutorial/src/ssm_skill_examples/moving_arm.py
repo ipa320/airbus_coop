@@ -18,7 +18,7 @@
 
 import rospy
 
-from ssm_core import ssm_state
+from airbus_ssm_core import ssm_state
 from std_msgs.msg import Empty
 from geometry_msgs.msg  import PoseStamped
         

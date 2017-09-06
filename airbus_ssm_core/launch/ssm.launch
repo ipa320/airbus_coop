@@ -5,7 +5,7 @@
   <param name="ssm_log_path"    	value="/tmp/"/>
   <param name="ssm_autostart"   	value="True"/>
   <param name="ssm_enable_log"		value="False"/>
-  <node name="ssm_node" pkg="ssm_core" type="ssm_node.py" respawn="false" output="screen">
+  <node name="ssm_node" pkg="airbus_ssm_core" type="ssm_node.py" respawn="false" output="screen">
   		<param name="scxml_file" value="$(arg scxml_file)"/>
   </node>
         

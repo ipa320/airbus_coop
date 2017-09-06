@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package ssm_core
+Changelog for package airbus_ssm_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.0.2 (2017-09-05)
@@ -30,7 +30,7 @@ Changelog for package ssm_core
 * fixed setup and CMakeLists / package.xml
 * removed executable parts of main and interpreter and tranfered it to a node file (good practice).
 * add install for ssm_main
-* added the readme on ssm_core
+* added the readme on airbus_ssm_core
 * added the parameter to the launchs files
 * changed the syntax of the test
 * added a "ssm_enable_log" parameter to enable or disable the log

@@ -15,13 +15,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import rospy
+from distutils.core import setup
+from catkin_pkg.python_setup import generate_distutils_setup
 
-from ssm_core.ssm_action_server import ssmActionServer
+d = generate_distutils_setup(
+	packages=['airbus_ssm_core'],
+	package_dir={'': 'src'},
+)
 
-if __name__ == '__main__':
-    rospy.init_node('ssm_action_server')
-    server = ssmActionServer()
-    rospy.spin()
-
-    
+setup(**d)

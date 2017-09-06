@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(airbus_ssm_plugin)
 
 find_package(catkin REQUIRED COMPONENTS
-  ssm_core
+  airbus_ssm_core
   airbus_cobot_gui
   airbus_pyqt_extend
   rospy

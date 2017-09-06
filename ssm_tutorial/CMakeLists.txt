@@ -3,13 +3,13 @@ project(ssm_tutorial)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
-  ssm_core
+  airbus_ssm_core
 )
 
 catkin_python_setup()
 
 catkin_package(
-  CATKIN_DEPENDS rospy ssm_core
+  CATKIN_DEPENDS rospy airbus_ssm_core
 )
 
 install(DIRECTORY launch resources

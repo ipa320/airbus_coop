@@ -34,7 +34,7 @@ from airbus_pyqt_extend import QtAgiCore
 from airbus_cobot_gui import plugin, ControlMode, EmergencyStopState
 
 from scxml import SCXMLState
-from ssm_core import ssm_main
+from airbus_ssm_core import ssm_main
 
 
 from ast import literal_eval
@@ -274,7 +274,7 @@ class SSMIntrospection(plugin.Plugin):
             default_f = rospy.get_param("/ssm_node/scxml_file")
             
         except KeyError:
-            default_f = QtAgiCore.get_pkg_dir_from_prefix("${ssm_core}")
+            default_f = QtAgiCore.get_pkg_dir_from_prefix("${airbus_ssm_core}")
             
         scxmlfile = fdial.getOpenFileName(self, "Open SCXML",'',"SCXML (*.scxml)", None, QFileDialog.DontUseNativeDialog)
         if scxmlfile[0] == "":

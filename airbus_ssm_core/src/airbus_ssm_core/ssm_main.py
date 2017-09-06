@@ -19,7 +19,7 @@
 
 import ssm_scxml_interpreter
 import ssm_introspection
-import ssm_core.srv
+import airbus_ssm_core.srv
 from std_msgs.msg import Int8, Empty, Bool
 
 import rospy
@@ -33,7 +33,7 @@ class ssmMain:
         self._SSM = None
         self._introspection = None
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
-        self._init_srv = rospy.Service(self._server_name + '/srv/init',ssm_core.srv.SSM_init, self._init_SSM_srv)
+        self._init_srv = rospy.Service(self._server_name + '/srv/init',airbus_ssm_core.srv.SSM_init, self._init_SSM_srv)
         self._start_sub = rospy.Subscriber(self._server_name + '/start',Empty,self.start, queue_size=1)
         self._init_sub = rospy.Subscriber(self._server_name + '/init', Empty, self._init_SSM_cb, queue_size=1)
         self._preempt_sub = rospy.Subscriber(self._server_name + '/preempt',Empty, self._preempt_cb, queue_size=1)
@@ -74,8 +74,8 @@ class ssmMain:
         ##test file existence if the whole path has been given
         file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(rospy.get_param('/ssm_node/scxml_file'))
         if(os.path.isfile(file) == False):
-            ##test file existence if only the name of the file was given (suppose to be in the resources dir of ssm_core
-            path = "${ssm_core}/resources/"+rospy.get_param('/ssm_node/scxml_file')+".scxml"
+            ##test file existence if only the name of the file was given (suppose to be in the resources dir of airbus_ssm_core
+            path = "${airbus_ssm_core}/resources/"+rospy.get_param('/ssm_node/scxml_file')+".scxml"
             file = ssm_scxml_interpreter.get_pkg_dir_from_prefix(path)
             if(os.path.isfile(file) == False):
                 rospy.logerr("[SSM] %s not found. Either give only the name of file without the scxml extension and put it in the resource folder.\n Or give the full path (${pkg}/dir/file.scxml)" 

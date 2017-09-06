@@ -21,12 +21,12 @@ import ssm_scxml_interpreter
 import ssm_introspection
 
 import actionlib
-import ssm_core.msg
+import airbus_ssm_core.msg
 from std_msgs.msg import Empty, Bool 
 
 class ssmActionServer(object):
-    _feedback = ssm_core.msg.SSMFeedback()
-    _result = ssm_core.msg.SSMResult()
+    _feedback = airbus_ssm_core.msg.SSMFeedback()
+    _result = airbus_ssm_core.msg.SSMResult()
     
     def __init__(self):
         
@@ -37,7 +37,7 @@ class ssmActionServer(object):
         self._preempt = False
         self._running = False
 
-        self._as = actionlib.SimpleActionServer(self._server_name, ssm_core.msg.SSMAction,execute_cb=self.execute_cb, auto_start=False)
+        self._as = actionlib.SimpleActionServer(self._server_name, airbus_ssm_core.msg.SSMAction,execute_cb=self.execute_cb, auto_start=False)
         self._as.register_preempt_callback(self.as_preempt_cb)
         self._as.start()
         
@@ -49,8 +49,8 @@ class ssmActionServer(object):
     def readSCXML(self, file):
         file_ = ssm_scxml_interpreter.get_pkg_dir_from_prefix(file)
         if(os.path.isfile(file_) == False):
-            ##test file existence if only the name of the file was given (suppose to be in the resources dir of ssm_core
-            path = "${ssm_core}/resources/"+file_+".scxml"
+            ##test file existence if only the name of the file was given (suppose to be in the resources dir of airbus_ssm_core
+            path = "${airbus_ssm_core}/resources/"+file_+".scxml"
             file_ = ssm_scxml_interpreter.get_pkg_dir_from_prefix(path)
             if(os.path.isfile(file_) == False):
                 rospy.logerr("[SSM] %s not found. Either give only the name of file without the scxml extension and put it in the resource folder.\n Or give the full path (${pkg}/dir/file.scxml)" 

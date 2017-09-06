@@ -12,8 +12,8 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>rospy</build_depend>
-  <build_depend>ssm_core</build_depend>
+  <build_depend>airbus_ssm_core</build_depend>
   <run_depend>rospy</run_depend>
-  <run_depend>ssm_core</run_depend>
+  <run_depend>airbus_ssm_core</run_depend>
 
 </package>

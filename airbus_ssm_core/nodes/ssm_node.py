@@ -15,12 +15,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
+import rospy
 
-d = generate_distutils_setup(
-	packages=['ssm_core'],
-	package_dir={'': 'src'},
-)
-
-setup(**d)
+from airbus_ssm_core.ssm_main import ssmMain
+from std_msgs.msg import Empty
+    
+if __name__ == '__main__':
+    
+    rospy.init_node('ssm_main', log_level=rospy.INFO)
+    SSM = ssmMain()
+    if(rospy.get_param('ssm_autostart', False) == True):
+       if(SSM._init_SSM()):
+          SSM.start(Empty)
+    rospy.spin()
+    

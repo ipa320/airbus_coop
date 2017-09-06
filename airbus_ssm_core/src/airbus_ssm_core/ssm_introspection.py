@@ -20,7 +20,7 @@ from std_msgs.msg import String, Empty
 import threading
 import smach
 import rospy
-import ssm_core.msg
+import airbus_ssm_core.msg
 from ast import literal_eval
 
 
@@ -61,7 +61,7 @@ class ssmIntrospection():
     def _update_tree_view_cb(self, *args, **kwargs):
         self._update_pub.publish(str(self._tree_view))
         if(self._as is not None):
-            feedback = ssm_core.msg.SSMFeedback()
+            feedback = airbus_ssm_core.msg.SSMFeedback()
             feedback.current_active_states = str(self._tree_view) 
             self._as.publish_feedback(feedback)
         
