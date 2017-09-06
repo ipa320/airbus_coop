@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="Tutorial1" qt:editorversion="4.2.1" initial="Input Number">
+    <qt:editorinfo initialGeometry="363.62;160.93;-20;-20;40;40"/>
+    <state id="Input Number">
+        <qt:editorinfo geometry="363.62;291.30;-111.81;-50;171.81;100" scenegeometry="363.62;291.30;251.81;241.30;171.81;100"/>
+        <transition type="external" event="Out" target="Primes">
+            <qt:editorinfo movePoint="-25.46;25.46"/>
+        </transition>
+        <transition type="external" event="Test" target="IsPrime">
+            <qt:editorinfo movePoint="-43.80;-8.14"/>
+        </transition>
+        <datamodel>
+            <data id="skill" expr="Input">
+                <qt:editorinfo geometry="25.46;34.63;0;0;0;0"/>
+            </data>
+            <data id="traj_name" expr="Home"/>
+        </datamodel>
+        <transition type="external" event="Retry" target="Input Number">
+            <qt:editorinfo endTargetFactors="4.81;24.54"/>
+        </transition>
+    </state>
+    <state id="Primes">
+        <qt:editorinfo geometry="540.85;436.95;-60;-50;120;100" scenegeometry="540.85;436.95;480.85;386.95;120;100"/>
+        <transition type="external" event="Off" target="Fin">
+            <qt:editorinfo movePoint="1.01;4.07"/>
+        </transition>
+        <transition type="external" event="Reset" target="Input Number">
+            <qt:editorinfo localGeometry="-0.03;-147.40" endTargetFactors="70.22;48.25" movePoint="49.91;-7.13"/>
+        </transition>
+        <datamodel>
+            <data id="skill" expr="Primes"/>
+        </datamodel>
+        <transition type="external" event="Continue" target="Input Number">
+            <qt:editorinfo localGeometry="-141.58;0" endTargetFactors="68.67;77.22" movePoint="13.24;4.07"/>
+        </transition>
+    </state>
+    <state id="IsPrime">
+        <qt:editorinfo geometry="229.17;436.95;-60;-50;120;100" scenegeometry="229.17;436.95;169.17;386.95;120;100"/>
+        <transition type="external" event="Return" target="Input Number">
+            <qt:editorinfo localGeometry="134.45;-0.01" movePoint="1.02;42.78"/>
+        </transition>
+        <datamodel>
+            <data id="skill" expr="isPrime">
+                <qt:editorinfo geometry="55.46;64.63;0;0;0;0"/>
+            </data>
+        </datamodel>
+    </state>
+    <final id="Fin">
+        <qt:editorinfo geometry="730.29;436.95;-20;-20;40;40" scenegeometry="730.29;436.95;710.29;416.95;40;40"/>
+    </final>
+    <datamodel>
+        <data id="skill_file" expr="${airbus_ssm_tutorial}/resources/skills.xml">
+            <qt:editorinfo geometry="115.46;115.46;0;0;0;0"/>
+        </data>
+    </datamodel>
+</scxml>

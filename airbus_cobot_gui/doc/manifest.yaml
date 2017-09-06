@@ -1,0 +1,17 @@
+actions: []
+authors: ''
+brief: ''
+bugtracker: ''
+depends:
+- catkin
+- roslib
+- rospy
+- airbus_pyqt_extend
+description: The airbus_cobot_gui package
+license: TODO
+maintainers: cobotgui <cobotgui@todo.todo>
+msgs: []
+package_type: package
+repo_url: ''
+srvs: []
+url: ''

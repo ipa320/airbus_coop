@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+	
+  <arg name="config_path" default="${airbus_cobot_gui}/config"/>
+  <arg name="file_name" default="default.conf"/> 
+
+  <arg name="emergency_stop_topic_name" default="/emergency_stop/state"/> 
+  <arg name="diagnostics_toplevel_topic_name" default="/diagnostics_toplevel_state"/> 
+  <arg name="diagnostics_topic_name" default="/diagnostics_agg"/> 
+ 
+  <node pkg="airbus_cobot_gui" type="airbus_cobot_gui_node.py" name="airbus_cobot_gui_node" output="screen">
+    <param name="config" value="$(arg config_path)/$(arg file_name)"/>
+  </node>
+  
+</launch>

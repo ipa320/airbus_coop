@@ -13,16 +13,16 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>agi_docgen</run_depend>
-  <run_depend>cobot_gui</run_depend>
-  <run_depend>pyqt_agi_extend</run_depend>
-  <run_depend>ssm_core</run_depend>
-  <run_depend>ssm_plugin</run_depend>
-  <run_depend>ssm_tutorial</run_depend>
-  <run_depend>plugin_log_manager</run_depend>
-  <run_depend>plugin_node_manager</run_depend>
-  <run_depend>plugin_rqt</run_depend>
-  <run_depend>plugin_rviz</run_depend>
+  <run_depend>airbus_docgen</run_depend>
+  <run_depend>airbus_cobot_gui</run_depend>
+  <run_depend>airbus_pyqt_extend</run_depend>
+  <run_depend>airbus_ssm_core</run_depend>
+  <run_depend>airbus_ssm_plugin</run_depend>
+  <run_depend>airbus_ssm_tutorial</run_depend>
+  <run_depend>airbus_plugin_log_manager</run_depend>
+  <run_depend>airbus_plugin_node_manager</run_depend>
+  <run_depend>airbus_plugin_rqt</run_depend>
+  <run_depend>airbus_plugin_rviz</run_depend>
 
   <export>
     <metapackage/>

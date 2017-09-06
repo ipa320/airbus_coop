@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classcobot__gui_1_1emergency_1_1emergency__stop_1_1EmergencyStopButton.html" title="cobot_gui.emergency.emergency\l_stop.EmergencyStopButton" alt="" coords="155,5,370,46"/>
-<area shape="rect" id="node3" href="$classcobot__gui_1_1plugin_1_1plugin__provider_1_1PluginsGroup.html" title="cobot_gui.plugin.plugin\l_provider.PluginsGroup" alt="" coords="184,70,341,111"/>
-<area shape="rect" id="node4" href="$classcobot__gui_1_1translator_1_1translator__widget_1_1CountryWidget.html" title="cobot_gui.translator.translator\l_widget.CountryWidget" alt="" coords="165,135,360,177"/>
-<area shape="rect" id="node5" href="$classcobot__gui_1_1translator_1_1translator__widget_1_1TranslateGeneratorItem.html" title="cobot_gui.translator.translator\l_widget.TranslateGeneratorItem" alt="" coords="159,201,367,242"/>
-</map>
