@@ -89,6 +89,7 @@ class EmptyState(ssmState):
         ssmState.__init__(self,outcomes=["next"])
         
     def execution(self, ud):
+        rospy.sleep(2)
         ud.skill = "Empty"
         return "next"
 
