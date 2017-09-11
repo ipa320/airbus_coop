@@ -164,7 +164,7 @@ class ssmInterpreter:
                    final_states = self.get_final_states_id(self.root.find(parent))
                    if(final_states is None):
                        self.CheckBool = False
-                       return
+                       return None
                 #List all states and all parallel states
                 list_state = self.root.findall(parent+'/state')
                 list_parallel = self.root.findall(parent+'/parallel')
@@ -173,14 +173,17 @@ class ssmInterpreter:
                 for parallel in list_parallel:
                     ##Construct parallel state
                     self.constructParallel(parallel, parent, current_SM, SSM, final_states)
+                    if(self.CheckBool == False):
+                        return None
 
                 for state in list_state:
                     if(state.find('state') is not None):
                         self.constructCompoundState(state, parent, current_SM, SSM, final_states)  
                     else:
                         self.constructSimpleState(state, current_SM, SSM, final_states)
-
-                
+                    if(self.CheckBool == False):
+                        return None
+                    
                 
             ##Current level is finished
             if(self.CheckBool == False):
@@ -392,10 +395,9 @@ class ssmInterpreter:
         if(skill_name is not None):
             if('expr' in skill_name.attrib):
                 try:
-                    State = self.skillProvider.load(skill_name.attrib.get('expr'))()
+                    State_ref = self.skillProvider.load(skill_name.attrib.get('expr'))
+                    State = State_ref()
                 except Exception as ex:
-                    rospy.logerr('[SCXML Interpreter] Import fail from Skill "%s" in state : "%s"!'%(skill_name.attrib['expr'],ID))
-                    rospy.logerr(ex)
                     self.CheckBool = False
                     return
             else:
