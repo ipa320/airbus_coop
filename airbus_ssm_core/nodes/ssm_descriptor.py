@@ -65,10 +65,14 @@ class SkillXMLDescriptor():
         _descriptors.append("Skill XML File Descriptor")
         _descriptors.append("XML File : '%s'"%self._input_file)
         _descriptors.append("Creation : '%s'"%StrTimeStamped())
-        _descriptors.append('')
-        _descriptors.append("-----------------------------------------------------------------")
+        _descriptors.append("\n-----------------------------------------------------------------\n")
         for skill in _root:
-            _state = self._SkillProvider.load(skill.attrib["name"])()
+            try:
+                _state = self._SkillProvider.load(skill.attrib["name"])()
+            except Exception as e:
+                rospy.logerr("[SkillXMLDescriptor] error during skill '%s' loading : %s"%(skill.attrib["name"],e))
+                sys.exit(-1)
+                
             _path = (import_module(skill.attrib["module"], skill.attrib["pkg"]).__file__)
             _path = _path[:-1]
             _descr = self.find_descriptions(_path, skill.attrib["class"])
@@ -90,7 +94,7 @@ class SkillXMLDescriptor():
         descriptor.append('')
         for line in decription:
             descriptor.append(line)
-        descriptor.append("-----------------------------------------------------------------")
+        descriptor.append("\n-----------------------------------------------------------------\n")
         return descriptor
         
             
