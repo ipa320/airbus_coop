@@ -20,9 +20,14 @@ import rospy
 import random
 from airbus_ssm_core import ssm_state
 
-
-
 class Test1(ssm_state.ssmState):
+    '''@SSM
+	Description :  Test skill that add +1 to a user data test and return sucess.
+	User-data :
+	- test : an int (if not created in the datamodel will be init to 0)
+	Outcome :
+	- success : sucessfully add +1 or created the data test
+	'''
     def __init__(self):
         ssm_state.ssmState.__init__(self,outcomes=["success"], io_keys=["test"])
         
@@ -36,6 +41,14 @@ class Test1(ssm_state.ssmState):
         return "success"
     
 class Test2(ssm_state.ssmState):
+    '''@SSM
+	Description :  A test state with a random outcomes using an inside counter
+	User-data : None
+	Outcome :
+	- success : test if the counter inside the state is above 10
+	- retry   : test if the counter inside the state is above 5 and below 10
+	- next    : test if the counter inside the state is above 0 and below 5
+	'''
     def __init__(self):
         ssm_state.ssmState.__init__(self,outcomes=["success","retry","next"])
         self.cpt_ = 0
@@ -58,6 +71,13 @@ class Test2(ssm_state.ssmState):
             return "success"
         
 class Test3(ssm_state.ssmState):
+    '''@SSM
+	Description :  A test state with a random outcomes with a 50/50.
+	User-data : None
+	Outcome :
+	- success  : if the random int is equal to 1
+	- failed   : otherwise
+	'''
     def __init__(self):
         ssm_state.ssmState.__init__(self,outcomes=["success","failed"])
         
