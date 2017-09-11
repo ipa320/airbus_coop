@@ -90,14 +90,17 @@ class ssmMain:
             rospy.logerr(e)
             self._SSM = None
             return False
-        try:
-            self._SSM.check_consistency()
-        except Exception as e:  
-            rospy.logerr("[SSM] error during consistency checks.")
-            rospy.logerr(e)
-            self._SSM = None
+
+        if self._SSM is not None:
+            try:
+                self._SSM.check_consistency()
+            except Exception as e:  
+                rospy.logerr("[SSM] error during consistency checks.")
+                rospy.logerr(e)
+                self._SSM = None
+                return False
+        else:
             return False
-        
         self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
         self._introspection.start()
         rospy.loginfo("[SSM] : %s file loaded and created." %file)

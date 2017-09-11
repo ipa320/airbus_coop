@@ -23,7 +23,7 @@ import rospy
 
 from roslib.packages import get_pkg_dir
 from xml.etree import ElementTree
-from importlib import import_module
+import importlib
 
 class SkillProvider(object):
     
@@ -47,12 +47,24 @@ class SkillProvider(object):
                 in_pkg          = skill.attrib["pkg"]
                 in_module       = skill.attrib["module"]
                 skill_class     = skill.attrib["class"]
-                skill_class_ref = None
-                skill_class_ref = import_module(in_module, in_pkg).__getattribute__(skill_class)
-                
-                return skill_class_ref
             except Exception as ex:
-                return None
+                rospy.logerr('[SCXML Interpreter] Error in the file register : %s'%(str(ex)))
+                raise Exception(ex)
+            skill_class_ref = None
+            try:
+                if(in_module in sys.modules):
+                    module_ref = reload(sys.modules[in_module])
+                else:
+                    module_ref = importlib.import_module(in_module, in_pkg)
+            except Exception as ex:
+                rospy.logerr('[SCXML Interpreter] Error in the "%s" file (pkg %s) : %s'%(in_module, in_pkg, str(ex)))
+                raise Exception(ex)
+            try:
+                skill_class_ref = module_ref.__getattribute__(skill_class)
+            except Exception as ex:
+                rospy.logerr('[SCXML Interpreter] Error in the class "%s" (pkg %s, file %s) : %s'%(skill_class,in_pkg,in_module, str(ex)))
+                raise Exception(ex)
+            return skill_class_ref
         else:
             rospy.logerr('[SCXML Interpreter] Skill named "%s" not found in register file !'%name)
             return None
