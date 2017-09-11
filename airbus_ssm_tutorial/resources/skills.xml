@@ -8,5 +8,20 @@
 	<skill name="Test1"		pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.skills" class="Test1"/>
 	<skill name="Test2"		pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.skills" class="Test2"/>
 	<skill name="Test3"		pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.skills" class="Test3"/>
-	
+	<!-- Pick and Place Skills -->
+	<skill name="MoveCart1"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveCart"/>
+	<skill name="MoveCart2"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveCart"/>
+	<skill name="MoveCart3"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveCart"/>
+	<skill name="MoveCart4"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveCart"/>
+	<skill name="RobotInfo"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="RobotInfo"/>
+	<skill name="Grip"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="Grip"/>
+	<skill name="UnGrip"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="UnGrip"/>
+	<skill name="GenEnvironment"	pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="GenEnvironment"/>
+	<skill name="MoveArti1"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveArti"/>
+	<skill name="MoveArti2"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveArti"/>
+	<skill name="MoveArti3"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveArti"/>
+	<skill name="MoveArti4"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveArti"/>
+	<!-- Move articular test Skills -->
+	<skill name="MoveArti"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="MoveArti"/>
+	<skill name="Commander"		pkg="airbus_ssm_tutorial" 	module="airbus_ssm_tutorial1.state_pap" class="Commander"/>
  </skills>
