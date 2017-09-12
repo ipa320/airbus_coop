@@ -40,7 +40,7 @@ from airbus_ssm_core.srv import SSM_init
 
 from ast import literal_eval
 from functools import partial
-from PyQt4.Qt import QByteArray
+from PyQt4.Qt import QByteArray, QPixmap
 
 
 SERVER_NAME = '/ssm'
@@ -134,6 +134,7 @@ class SSMIntrospection(plugin.Plugin):
         
         self.trigger_status.connect(self.updateStatus)
         self.trigger_treeview.connect(self.updateTreeView)
+        self.trigger_treeview.connect(self.updateGraphdot)
         self.trigger_log.connect(self.updateLog)
 
         self._ssm_status = 0
@@ -239,6 +240,13 @@ class SSMIntrospection(plugin.Plugin):
                 self._not_loaded()
             elif status == 10: ##Finish
                 self._finish_state()
+    def updateGraphdot(self):
+        
+        w_ = self.dotgraph.width()
+        h_ = self.dotgraph.height()
+        print(w_)
+        print(h_)
+        self.dotgraph.setPixmap(QPixmap('/tmp/test.png').scaled(w_, h_, Qt.KeepAspectRatio))
           
     def updateTreeView(self):
 

@@ -86,10 +86,10 @@ class ssmGraph(object):
         self._sub_update = rospy.Subscriber(self._server_name + "/ssm_status", String, self._update_cb, queue_size = 1)
          
     def save_graph(self):
-        self._graph_dot.write('/tmp/test.dot', 'dot')
+        self._graph_dot.write_png('/tmp/test.dot')
     
     def stop(self):
-        os.remove('/tmp/ssm_graph.dot')
+        os.remove('/tmp/test.dot')
         if(self._sub_update is not None):
             self._sub_update.unregister()
         
