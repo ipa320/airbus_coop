@@ -19,6 +19,7 @@
 
 import ssm_scxml_interpreter
 import ssm_introspection
+import ssm_graphviz
 import airbus_ssm_core.srv
 from std_msgs.msg import Int8, Empty, Bool
 
@@ -101,8 +102,12 @@ class ssmMain:
                 return False
         else:
             return False
+        
+        self._graphviz = ssm_graphviz.ssmGraph(self._SSM)
+        self._graphviz.start()
         self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
         self._introspection.start()
+        rospy.sleep(1)##temp fix
         rospy.loginfo("[SSM] : %s file loaded and created." %file)
         return True      
     
@@ -115,11 +120,13 @@ class ssmMain:
                 self._status_pub.publish(-2)
                 rospy.logerr(e)
                 self._introspection.stop()
+                self._graphviz.stop()
                 return
             if(self._preempt == False):
                 self._status_pub.publish(10)
                 rospy.loginfo("[SSM] : Finished without error")
             self._introspection.stop()
+            self._graphviz.stop()
         else:
             rospy.logwarn("[SSM] : Start requested but there is no state machine loaded !")
             

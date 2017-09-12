@@ -24,7 +24,6 @@ import airbus_ssm_core.msg
 from ast import literal_eval
 
 
-
 class ssmIntrospection():
     def __init__(self, state_machine, action_server = None):
         """Traverse the smach tree starting at root, and construct introspection
