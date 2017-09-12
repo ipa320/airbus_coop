@@ -163,8 +163,12 @@ class ssmInterpreter:
                 if(type(current_SM) is not ssm_concurrence.ssmConcurrence):
                    final_states = self.get_final_states_id(self.root.find(parent))
                    if(final_states is None):
-                       self.CheckBool = False
-                       return None
+                        self.CheckBool = False
+                        try:
+                            current_SM.close()
+                        except Exception as ex:
+                            raise Exception(ex)
+                        return None
                 #List all states and all parallel states
                 list_state = self.root.findall(parent+'/state')
                 list_parallel = self.root.findall(parent+'/parallel')
@@ -174,6 +178,10 @@ class ssmInterpreter:
                     ##Construct parallel state
                     self.constructParallel(parallel, parent, current_SM, SSM, final_states)
                     if(self.CheckBool == False):
+                        try:
+                            current_SM.close()
+                        except Exception as ex:
+                            raise Exception(ex)
                         return None
 
                 for state in list_state:
@@ -182,15 +190,19 @@ class ssmInterpreter:
                     else:
                         self.constructSimpleState(state, current_SM, SSM, final_states)
                     if(self.CheckBool == False):
+                        try:
+                            current_SM.close()
+                        except Exception as ex:
+                            raise Exception(ex)
                         return None
                     
                 
-            ##Current level is finished
-            if(self.CheckBool == False):
-                return None
-            else:
+                ##Current level is finished
                 #close the current SM for construction
-                current_SM.close() 
+                try:
+                    current_SM.close()
+                except Exception as ex:
+                    raise Exception(ex)
             
             if(len(self._next_parent_list)==0):##There is no lower level
                 finish_ = True
@@ -202,6 +214,7 @@ class ssmInterpreter:
             return None
         else:   
             return SSM
+    
     
     def constructParallel(self, current_level, parent, current_openSM, mainSM, final_states):
         
@@ -331,8 +344,8 @@ class ssmInterpreter:
                         self.CheckBool = False
                         return
                 
-                outcomes_.append(event)
-                transitions_[event] = target
+                    outcomes_.append(event)
+                    transitions_[event] = target
 
         ##Add the datamodel
         datamodel_ = self.get_datamodel(current_level,mainSM, ID)
