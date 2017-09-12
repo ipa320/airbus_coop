@@ -35,6 +35,7 @@ from airbus_cobot_gui import plugin, ControlMode, EmergencyStopState
 
 from scxml import SCXMLState
 from airbus_ssm_core import ssm_main
+from airbus_ssm_core.srv import SSM_init
 
 
 from ast import literal_eval
@@ -102,6 +103,12 @@ class SSMIntrospection(plugin.Plugin):
         self.rearm_button.setIconSize(QSize(80,80))
         self.rearm_button.setEnabled(False)
         self.connect(self.rearm_button, SIGNAL('clicked()'), self._rearm_button_clicked)
+        
+         ##Setup Thread
+        
+        self._ssm_runnable = SSMRunnable(self)
+        self._ssm_runnable.start()
+        
         ##Setup Publisher / Subscriber
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
 
@@ -111,7 +118,7 @@ class SSMIntrospection(plugin.Plugin):
 
         self._ssm_ready_sub = rospy.Subscriber(self._server_name + '/status',
                                                Int8,
-                                               self._ssm_status_cb)
+                                               self._ssm_status_cb, queue_size=1)
         
         self._log_sub = rospy.Subscriber('/rosout', 
                                          Log, 
@@ -121,16 +128,9 @@ class SSMIntrospection(plugin.Plugin):
         
         self._start_pub = rospy.Publisher(self._server_name+'/start', Empty, queue_size=1)
         
-        self._init_pub = rospy.Publisher(self._server_name+'/init', Empty, queue_size=1)
-        
         self._pause_pub = rospy.Publisher(self._server_name+'/pause', Bool, queue_size=1)
         
         self._request_tree_view_pub = rospy.Publisher(self._server_name+'/status_request', Empty, queue_size=1)
-        
-        ##Setup Thread
-        
-        self._ssm_runnable = SSMRunnable(self)
-        self._ssm_runnable.start()
         
         self.trigger_status.connect(self.updateStatus)
         self.trigger_treeview.connect(self.updateTreeView)
@@ -281,37 +281,38 @@ class SSMIntrospection(plugin.Plugin):
             return
 
         self._scxml_model.setHorizontalHeaderLabels([scxmlfile[0]])
-
         rospy.set_param('/ssm_node/scxml_file',scxmlfile[0])
-        
         self._load_SSM()
         
         
             
     def _load_SSM(self):
         try:
-            rospy.get_param("/ssm_node/scxml_file")
-            self._ssm_loaded = True
-            self._wait_ssm_isready()
-            if(self._ssm_status != -10):
+            result = self._wait_ssm_isready()
+            if(result == True):
+                self._ssm_loaded = True
                 self._wait_tree_view()
+            else:
+                self._not_loaded()             
         except KeyError as e:
              self._not_loaded()
     
     def _wait_ssm_isready(self):
-        while(rospy.is_shutdown() == False and self._ssm_status != 1 ):
-            self._init_pub.publish()
-            rospy.logdebug("Waiting ssm_is_ready")
-            if(self._ssm_status == -10):
-                return
-            rospy.sleep(3)
-            
-    
+        rospy.wait_for_service(self._server_name+'/srv/init',10)
+        try:
+            _init_srv = rospy.ServiceProxy(self._server_name+'/srv/init',SSM_init)
+            call_ = String()
+            call_.data = rospy.get_param("/ssm_node/scxml_file")
+            resp = _init_srv(call_)
+            return resp.result.data
+        except rospy.ServiceException, e:
+            rospy.logerr('Service call failed : %s'%e)
+            raise rospy.ServiceException(e)
+
     def _wait_tree_view(self):
         while(rospy.is_shutdown() == False and self._tree_view_dict == None ):
-            rospy.logdebug("Waiting ssm_tree_view")
             self._request_tree_view_pub.publish()
-            rospy.sleep(1)
+            rospy.sleep(0.1)
                 
     def _start_button_clicked(self):
         if(self._ssm_paused == True):
