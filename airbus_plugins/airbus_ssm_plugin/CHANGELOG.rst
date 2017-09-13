@@ -2,8 +2,8 @@
 Changelog for package airbus_ssm_plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.4 (2017-09-13)
+------------------
 * Merge pull request `#36 <https://github.com/ipa320/airbus_coop/issues/36>`_ from ipa-led/master
   Added dotgraph viewer to ssm_plugin
 * Added the dot graph viewer in the ssm plugin
