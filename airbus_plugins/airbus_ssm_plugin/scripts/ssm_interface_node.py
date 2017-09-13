@@ -30,16 +30,19 @@ if __name__ == "__main__":
     import sys
     import signal
     
-    rospy.init_node("airbus_ssm_plugin_node")
+    rospy.init_node("airbus_ssm_plugin_node", disable_signals=True)
     
     a = QApplication(sys.argv)
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
     
     window = plugin.getStandAloneInstance("airbus_ssm_plugin", SSMIntrospection, "en")
     window.setWindowTitle("ssmIntrospection")
     window.show()
     
+    a.connect(a, SIGNAL("aboutToQuit()"), window.onDestroy)
+    def signal_handler(signum, frame):
+        a.quit()
+    signal.signal(signal.SIGINT, signal_handler)
+    rospy.on_shutdown(a.quit)
     sys.exit(a.exec_())
     
 #End of file
-

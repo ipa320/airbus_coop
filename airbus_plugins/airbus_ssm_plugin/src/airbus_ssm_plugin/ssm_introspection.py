@@ -36,7 +36,8 @@ from airbus_cobot_gui import plugin, ControlMode, EmergencyStopState
 from scxml import SCXMLState
 from airbus_ssm_core import ssm_main
 from airbus_ssm_core.srv import SSM_init
-
+from airbus_ssm_plugin import xdot_qt
+import tempfile
 
 from ast import literal_eval
 from functools import partial
@@ -50,9 +51,9 @@ from res import R
 
 class SSMRunnable(QThread):
     
-    def __init__(self, parent):
+    def __init__(self, parent, tmp_file = None):
         QThread.__init__(self, parent)
-        self.SSM_Main = ssm_main.ssmMain()
+        self.SSM_Main = ssm_main.ssmMain(tmp_file)
         
     def run(self):
         while(rospy.is_shutdown == False):
@@ -103,10 +104,13 @@ class SSMIntrospection(plugin.Plugin):
         self.rearm_button.setIconSize(QSize(80,80))
         self.rearm_button.setEnabled(False)
         self.connect(self.rearm_button, SIGNAL('clicked()'), self._rearm_button_clicked)
+        self._tempfile = tempfile.NamedTemporaryFile('w+b',dir='/tmp', delete=False)
+        self.dotWidget = xdot_qt.DotWidget(self)
+        self.gridLayout_4.addWidget(self.dotWidget)
         
          ##Setup Thread
         
-        self._ssm_runnable = SSMRunnable(self)
+        self._ssm_runnable = SSMRunnable(self, self._tempfile)
         self._ssm_runnable.start()
         
         ##Setup Publisher / Subscriber
@@ -240,14 +244,13 @@ class SSMIntrospection(plugin.Plugin):
                 self._not_loaded()
             elif status == 10: ##Finish
                 self._finish_state()
-    def updateGraphdot(self):
-        
-        w_ = self.dotgraph.width()
-        h_ = self.dotgraph.height()
-        print(w_)
-        print(h_)
-        self.dotgraph.setPixmap(QPixmap('/tmp/test.png').scaled(w_, h_, Qt.KeepAspectRatio))
-          
+                
+    def updateGraphdot(self):       
+        self._tempfile = file(self._tempfile.name)
+        self.dotWidget.set_dotcode(self._tempfile.read(),self._tempfile.name)
+        self._tempfile.close()
+        self.dotWidget.zoom_to_fit()
+      
     def updateTreeView(self):
 
         if (self._tree_view == False):
@@ -318,9 +321,7 @@ class SSMIntrospection(plugin.Plugin):
             raise rospy.ServiceException(e)
 
     def _wait_tree_view(self):
-        while(rospy.is_shutdown() == False and self._tree_view_dict == None ):
-            self._request_tree_view_pub.publish()
-            rospy.sleep(0.1)
+        self._request_tree_view_pub.publish()
                 
     def _start_button_clicked(self):
         if(self._ssm_paused == True):
@@ -403,22 +404,10 @@ class SSMIntrospection(plugin.Plugin):
         
     def onDestroy(self):
         self._preempt_ssm()
-        
-if __name__ == "__main__":
-    
-    import sys
-    import signal
-    
-    rospy.init_node("airbus_ssm_plugin_node")
-    
-    a = QApplication(sys.argv)
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
-    
-    window = plugin.getStandAloneInstance("airbus_ssm_plugin", SSMIntrospection, "en")
-    window.setWindowTitle("ssmIntrospection")
-    window.show()
-    
-    sys.exit(a.exec_())
+        try:
+            os.remove(self._tempfile.name)
+        except:
+            pass
 
 
     
