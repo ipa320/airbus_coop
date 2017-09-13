@@ -106,7 +106,6 @@ class ssmGraph(object):
         
     def construct_subgraph(self, state, name, graph):
         """Recursively construct graph."""
-        print(name)
         if isinstance(state, smach.concurrence.Concurrence):
             self.add_final(state, name, graph)
         
