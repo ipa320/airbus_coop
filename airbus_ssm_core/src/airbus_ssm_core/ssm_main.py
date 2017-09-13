@@ -19,6 +19,7 @@
 
 import ssm_scxml_interpreter
 import ssm_introspection
+import ssm_graphviz
 import airbus_ssm_core.srv
 from std_msgs.msg import Int8, Empty, Bool
 
@@ -29,7 +30,7 @@ import smach_ros
 
 class ssmMain:
     
-    def __init__(self):
+    def __init__(self, tempfile = None):
         self._SSM = None
         self._introspection = None
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
@@ -42,6 +43,7 @@ class ssmMain:
         self._preempt = False
         self._loading = False
         rospy.loginfo("SSM is now ready !")
+        self._tempfile = tempfile
         
     def _init_SSM_cb(self, msg):
         if(self._loading == False):
@@ -81,7 +83,6 @@ class ssmMain:
                 rospy.logerr("[SSM] %s not found. Either give only the name of file without the scxml extension and put it in the resource folder.\n Or give the full path (${pkg}/dir/file.scxml)" 
                              %rospy.get_param('/ssm_node/scxml_file'))
                 return False
-            
         try:
             interpreter = ssm_scxml_interpreter.ssmInterpreter(file)
             self._SSM = interpreter.convertSCXML()
@@ -101,8 +102,12 @@ class ssmMain:
                 return False
         else:
             return False
+        
+        self._graphviz = ssm_graphviz.ssmGraph(self._SSM, tempfile=self._tempfile)
         self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
         self._introspection.start()
+        self._graphviz.start()
+        rospy.sleep(1)##temp fix
         rospy.loginfo("[SSM] : %s file loaded and created." %file)
         return True      
     
@@ -115,11 +120,13 @@ class ssmMain:
                 self._status_pub.publish(-2)
                 rospy.logerr(e)
                 self._introspection.stop()
+                self._graphviz.stop()
                 return
             if(self._preempt == False):
                 self._status_pub.publish(10)
                 rospy.loginfo("[SSM] : Finished without error")
             self._introspection.stop()
+            self._graphviz.stop()
         else:
             rospy.logwarn("[SSM] : Start requested but there is no state machine loaded !")
             
