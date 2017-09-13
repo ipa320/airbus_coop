@@ -2,6 +2,9 @@
 Changelog for package airbus_docgen
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.0.3 (2017-09-06)
 ------------------
 * update changelog
