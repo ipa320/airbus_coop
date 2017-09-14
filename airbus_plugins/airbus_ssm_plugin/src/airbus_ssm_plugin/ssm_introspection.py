@@ -37,7 +37,6 @@ from scxml import SCXMLState
 from airbus_ssm_core import ssm_main
 from airbus_ssm_core.srv import SSM_init
 from airbus_ssm_plugin import xdot_qt
-import tempfile
 
 from ast import literal_eval
 from functools import partial
@@ -53,7 +52,7 @@ class SSMRunnable(QThread):
     
     def __init__(self, parent, tmp_file = None):
         QThread.__init__(self, parent)
-        self.SSM_Main = ssm_main.ssmMain(tmp_file)
+        self.SSM_Main = ssm_main.ssmMain()
         
     def run(self):
         while(rospy.is_shutdown == False):
@@ -65,6 +64,7 @@ class SSMIntrospection(plugin.Plugin):
     
     trigger_status = pyqtSignal()
     trigger_treeview = pyqtSignal()
+    trigger_dotcode = pyqtSignal()
     trigger_log = pyqtSignal()
     
     def __init__(self, context):
@@ -104,13 +104,12 @@ class SSMIntrospection(plugin.Plugin):
         self.rearm_button.setIconSize(QSize(80,80))
         self.rearm_button.setEnabled(False)
         self.connect(self.rearm_button, SIGNAL('clicked()'), self._rearm_button_clicked)
-        self._tempfile = tempfile.NamedTemporaryFile('w+b',dir='/tmp', delete=False)
         self.dotWidget = xdot_qt.DotWidget(self)
         self.gridLayout_4.addWidget(self.dotWidget)
         
          ##Setup Thread
         
-        self._ssm_runnable = SSMRunnable(self, self._tempfile)
+        self._ssm_runnable = SSMRunnable(self)
         self._ssm_runnable.start()
         
         ##Setup Publisher / Subscriber
@@ -119,6 +118,10 @@ class SSMIntrospection(plugin.Plugin):
         self._ssm_tree_view_sub = rospy.Subscriber(self._server_name+'/ssm_status',
                                                     String,
                                                     self._ssm_tree_view_cb)
+        
+        self._ssm_dotcode_sub = rospy.Subscriber(self._server_name+'/ssm_dotcode',
+                                                    String,
+                                                    self._ssm_dotcode_cb)
 
         self._ssm_ready_sub = rospy.Subscriber(self._server_name + '/status',
                                                Int8,
@@ -138,7 +141,7 @@ class SSMIntrospection(plugin.Plugin):
         
         self.trigger_status.connect(self.updateStatus)
         self.trigger_treeview.connect(self.updateTreeView)
-        self.trigger_treeview.connect(self.updateGraphdot)
+        self.trigger_dotcode.connect(self.updateGraphdot)
         self.trigger_log.connect(self.updateLog)
 
         self._ssm_status = 0
@@ -246,9 +249,7 @@ class SSMIntrospection(plugin.Plugin):
                 self._finish_state()
                 
     def updateGraphdot(self):       
-        self._tempfile = file(self._tempfile.name)
-        self.dotWidget.set_dotcode(self._tempfile.read(),self._tempfile.name)
-        self._tempfile.close()
+        self.dotWidget.set_dotcode(self._dotcode)
         self.dotWidget.zoom_to_fit()
       
     def updateTreeView(self):
@@ -272,6 +273,10 @@ class SSMIntrospection(plugin.Plugin):
     def _ssm_status_cb(self, msg):
         self._ssm_status = msg.data
         self.trigger_status.emit()
+    
+    def _ssm_dotcode_cb(self, msg):
+        self._dotcode = msg.data
+        self.trigger_dotcode.emit()
         
     
     def openSCXMLFile(self): 
@@ -404,10 +409,6 @@ class SSMIntrospection(plugin.Plugin):
         
     def onDestroy(self):
         self._preempt_ssm()
-        try:
-            os.remove(self._tempfile.name)
-        except:
-            pass
 
 
     

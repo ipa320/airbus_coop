@@ -28,7 +28,7 @@ from pydot import Subgraph
 
 
 class ssmGraph(object):
-    def __init__(self, state_machine, action_server = None, tempfile = None):
+    def __init__(self, state_machine, action_server = None):
         """Traverse the smach tree starting at root, and construct introspection
         proxies for getting and setting debug state."""
         self._state_machine = state_machine
@@ -41,14 +41,14 @@ class ssmGraph(object):
         self._parallel_starting = []
         self._parallel_ending = []
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
+        self._update_pub = rospy.Publisher(self._server_name + "/ssm_dotcode", String, queue_size = 1)
         self._sub_update = None
-        self._tempfile = tempfile
         
         
     def _update_cb(self, msg):
         statut_dict = literal_eval(msg.data)
         self.update_color('ROOT', statut_dict,self._graph_dot)
-        self.save_graph()
+        self.send_graph()
     
     def update_color(self, name, statut_dict, graph): 
         for state_ in statut_dict[name]:
@@ -68,10 +68,17 @@ class ssmGraph(object):
                 else:
                     color = 'yellow2'
                     
+                if(len(graph.get_subgraph('cluster' + str(state_)))>0):
+                    graph.get_subgraph('cluster' + str(state_))[0].set('style','filled')
+                    graph.get_subgraph('cluster' + str(state_))[0].set('fillcolor',color)
+                    self.update_color(state_, statut_dict, graph.get_subgraph('cluster' + state_)[0])
+                elif(len(graph.get_subgraph('"cluster' + state_+'"'))>0):
+                    graph.get_subgraph('"cluster' + state_+'"')[0].set('style','filled')
+                    graph.get_subgraph('"cluster' + state_+'"')[0].set('fillcolor',color)
+                    self.update_color(state_, statut_dict, graph.get_subgraph('"cluster' + state_+'"')[0])
+                else:
+                    pass
                 
-                graph.get_subgraph('cluster' + str(state_))[0].set('style','filled')
-                graph.get_subgraph('cluster' + str(state_))[0].set('fillcolor',color)
-                self.update_color(state_, statut_dict, graph.get_subgraph('cluster' + state_)[0])
             else:
                 if(statut_dict[name][state_] == 1):
                     color = 'greenyellow'
@@ -93,12 +100,13 @@ class ssmGraph(object):
         # Construct proxies
         self.construct_subgraph(self._state_machine, 'ROOT', self._graph_dot)
         self.layout_nodes(self._graph_dot)
-        self.save_graph()
+        self.send_graph()
         self._sub_update = rospy.Subscriber(self._server_name + "/ssm_status", String, self._update_cb, queue_size = 1)
          
-    def save_graph(self):
-        if self._tempfile is not None:
-            self._graph_dot.write(self._tempfile.name,'dot')
+    def send_graph(self):
+        Msg = String()
+        Msg.data = self._graph_dot.to_string()
+        self._update_pub.publish(Msg)
     
     def stop(self):
         if(self._sub_update is not None):
