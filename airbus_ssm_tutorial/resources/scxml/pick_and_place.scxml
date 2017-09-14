@@ -4,7 +4,7 @@
     <state id="MoveCart1">
         <qt:editorinfo scenegeometry="265.47;510.68;205.47;460.68;120;100" geometry="265.47;510.68;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveCart1"/>
+            <data id="skill" expr="MoveCart"/>
             <data id="target" expr="0.4 0 0.6 0 -180 0"/>
         </datamodel>
         <transition type="external" event="success" target="Grip">
@@ -43,14 +43,14 @@
         <datamodel>
             <data id="skill" expr="GenEnvironment"/>
         </datamodel>
-        <transition type="external" event="success" target="MoveArti1">
+        <transition type="external" event="success" target="MoveArti">
             <qt:editorinfo movePoint="-18.58;6.19"/>
         </transition>
     </state>
     <state id="MoveCart3">
         <qt:editorinfo scenegeometry="440.55;145.92;380.55;95.92;120;100" geometry="440.55;145.92;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveCart3"/>
+            <data id="skill" expr="MoveCart"/>
             <data id="target" expr="0 0.4 0.6 0 -180 90"/>
         </datamodel>
         <transition type="external" event="success" target="UnGrip"/>
@@ -67,7 +67,7 @@
     <state id="MoveCart4">
         <qt:editorinfo scenegeometry="440.55;391.39;380.55;341.39;120;100" geometry="440.55;391.39;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveCart4"/>
+            <data id="skill" expr="MoveCart"/>
             <data id="target" expr="0 0.4 0.6 0 -180 90"/>
         </datamodel>
         <transition type="external" event="success" target="MoveArti4"/>
@@ -75,17 +75,17 @@
     <state id="MoveCart2">
         <qt:editorinfo scenegeometry="265.47;269.59;205.47;219.59;120;100" geometry="265.47;269.59;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveCart2"/>
+            <data id="skill" expr="MoveCart"/>
             <data id="target" expr="0.4 0 0.65 0 -180 0"/>
         </datamodel>
         <transition type="external" event="success" target="MoveArti3">
             <qt:editorinfo movePoint="71.21;4.13"/>
         </transition>
     </state>
-    <state id="MoveArti1">
+    <state id="MoveArti">
         <qt:editorinfo scenegeometry="85.90;391.39;25.90;341.39;120;100" geometry="85.90;391.39;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveArti1"/>
+            <data id="skill" expr="MoveArti"/>
             <data id="joints" expr="0 10 20 0 45 0"/>
         </datamodel>
         <transition type="external" event="success" target="MoveArti2">
@@ -95,7 +95,7 @@
     <state id="MoveArti2">
         <qt:editorinfo scenegeometry="85.90;510.68;25.90;460.68;120;100" geometry="85.90;510.68;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveArti2"/>
+            <data id="skill" expr="MoveArti"/>
             <data expr="0 20 60 0 90 0" id="joints"/>
         </datamodel>
         <transition type="external" event="success" target="MoveCart1"/>
@@ -103,7 +103,7 @@
     <state id="MoveArti3">
         <qt:editorinfo scenegeometry="265.47;145.92;205.47;95.92;120;100" geometry="265.47;145.92;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveArti3"/>
+            <data id="skill" expr="MoveArti"/>
             <data expr="90 20 60 0 90 0" id="joints"/>
         </datamodel>
         <transition type="external" event="success" target="MoveCart3">
@@ -113,7 +113,7 @@
     <state id="MoveArti4">
         <qt:editorinfo scenegeometry="440.55;510.68;380.55;460.68;120;100" geometry="440.55;510.68;-60;-50;120;100"/>
         <datamodel>
-            <data id="skill" expr="MoveArti4"/>
+            <data id="skill" expr="MoveArti"/>
             <data expr="0 0 0 0 0 0" id="joints"/>
         </datamodel>
         <transition type="external" event="success" target="Final_1"/>

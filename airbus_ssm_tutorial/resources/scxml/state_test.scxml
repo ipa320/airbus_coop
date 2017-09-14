@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="state_test" qt:editorversion="4.4.0" initial="InitMoveit">
+    <qt:editorinfo initialGeometry="256.88;137.14;-20;-20;40;40"/>
+    <final id="Final_1">
+        <qt:editorinfo geometry="299.86;719.45;-20;-20;40;40" scenegeometry="299.86;719.45;279.86;699.45;40;40"/>
+    </final>
+    <datamodel>
+        <data expr="${airbus_ssm_tutorial}/resources/skills.xml" id="skill_file"/>
+        <data id="group" expr="arm"/>
+    </datamodel>
+    <state id="MoveCart">
+        <qt:editorinfo geometry="316.23;537.08;-60;-50;120;100" scenegeometry="316.23;537.08;256.23;487.08;120;100"/>
+        <transition type="external" event="success" target="Final_1">
+            <qt:editorinfo movePoint="35.82;1.02"/>
+        </transition>
+        <datamodel>
+            <data id="skill" expr="MoveCart"/>
+            <data id="target" expr="[[0.4,0,0.6,0,-180,0],[0.3,0.1,0.6,0,-180,0],[0.25,0.2,0.6,0,-180,0]]"/>
+            <data id="frame" expr="base_link"/>
+            <data id="offset" expr="[0,0,-0.2,0,0,0]"/>
+        </datamodel>
+    </state>
+    <state id="InitMoveit">
+        <qt:editorinfo geometry="316.23;230.27;-60;-50;120;100" scenegeometry="316.23;230.27;256.23;180.27;120;100"/>
+        <transition type="external" event="success" target="MoveArti">
+            <qt:editorinfo movePoint="1.02;1.02"/>
+        </transition>
+        <datamodel>
+            <data id="skill" expr="InitMoveit"/>
+        </datamodel>
+    </state>
+    <state id="MoveArti">
+        <qt:editorinfo geometry="316.23;371.86;-60;-50;120;100" scenegeometry="316.23;371.86;256.23;321.86;120;100"/>
+        <datamodel>
+            <data id="skill" expr="MoveArti"/>
+            <data id="joints" expr="[[45,0,0,0,0,0],[45,30,20,0,0,0],[45,30,20,0,90,0]]"/>
+        </datamodel>
+        <transition type="external" event="success" target="MoveCart">
+            <qt:editorinfo endTargetFactors="90.63;44.71" movePoint="3.07;14.33"/>
+        </transition>
+    </state>
+</scxml>
