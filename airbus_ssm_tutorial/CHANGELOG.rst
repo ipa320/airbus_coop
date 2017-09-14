@@ -2,6 +2,17 @@
 Changelog for package airbus_ssm_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.4 (2017-09-13)
+------------------
+* Merge pull request `#36 <https://github.com/ipa320/airbus_coop/issues/36>`_ from ipa-led/master
+  Added dotgraph viewer to ssm_plugin
+* removed a debug print
+* Merge pull request `#35 <https://github.com/ipa320/airbus_coop/issues/35>`_ from ipa-led/master
+  Improvements on the ssm_core packages
+* Merge branch 'master' of https://github.com/ipa-led/airbus_coop into dot
+* added descriptions to the skills tutorial
+* Contributors: Nadia Hammoudeh García, ipa-led
+
 0.0.3 (2017-09-06)
 ------------------
 * Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename

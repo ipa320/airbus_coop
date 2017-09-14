@@ -2,6 +2,32 @@
 Changelog for package airbus_ssm_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.4 (2017-09-13)
+------------------
+* Merge pull request `#36 <https://github.com/ipa320/airbus_coop/issues/36>`_ from ipa-led/master
+  Added dotgraph viewer to ssm_plugin
+* removed a debug print
+* Added the dot graph viewer in the ssm plugin
+* first version not working
+* Merge remote-tracking branch 'origin/dot'
+* Better closing of opened container (limit error risk)
+* Merge pull request `#35 <https://github.com/ipa320/airbus_coop/issues/35>`_ from ipa-led/master
+  Improvements on the ssm_core packages
+* Added a reload of the skills during execution and a better view of syntax error in the python files
+* Merge branch 'master' of https://github.com/ipa-led/airbus_coop into dot
+* Added line to the descriptor to be more readable
+* added ssm_descriptor into the CMakeLists
+* Added the other possible way to give a path to a file
+* add dot create to ssm_core
+* fixed the launch file for the descriptor
+* Change the tabulations by spaces
+* Changed the markdown (again)
+* changed the markdown for the name
+* Upgraded the README file
+* added a skill.xml description generator to ease the use of an SCXML Gui
+* Bug fixes for the when a state fail at the creation level.
+* Contributors: Nadia Hammoudeh García, ipa-led
+
 0.0.3 (2017-09-06)
 ------------------
 * Merge pull request `#33 <https://github.com/ipa320/airbus_coop/issues/33>`_ from ipa-nhg/Rename
