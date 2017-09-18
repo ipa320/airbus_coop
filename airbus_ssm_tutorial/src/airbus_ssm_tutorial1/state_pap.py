@@ -8,10 +8,11 @@ from airbus_ssm_core import ssm_state
 import moveit_commander
 import moveit_msgs.msg
 import geometry_msgs.msg
+from gazebo_msgs.srv import SpawnModel
 from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
 import ast
-
+import copy
 
 class InitMoveit(ssm_state.ssmState):
 	'''@SSM
@@ -135,18 +136,19 @@ class MoveCart(ssm_state.ssmState):
 	def execution(self,ud):
 		print("MOVE CARTESIAN")
 		self.group = moveit_commander.MoveGroupCommander(ud.group)
-		
+		self.group.clear_pose_targets()
+		self.waypoints = []
 		
 		#Planification and Execution
 		for pos in self.acquireFrameUD(ud.target):
-			self.group.clear_pose_targets()
 			self.new_pos = self.createOffset(pos,self.acquireFrameUD(ud.offset))
 			print(self.new_pos)
-			self.group.set_pose_target(self.poseTarget(self.new_pos,ud.frame))
-			self.plan = self.group.plan()
-			rospy.sleep(2)
-			self.group.execute(self.plan)
+			self.waypoints.append(copy.deepcopy(self.poseTarget(self.new_pos,ud.frame).pose))
 
+		(self.plan, self.fraction) = self.group.compute_cartesian_path(self.waypoints,0.01,0.0)		
+		#rospy.sleep(1)
+		self.group.execute(self.plan)
+		
 		return "success"
 		
 
@@ -171,16 +173,16 @@ class MoveArti(ssm_state.ssmState):
 	def execution(self,ud):
 		print("MOVE ARTICULAR")
 		self.group = moveit_commander.MoveGroupCommander(ud.group)
-		
+		self.group.clear_pose_targets()
 		#Planification and Execution
 		for target in self.acquireJointsUD(ud.joints):
-			#self.group.clear_pose_targets()
+			
 			print(target)
 			for i in range (0,6):
 				target[i] = np.deg2rad(target[i])
 			self.group.set_joint_value_target(target)
 			self.plan = self.group.plan()		
-			rospy.sleep(2)
+			#rospy.sleep(1)
 			self.group.execute(self.plan)
 
 		return "success"
@@ -244,16 +246,16 @@ class GenEnvironment(ssm_state.ssmState):
 		ssm_state.ssmState.__init__(self,outcomes=["success"])
 		
 	def createPose(self,x,y,z):
-		self.p = PoseStamped()
-		self.p.header.frame_id = "/world"
-		self.p.pose.position.x = x
-		self.p.pose.position.y = y
-		self.p.pose.position.z = z
-		self.p.pose.orientation.x = 0
-		self.p.pose.orientation.y = 0
-		self.p.pose.orientation.z = 0
-		self.p.pose.orientation.w = 1
-		return self.p
+		p = PoseStamped()
+		p.header.frame_id = "/world"
+		p.pose.position.x = x
+		p.pose.position.y = y
+		p.pose.position.z = z
+		p.pose.orientation.x = 0
+		p.pose.orientation.y = 0
+		p.pose.orientation.z = 0
+		p.pose.orientation.w = 1
+		return p
 		
 	def execution(self,ud):	
 		self.scene = moveit_commander.PlanningSceneInterface()	
@@ -276,21 +278,20 @@ class InitObject(ssm_state.ssmState):
 		ssm_state.ssmState.__init__(self,outcomes=["success"])
 			
 	def createPose(self,x,y,z):
-		self.p = PoseStamped()
-		self.p.header.frame_id = "/world"
-		self.p.pose.position.x = x
-		self.p.pose.position.y = y
-		self.p.pose.position.z = z
-		self.p.pose.orientation.x = 0
-		self.p.pose.orientation.y = 0
-		self.p.pose.orientation.z = 0
-		self.p.pose.orientation.w = 1
-		return self.p
+		p = PoseStamped()
+		p.header.frame_id = "/world"
+		p.pose.position.x = x
+		p.pose.position.y = y
+		p.pose.position.z = z
+		p.pose.orientation.x = 0
+		p.pose.orientation.y = 0
+		p.pose.orientation.z = 0
+		p.pose.orientation.w = 1
+		return p
 		
 	def execution(self,ud):	
 		self.scene = moveit_commander.PlanningSceneInterface()	
 		self.scene.add_box("object", self.createPose(0.4,0,0.55), (0.1,0.1,0.1))
-		#self.scene.add_box("object", self.createPose(0.4,0.3,0.55), (0.1,0.1,0.1))
 		rospy.sleep(1)
 		return "success"
 
@@ -382,8 +383,9 @@ class Sensor(ssm_state.ssmState):
 		
 	def execution(self,ud):	
 						
-		self.sensor_info = rospy.Subscriber("/chatter", PoseStamped, self.callback)		
-		rospy.wait_for_message("/chatter", PoseStamped)
+		self.sensor_info = rospy.Subscriber("/chatter", PoseStamped, self.callback)
+			
+		rospy.wait_for_message("/chatter", PoseStamped) #boucle
 		
 		print("RECU")
 		print(self.x)
@@ -394,5 +396,38 @@ class Sensor(ssm_state.ssmState):
 		
 		return "success"
 
-
+"""
+class GenWorld(ssm_state.ssmState):
+	'''@SSM
+	Description :  Skill that generate the gazebo environment
+	User-data : N/A
+	Outcome :
+	- success : sucessfully created the gazebo environment
+	'''
+	def __init__(self):
+		ssm_state.ssmState.__init__(self,outcomes=["success"])
+		
+	def createPose(self,x,y,z):
+		p = PoseStamped()
+		p.header.frame_id = "/world"
+		p.pose.position.x = x
+		p.pose.position.y = y
+		p.pose.position.z = z
+		p.pose.orientation.x = 0
+		p.pose.orientation.y = 0
+		p.pose.orientation.z = 0
+		p.pose.orientation.w = 1
+		return p
+		
+	def execution(self,ud):	
+		self.obj = SpawnModel()
+		self.obj.model_name = new_object
+		string model_xml =                  
+		string robot_namespace           
+		geometry_msgs/Pose initial_pose   
+		string reference_frame     
+		return "success"
+		
+		
+"""
 
