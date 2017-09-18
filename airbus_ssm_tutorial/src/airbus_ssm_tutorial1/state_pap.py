@@ -11,71 +11,9 @@ import geometry_msgs.msg
 from gazebo_msgs.srv import SpawnModel
 from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
+from moveit_msgs.msg import ExecuteTrajectoryActionResult 
 import ast
 import copy
-
-class InitMoveit(ssm_state.ssmState):
-	'''@SSM
-	Description : Init skill that initialize the moveit_commander
-	User-data : N/A
-	Outcome :
-	- success : sucessfully initialized moveit_commander
-	'''
-	def __init__(self):
-		ssm_state.ssmState.__init__(self,outcomes=["success"])
-				
-	def execution(self,ud):
-		#moveit_commander.roscpp_initialize(sys.argv)
-		#self.robot = moveit_commander.RobotCommander()
-		#self.scene = moveit_commander.PlanningSceneInterface()	
-		rospy.sleep(1)
-		print("Moveit commander initialized !") 
-		return("success")
-
-
-
-class RobotInfo(ssm_state.ssmState):
-	'''@SSM
-	Description :  Info skill that displays information about the used robot
-	User-data : N/A
-	Outcome :
-	- success : sucessfully displayed information
-	'''
-	def __init__(self):
-		ssm_state.ssmState.__init__(self,outcomes=["success"])
-		
-	def execution(self,ud):
-		self.robot = moveit_commander.RobotCommander()
-		#Displays informations about the robot configuration
-		print("============ Robot Groups:")
-		print(self.robot.get_group_names())
-		print("============ Printing robot state")
-		print(self.robot.get_current_state())
-		print("============")
-		return "success"
-
-
-
-class GroupInfo(ssm_state.ssmState):
-	'''@SSM
-	Description :  Info skill that displays information about a selected moveit move group
-	User-data :
-	- group : a name of a robot moveit move group (string)
-	Outcome :
-	- success : sucessfully displayed information
-	'''
-	def __init__(self):
-		ssm_state.ssmState.__init__(self,outcomes=["success"],io_keys=["group"])
-
-	def execution(self,ud):
-		self.group = moveit_commander.MoveGroupCommander(ud.group)
-		#Displays informations about the group configuration	
-		print("============ Reference frame: %s" % self.group.get_planning_frame())
-		print("============ End effector: %s" % self.group.get_end_effector_link())
-		print("============ Position of End Effector: %s" % self.group.get_current_pose())
-		return "success"
-
-
 
 class MoveCart(ssm_state.ssmState):
 	'''@SSM
@@ -92,6 +30,8 @@ class MoveCart(ssm_state.ssmState):
 	'''
 	def __init__(self):
 		ssm_state.ssmState.__init__(self,outcomes=["success"],io_keys=["group","target","frame","offset"])
+		self.result = 0
+		self.msg = ""
 					
 	def acquireFrameUD(self,ud):
 		target_list = ast.literal_eval(ud)
@@ -133,23 +73,42 @@ class MoveCart(ssm_state.ssmState):
 		pose_target.pose.orientation.w = target_pos[6]
 		return pose_target
 	
+	def result_cb(self, msg):
+		self.result = msg.result.error_code.val
+		self.msg = msg.status.text
+
+	def move(self, group, plan):
+		self.result = 0
+		group.execute(plan, wait=False)
+		while(self.result == 0):
+			if(self.preempt_requested()):
+				group.stop()
+			rospy.sleep(0.01)
+		#rospy.sleep(1)
+	
 	def execution(self,ud):
-		print("MOVE CARTESIAN")
-		self.group = moveit_commander.MoveGroupCommander(ud.group)
-		self.group.clear_pose_targets()
-		self.waypoints = []
+		self.result_sub = rospy.Subscriber("/execute_trajectory/result", ExecuteTrajectoryActionResult, self.result_cb, queue_size=1)
+		group = moveit_commander.MoveGroupCommander(ud.group)
+		group.set_max_velocity_scaling_factor(0.1)
+		group.set_goal_tolerance(0.005)
+		group.clear_pose_targets()
+		waypoints = []
 		
 		#Planification and Execution
 		for pos in self.acquireFrameUD(ud.target):
-			self.new_pos = self.createOffset(pos,self.acquireFrameUD(ud.offset))
-			print(self.new_pos)
-			self.waypoints.append(copy.deepcopy(self.poseTarget(self.new_pos,ud.frame).pose))
+			new_pos = self.createOffset(pos,self.acquireFrameUD(ud.offset))
+			waypoints.append(self.poseTarget(new_pos,ud.frame).pose)
 
-		(self.plan, self.fraction) = self.group.compute_cartesian_path(self.waypoints,0.01,0.0)		
+		(plan, fraction) = group.compute_cartesian_path(waypoints, eef_step=0.01, jump_threshold=0.0, avoid_collisions=True)		
 		#rospy.sleep(1)
-		self.group.execute(self.plan)
-		
-		return "success"
+
+		self.move(group, plan)
+		if(self.result == 1): 
+			rospy.loginfo("[MoveCartesian] : %s"%self.msg)
+			return "success"
+		else:
+			rospy.logerr("[MoveCartesian] : %s"%self.msg)
+			return 'preempt'
 		
 
 
@@ -165,27 +124,48 @@ class MoveArti(ssm_state.ssmState):
 	'''
 	def __init__(self):
 		ssm_state.ssmState.__init__(self,outcomes=["success"],io_keys=["group","joints"])
+		self.result = 0
+		self.msg = ""
 	
 	def acquireJointsUD(self,ud):
 		target_list = ast.literal_eval(ud)
-		return target_list  
+		return target_list
+	
+	def result_cb(self, msg):
+		self.result = msg.result.error_code.val
+		self.msg = msg.status.text
+
+	def move(self, group):
+		self.result = 0
+		plan = group.plan()
+		group.execute(plan, wait=False)
+		while(self.result == 0):
+			if(self.preempt_requested()):
+				group.stop()
+			rospy.sleep(0.01)
 		
 	def execution(self,ud):
-		print("MOVE ARTICULAR")
-		self.group = moveit_commander.MoveGroupCommander(ud.group)
-		self.group.clear_pose_targets()
+		self.result_sub = rospy.Subscriber("/execute_trajectory/result", ExecuteTrajectoryActionResult, self.result_cb, queue_size=1)
+		group = moveit_commander.MoveGroupCommander(ud.group)
+		group.set_max_velocity_scaling_factor(0.5)
+		group.set_goal_tolerance(0.005)
+		group.clear_pose_targets()
 		#Planification and Execution
 		for target in self.acquireJointsUD(ud.joints):
-			
-			print(target)
 			for i in range (0,6):
 				target[i] = np.deg2rad(target[i])
-			self.group.set_joint_value_target(target)
-			self.plan = self.group.plan()		
-			#rospy.sleep(1)
-			self.group.execute(self.plan)
-
-		return "success"
+			group.set_joint_value_target(target)
+			self.move(group)
+			if(self.result != 1):
+				rospy.logerr("[MoveArticular] : %s"%self.msg)
+				return 'preempt'
+			
+		if(self.result == 1): 
+			rospy.loginfo("[MoveArticular] : %s"%self.msg)
+			return "success"
+		else:
+			rospy.logerr("[MoveArticular] : %s"%self.msg)
+			return 'preempt'
 	
 		
 		
@@ -294,69 +274,6 @@ class InitObject(ssm_state.ssmState):
 		self.scene.add_box("object", self.createPose(0.4,0,0.55), (0.1,0.1,0.1))
 		rospy.sleep(1)
 		return "success"
-
-
-
-
-"""
-class Commander(ssm_state.ssmState):
-	def __init__(self):
-		ssm_state.ssmState.__init__(self,outcomes=["success","relaunch"],io_keys=["joints","target"])
-
-	def acquireObjectPos(self,obj):
-		obj_string = obj
-		obj_list = obj_string.split(" ")
-		for i in range (0,6) :
-			obj_list[i] = float(obj_list[i])
-		
-		for i in range (3,6) :
-			obj_list[i] = np.deg2rad(obj_list[i])	
-				
-		return obj_list 
-		
-	def execution(self,ud):
-		
-		self.object_name = raw_input("Object name : ")
-		self.object_pos_raw = raw_input("Object position : ")
-		
-		self.object_pos = self.acquireObjectPos(self.object_pos_raw)
-		
-
-		print("Object name = %s" %self.object_name)
-		print ("Object position = %s" %self.object_pos)
-		
-		self.joint_1_rot = np.rad2deg(np.arctan(float(self.object_pos[1])/float(self.object_pos[0])))
-		print (self.joint_1_rot)
-		
-		
-		ud.joints = "%f 0 0 0 0 0" % np.float(self.joint_1_rot)
-		
-		print(type(ud.joints))
-		rospy.sleep(20)
-
-		self.step = int(ud.step)
-			
-		if (self.step == 0):
-			ud.joints = "%f 0 0 0 0 0" % np.float(self.joint_1_rot)
-			rospy.sleep(20)
-			return "relaunch"
-		
-		elif (self.step == 1):
-			ud.joints = "%f 20 20 0 0 0" % np.float(self.joint_1_rot)
-			return "relaunch"
-			
-		elif (self.step > 1):
-			return "success"
-	
-		
-		else :
-			print("YOUR CODE IS NOT WORKING LIKE YOU WOULD LIKE")
-			return "success"
-
-		return "relaunch"
-		"""
-
-
 	  
 class Sensor(ssm_state.ssmState):
 	'''@SSM
@@ -367,67 +284,26 @@ class Sensor(ssm_state.ssmState):
 	- success : sucessfully got the information
 	'''
 	def __init__(self):
-		ssm_state.ssmState.__init__(self,outcomes=["success"],io_keys=["objpos"])
-		self.pub = rospy.Publisher('chatter', PoseStamped, queue_size=10)
-		self.msg = PoseStamped()
-		self.msg.pose.position.x=0
-		self.msg.pose.position.y=0
-		self.msg.pose.position.z=0
-		
+		ssm_state.ssmState.__init__(self,outcomes=["success"],io_keys=["objpos"])	
+		self._msg_receive = False
 		
 	def callback(self,data):
-		rospy.loginfo(rospy.get_caller_id() + "I heard %s", (data.pose.position.x,data.pose.position.y,data.pose.position.z))	
+		self._msg_receive = True
 		self.x=data.pose.position.x
 		self.y=data.pose.position.y
 		self.z=data.pose.position.z
 		
 	def execution(self,ud):	
-						
-		self.sensor_info = rospy.Subscriber("/chatter", PoseStamped, self.callback)
-			
-		rospy.wait_for_message("/chatter", PoseStamped) #boucle
 		
-		print("RECU")
-		print(self.x)
-		print(self.y)
-		print(self.z)
+		self._msg_receive = False
+		self.sensor_info = rospy.Subscriber("/obj/pose", PoseStamped, self.callback)
+		while(self._msg_receive == False):
+			if(self.preempt_requested()):
+				return False
+			rospy.sleep(0.1)
 		
 		ud.objpos = [self.x,self.y,self.z]
 		
 		return "success"
 
-"""
-class GenWorld(ssm_state.ssmState):
-	'''@SSM
-	Description :  Skill that generate the gazebo environment
-	User-data : N/A
-	Outcome :
-	- success : sucessfully created the gazebo environment
-	'''
-	def __init__(self):
-		ssm_state.ssmState.__init__(self,outcomes=["success"])
-		
-	def createPose(self,x,y,z):
-		p = PoseStamped()
-		p.header.frame_id = "/world"
-		p.pose.position.x = x
-		p.pose.position.y = y
-		p.pose.position.z = z
-		p.pose.orientation.x = 0
-		p.pose.orientation.y = 0
-		p.pose.orientation.z = 0
-		p.pose.orientation.w = 1
-		return p
-		
-	def execution(self,ud):	
-		self.obj = SpawnModel()
-		self.obj.model_name = new_object
-		string model_xml =                  
-		string robot_namespace           
-		geometry_msgs/Pose initial_pose   
-		string reference_frame     
-		return "success"
-		
-		
-"""
 
