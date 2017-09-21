@@ -27,5 +27,4 @@ if __name__ == '__main__':
     if(rospy.get_param('ssm_autostart', False) == True):
        if(SSM._init_SSM()):
           SSM.start(Empty)
-    rospy.spin()
     
