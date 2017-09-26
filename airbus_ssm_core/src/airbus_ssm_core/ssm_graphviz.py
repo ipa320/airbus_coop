@@ -162,7 +162,6 @@ class ssmGraph(object):
                     graph.add_edge(pydot.Edge(node_name,label, style='invis'))
             
         for transition in state.get_internal_edges():
-            
             if(transition[0] != 'preempt'):
                 _edge = pydot.Edge('""','""',label=transition[0])
                 if(transition[0]==transition[2]): #final
@@ -175,7 +174,9 @@ class ssmGraph(object):
                         to_label = 'init_' + transition[2]
                         _edge.set('lhead', 'cluster'+transition[2])
                     else:
-                        if(('"parrallel_'+name+'_'+transition[2]+'"') in self._parallel_ending):
+                        if(transition[2] is None):
+                            to_label = transition[0]
+                        elif(('"parrallel_'+name+'_'+transition[2]+'"') in self._parallel_ending):
                             to_label = '"parrallel_'+name+'_'+transition[2]+'"'
                         else:
                             to_label = transition[2]
