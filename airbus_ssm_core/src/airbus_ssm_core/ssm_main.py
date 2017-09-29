@@ -30,7 +30,7 @@ import smach_ros
 
 class ssmMain:
     
-    def __init__(self, tempfile = None):
+    def __init__(self):
         self._SSM = None
         self._introspection = None
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
@@ -43,7 +43,6 @@ class ssmMain:
         self._preempt = False
         self._loading = False
         rospy.loginfo("SSM is now ready !")
-        self._tempfile = tempfile
         
     def _init_SSM_cb(self, msg):
         if(self._loading == False):
@@ -103,7 +102,7 @@ class ssmMain:
         else:
             return False
         
-        self._graphviz = ssm_graphviz.ssmGraph(self._SSM, tempfile=self._tempfile)
+        self._graphviz = ssm_graphviz.ssmGraph(self._SSM)
         self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
         self._introspection.start()
         self._graphviz.start()

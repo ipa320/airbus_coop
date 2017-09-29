@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="ssm_introspection" pkg="airbus_ssm_plugin" type="ssm_interface_node.py" respawn="false" output="screen">
+  </node>
+
+</launch>
