@@ -165,9 +165,10 @@ class ssmInterpreter:
                    if(final_states is None):
                         self.CheckBool = False
                         try:
-                            current_SM.close()
+                            current_SM.check_consistency()
                         except Exception as ex:
-                            raise Exception(ex)
+                            raise ex
+                        current_SM.close()
                         return None
                 #List all states and all parallel states
                 list_state = self.root.findall(parent+'/state')
@@ -179,9 +180,10 @@ class ssmInterpreter:
                     self.constructParallel(parallel, parent, current_SM, SSM, final_states)
                     if(self.CheckBool == False):
                         try:
-                            current_SM.close()
+                            current_SM.check_consistency()
                         except Exception as ex:
-                            raise Exception(ex)
+                            raise ex
+                        current_SM.close()
                         return None
 
                 for state in list_state:
@@ -191,18 +193,20 @@ class ssmInterpreter:
                         self.constructSimpleState(state, current_SM, SSM, final_states)
                     if(self.CheckBool == False):
                         try:
-                            current_SM.close()
+                            current_SM.check_consistency()
                         except Exception as ex:
-                            raise Exception(ex)
+                            raise ex
+                        current_SM.close()
                         return None
                     
                 
                 ##Current level is finished
                 #close the current SM for construction
                 try:
-                    current_SM.close()
+                    current_SM.check_consistency()
                 except Exception as ex:
-                    raise Exception(ex)
+                    raise ex
+                current_SM.close()
             
             if(len(self._next_parent_list)==0):##There is no lower level
                 finish_ = True
