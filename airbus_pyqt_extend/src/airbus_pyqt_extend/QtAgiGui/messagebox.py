@@ -20,6 +20,7 @@ import rospy
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_pyqt_extend.QtAgiCore import loadRsc
 

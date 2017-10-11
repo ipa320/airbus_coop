@@ -21,6 +21,7 @@ import time
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 
 from airbus_cobot_gui.res import R

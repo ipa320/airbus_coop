@@ -25,6 +25,7 @@ from xml.etree import ElementTree
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from python_qt_binding import loadUi
 

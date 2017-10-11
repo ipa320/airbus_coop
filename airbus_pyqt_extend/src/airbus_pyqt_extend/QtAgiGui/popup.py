@@ -19,6 +19,7 @@ import rospy
 
 from python_qt_binding import QtGui
 from python_qt_binding import QtCore
+from python_qt_binding.QtWidgets import *
 
 ## @package: QAgiPopup
 ##
@@ -27,7 +28,7 @@ from python_qt_binding import QtCore
 ## @date    Last modified 04/03/2014
 ## @class QAgiPopup
 ## @brief Popup object.
-class QAgiPopup(QtGui.QWidget):
+class QAgiPopup(QWidget):
 
     TopLeft     = 1
     BottomRight = 2

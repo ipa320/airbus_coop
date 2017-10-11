@@ -21,6 +21,7 @@ import os
 from roslib.packages import get_pkg_dir
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_cobot_gui.account import Privilege, User
 from airbus_cobot_gui.alarm import Alarm

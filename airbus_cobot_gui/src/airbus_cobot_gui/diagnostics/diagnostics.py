@@ -21,6 +21,7 @@ import threading
 from roslib.packages import get_pkg_dir
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 from airbus_cobot_gui.res import R
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
