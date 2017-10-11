@@ -99,7 +99,7 @@ class QAgiAbstractJoystick(QLabel):
         self._listener = listener
         
     def mousePressEvent(self, event):
-        self.emit(SIGNAL('joystickPressedEvent'))
+        self.joystickPressedEvent.emit()
         
     def mouseMoveEvent(self, event):
         
@@ -111,8 +111,8 @@ class QAgiAbstractJoystick(QLabel):
         
     def mouseReleaseEvent(self, event):
         self._handle.stop(self._x0, self._y0)
-        self.emit(SIGNAL('valuesChanged'),[0, 0])
-        self.emit(SIGNAL('joystickReleasedEvent'))
+        self.valuesChanged.emit([0, 0])
+        self.joystickReleasedEvent.emit()
         
     def x0(self):
         return self._x0
@@ -169,7 +169,7 @@ class QAgiJoystick(QAgiAbstractJoystick):
         x = float((x - self.getHandle().x0())-(self.x0()- self.getHandle().x0())) / self.getRadius()
         y = float((self.y0()- self.getHandle().y0())-(y - self.getHandle().y0())) / self.getRadius()
         
-        self.emit(SIGNAL('valuesChanged'),[x, y])
+        self.valuesChanged.emit([x, y])
 
 class QAgiHJoystick(QAgiAbstractJoystick):
     
@@ -188,7 +188,7 @@ class QAgiHJoystick(QAgiAbstractJoystick):
             self.getHandle().follow(x, self.y0())
             
             x = float((x - self.getHandle().x0())-(self.x0()- self.getHandle().x0())) / self.getRadius()
-            self.emit(SIGNAL('valuesChanged'),[x, 0.])
+            self.valuesChanged.emit([x, 0.])
 
 class QAgiVJoystick(QAgiAbstractJoystick):
     
@@ -207,7 +207,7 @@ class QAgiVJoystick(QAgiAbstractJoystick):
             self.getHandle().follow(self.x0(), y)
             
             y = float((self.y0()- self.getHandle().y0())-(y - self.getHandle().y0())) / self.getRadius()
-            self.emit(SIGNAL('valuesChanged'),[0., y])
+            self.valuesChanged.emit([0., y])
             
     def resizeEvent(self, event):
         self.setPixmap(rsc.images.getPixmap("joyY", self.width(), self.height()))

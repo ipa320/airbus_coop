@@ -42,7 +42,7 @@ class QAgiPopup(QWidget):
         @type parent: QObject.
         """
         
-        QtGui.QWidget.__init__(self, parent)
+        QWidget.__init__(self, parent)
         self.setWindowFlags(QtCore.Qt.Popup | QtCore.Qt.FramelessWindowHint)
         self.setStyleSheet("QWidget{background-color: #d9d9d9;}")
         self._parent = parent

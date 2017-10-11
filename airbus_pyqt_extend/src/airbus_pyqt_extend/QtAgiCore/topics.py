@@ -20,11 +20,12 @@ import rospy
 import os
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 class QAgiSubscriber(QObject):
     
-    CALLBACK_SIGN = 'callbackTriggered'
-    TIMEOUT_SIGN  = 'timeoutTriggered'
+    callbackTriggered = pyqtSignal(object)
+    timeoutTriggered  = pyqtSignal()
     
     def __init__(self,
                  parent,                   # Main thread (QObject)
@@ -59,10 +60,10 @@ class QAgiSubscriber(QObject):
         else:
             self._cb_ptr = self._callback
         
-        self._parent.connect(self, SIGNAL(self.CALLBACK_SIGN), self._cb_slot)
+        self.callbackTriggered.connect(self._cb_slot)
         
         if self._timeout_slot:
-            self._parent.connect(self, SIGNAL(self.TIMEOUT_SIGN), self._timeout_slot)
+            self.timeoutTriggered.connect(self._timeout_slot)
             
         if auto_start:
             self.start()
@@ -83,13 +84,13 @@ class QAgiSubscriber(QObject):
     
     def _callback(self, msg):
         """Callback without max rate inhibition"""
-        self.emit(SIGNAL(self.CALLBACK_SIGN), msg)
+        self.callbackTriggered.emit(msg)
         self._last_call_time = rospy.get_rostime()
         
     def _slot_check_timeout(self):
         
         if self.remaining() > self._timeout:
-            self.emit(SIGNAL(self.TIMEOUT_SIGN))
+            self.timeoutTriggered.emit()
     
     def setTimeout(self, timeout):
         self._timeout = timeout
@@ -102,7 +103,7 @@ class QAgiSubscriber(QObject):
         
         if self._timeout:
             self._timeout_t = QTimer(self)
-            self.connect(self._timeout_t, SIGNAL("timeout()"), self._slot_check_timeout)
+            self._timeout_t.timeout.connect(self._slot_check_timeout)
             self._timeout_t.start(self._timeout.to_nsec()*(1e-6)/3)
             
         self._last_call_time = rospy.get_rostime()

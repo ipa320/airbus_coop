@@ -20,6 +20,7 @@ from roslib.packages import get_pkg_dir
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_pyqt_extend.QtAgiCore import get_pkg_dir_from_prefix
 from airbus_cobot_gui import Plugin, ControlMode

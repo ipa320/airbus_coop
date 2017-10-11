@@ -61,8 +61,7 @@ class TableMonitoringNodes:
         
         self._parent = parent
         
-        QObject.connect(self._parent._but_cleanup,
-                        SIGNAL('clicked()'),self.onCleanup)
+        self._parent._but_cleanup.clicked.connect(self.onCleanup)
         
         self._datamodel = QStandardItemModel(0, 5, self._parent)
         self._parent._table_monitor.setModel(self._datamodel)

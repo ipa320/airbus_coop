@@ -36,8 +36,8 @@ from airbus_pyqt_extend import QtAgiCore
 
 # Load my generated resources file
 from airbus_cobot_gui.res import R
-from PyQt4.Qt import QApplication
-from PyQt4.uic.Compiler.qtproxies import QtGui
+from python_qt_binding.QtWidgets import QApplication
+from PyQt5.uic.Compiler.qtproxies import QtGui
 
 FULL_SCREEN_ARGS = ["full-screen"   ,"full"   ,"f",
                     "-full-screen"  ,"-full"  ,"-f",
@@ -80,7 +80,7 @@ def run():
     splash.close()
     #Set the gui signal for cleanup
     app.gui = gui
-    app.connect(app, SIGNAL("aboutToQuit()"), app.cleanGui)
+    app.aboutToQuit.connect(app.cleanGui)
     
     #Set the ctrl+c signal for cleanup
     def signal_handler(signal, frame):

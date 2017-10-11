@@ -59,7 +59,7 @@ class EmergencyStopButton(QPushButton):
         self._button_state  = EmergencyStopState.UNLOCKED
         self._keep_running = True
         
-        self.connect(self,SIGNAL('clicked(bool)'),self._trigger_button)
+        self.clicked.connect(self._trigger_button)
         
         self._estop_pub = rospy.Publisher(self.EMERGENCY_STOP_TOPIC_NAME,
                                           Bool, latch=True, queue_size=1)

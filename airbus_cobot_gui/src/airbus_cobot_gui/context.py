@@ -69,17 +69,17 @@ class Context(QObject):
     
     AUTOMATIC = 1
     MANUAL    = 2
+
+    viewManagerRequest       = pyqtSignal(object)
+    newUserConnectionRequest = pyqtSignal(object)
+    newControlModeRequest    = pyqtSignal(object)
+    newLanguageRequest       = pyqtSignal(object)
     
-    viewManagerRequest = SIGNAL('viewManagerRequested')
+    defaultTrigger       = pyqtSignal(object)
+    alarmTrigger         = pyqtSignal(object)
+    emergencyStopRequest = pyqtSignal(object)
+    shutingdownRequest   = pyqtSignal()
     
-    newUserConnectionRequest = SIGNAL('newUserConnectionRequested')
-    newControlModeRequest    = SIGNAL('newControlModeRequested')
-    newLanguageRequest       = SIGNAL('newLanguageRequested')
-    
-    defaultTrigger       = SIGNAL('defaultTriggered')
-    alarmTrigger         = SIGNAL('alarmTriggered')
-    emergencyStopRequest = SIGNAL('emergencyStopRequested')
-    shutingdownRequest   = SIGNAL('shutingdownRequested')
     
     def __init__(self, parent):
         QObject.__init__(self, parent)
@@ -97,30 +97,30 @@ class Context(QObject):
         return self._parent
         
     def addViewManagerEventListner(self, listener):
-        self.connect(self, self.viewManagerRequest, listener)
+        self.viewManagerRequest.connect(listener)
         
     def addUserEventListener(self, listener):
-        self.connect(self, self.newUserConnectionRequest, listener)
+        self.newUserConnectionRequest.connect(listener)
         
     addUserConnectionEventListener = addUserEventListener
         
     def addControlModeEventListener(self, listener):
-        self.connect(self, self.newControlModeRequest, listener)
+        self.newControlModeRequest.connect(listener)
         
     def addLanguageEventListner(self, listener):
-        self.connect(self, self.newLanguageRequest, listener)
+        self.newLanguageRequest.connect(listener)
         
     def addDefaultEventListner(self, listener):
-        self.connect(self, self.defaultTrigger, listener)
+        self.defaultTrigger.connect(listener)
         
     def addAlarmEventListner(self, listener):
-        self.connect(self, self.alarmTrigger, listener)
+        self.alarmTrigger.connect(listener)
         
     def addEmergencyStopEventListner(self, listener):
-        self.connect(self, self.emergencyStopRequest, listener)
+        self.emergencyStopRequest.connect(listener)
         
     def addCloseEventListner(self, listener):
-        self.connect(self, self.shutingdownRequest, listener)
+        self.shutingdownRequest.connect(listener)
         
     addShutingdownEventListner = addCloseEventListner
         
@@ -132,7 +132,7 @@ class Context(QObject):
     
     def requestNewUserConnection(self, user):
         self._user = user
-        self.emit(self.newUserConnectionRequest, user)
+        self.newUserConnectionRequest.emit(user)
         
     switchUser = requestNewUserConnection
     
@@ -142,11 +142,11 @@ class Context(QObject):
     getUserInfo = getUser
     
     def requestDisplayView(self, view):
-        self.emit(self.viewManagerRequest, view)
+        self.viewManagerRequest.emit(view)
         
     def requestNewControlMode(self, ctrl):
         self._control_mode = ctrl
-        self.emit(self.newControlModeRequest, ctrl)
+        self.newControlModeRequest.emit(ctrl)
         
     switchControlMode = requestNewControlMode
         
@@ -155,7 +155,7 @@ class Context(QObject):
         
     def requestNewLanguage(self, lng):
         self._lng = lng
-        self.emit(self.newLanguageRequest, lng)
+        self.newLanguageRequest.emit(lng)
         
     switchLanguage = requestNewLanguage
         
@@ -165,13 +165,13 @@ class Context(QObject):
     def requestDefault(self, errcode, what=''):
         self._default = errcode
         self._what = what
-        self.emit(self.defaultTrigger, self._default)
+        self.defaultTrigger.emit(self._default)
         
     def getDefault(self):
         return self._default
     
     def requestAlarm(self, level, what="???"):
-        self.emit(self.alarmTrigger, Alarm(self, level, what))
+        self.alarmTrigger.emit(Alarm(self, level, what))
         
     sendAlarm = requestAlarm
         
@@ -181,7 +181,7 @@ class Context(QObject):
     def resquestEmergencyStop(self, state, what=''):
         self._emer = state
         self._what = what
-        self.emit(self.emergencyStopRequest, state)
+        self.emergencyStopRequest.emit(state)
     
     def inEmergencyStop(self):
         return self._emer
@@ -190,5 +190,5 @@ class Context(QObject):
         return self._what
     
     def requestShutdown(self):
-        self.emit(self.shutingdownRequest)
+        self.shutingdownRequest.emit()
     
