@@ -20,6 +20,7 @@ import sys
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_ssm_plugin.ssm_introspection import SSMIntrospection
 
@@ -38,7 +39,7 @@ if __name__ == "__main__":
     window.setWindowTitle("ssmIntrospection")
     window.show()
     
-    a.connect(a, SIGNAL("aboutToQuit()"), window.onDestroy)
+    a.aboutToQuit.connect(window.onDestroy)
     def signal_handler(signum, frame):
         a.quit()
     signal.signal(signal.SIGINT, signal_handler)

@@ -27,6 +27,7 @@ from xml.etree import ElementTree as ET
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 
 from airbus_pyqt_extend import QtAgiCore
@@ -40,7 +41,6 @@ from airbus_ssm_plugin import xdot_qt
 
 from ast import literal_eval
 from functools import partial
-from PyQt4.Qt import QByteArray, QPixmap
 
 
 SERVER_NAME = '/ssm'
@@ -83,30 +83,29 @@ class SSMIntrospection(plugin.Plugin):
         self.open_button.setIcon(QIcon(R.images.ic_folder))
         self.open_button.setIconSize(QSize(50,50))
         self.open_button.setEnabled(False)
-        self.connect(self.open_button, SIGNAL('clicked()'), self.openSCXMLFile)
+        self.open_button.clicked.connect(self.openSCXMLFile)
         
         self.preempt_button.setIcon(QIcon(R.images.ic_preempt))
         self.preempt_button.setIconSize(QSize(100,100))
         self.preempt_button.setEnabled(False)
-        self.connect(self.preempt_button, SIGNAL('clicked()'), self._preempt_ssm)
+        self.preempt_button.clicked.connect(self._preempt_ssm)
         
         self.start_button.setIcon(QIcon(R.images.ic_start))
         self.start_button.setIconSize(QSize(50,50))
         self.start_button.setEnabled(False)
-        self.connect(self.start_button, SIGNAL('clicked()'), self._start_button_clicked)
+        self.start_button.clicked.connect(self._start_button_clicked)
         
         self.pause_button.setIcon(QIcon(R.images.ic_pause))
         self.pause_button.setIconSize(QSize(50,50))
         self.pause_button.setEnabled(False)
-        self.connect(self.pause_button, SIGNAL('clicked()'), self._pause_button_clicked)
+        self.pause_button.clicked.connect(self._pause_button_clicked)
 
         self.rearm_button.setIcon(QIcon(R.images.ic_rearm))
         self.rearm_button.setIconSize(QSize(80,80))
         self.rearm_button.setEnabled(False)
-        self.connect(self.rearm_button, SIGNAL('clicked()'), self._rearm_button_clicked)
+        self.rearm_button.clicked.connect(self._rearm_button_clicked)
         self.dotWidget = xdot_qt.DotWidget(self)
         self.gridLayout_4.addWidget(self.dotWidget)
-        
          ##Setup Thread
         
         self._ssm_runnable = SSMRunnable(self)
@@ -114,7 +113,6 @@ class SSMIntrospection(plugin.Plugin):
         
         ##Setup Publisher / Subscriber
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
-
         self._ssm_tree_view_sub = rospy.Subscriber(self._server_name+'/ssm_status',
                                                     String,
                                                     self._ssm_tree_view_cb)
@@ -143,7 +141,7 @@ class SSMIntrospection(plugin.Plugin):
         self.trigger_treeview.connect(self.updateTreeView)
         self.trigger_dotcode.connect(self.updateGraphdot)
         self.trigger_log.connect(self.updateLog)
-
+        
         self._ssm_status = 0
         self.ssm_status.setPixmap(R.getPixmapById("ic_ssm_pending").scaled(50,50))
         
@@ -154,7 +152,6 @@ class SSMIntrospection(plugin.Plugin):
         self._ssm_loaded = False
         self._ssm_paused = False
         self._auto_reload = False
-        
            
     def clearAllStates(self):
         self._tree_view = False
