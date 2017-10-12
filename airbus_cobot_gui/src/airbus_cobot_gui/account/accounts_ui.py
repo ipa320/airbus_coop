@@ -72,7 +72,7 @@ class LoginDialog(QDialog):
         self.login_button.clicked.connect(self.account_validation)
         
         if closable:
-            self.exit_buttonclicked.connect(self.close)
+            self.exit_button.clicked.connect(self.close)
             self.exit_button.setVisible(True)
         else:
             self.exit_button.setVisible(False)

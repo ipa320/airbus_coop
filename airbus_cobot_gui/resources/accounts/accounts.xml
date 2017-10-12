@@ -1,39 +1,15 @@
 <?xml version='1.0' encoding='utf8'?>
 <accounts>
-  <user id="45502756">
-    <created>1442824926380249977</created>
-    <modified>1468313975843910932</modified>
-    <privilege>developer</privilege>
-    <password>YXRpMDA2</password>
-  </user>
-  <user id="mmn">
-    <created>1442824973091439008</created>
-    <modified>1468314000068506956</modified>
-    <privilege>operator</privilege>
-    <password>YXRpMDA2</password>
-  </user>
-  <user id="test2">
-    <created>1482144889701138019</created>
-    <modified>1482144916652267932</modified>
+  <user id="test">
+    <created>1507794452515877962</created>
+    <modified>1507794452515929937</modified>
     <privilege>operator</privilege>
     <password>dGVzdA==</password>
   </user>
-  <user id="toto">
-    <created>1482158954170109987</created>
-    <modified>1482158967854861021</modified>
-    <privilege>operator</privilege>
-    <password>dG90bw==</password>
-  </user>
-  <user id="tuto">
-    <created>1484053000581603050</created>
-    <modified>1484053000581619977</modified>
-    <privilege>maintenance</privilege>
-    <password>dHV0bw==</password>
-  </user>
-  <user id="florian">
-    <created>1484123016237778902</created>
-    <modified>1484123016237793922</modified>
-    <privilege>expert</privilege>
-    <password>Zmxvcmlhbg==</password>
+  <user id="LED">
+    <created>1507794567464015960</created>
+    <modified>1507794567464078903</modified>
+    <privilege>developer</privilege>
+    <password>MTEyMDg=</password>
   </user>
 </accounts>

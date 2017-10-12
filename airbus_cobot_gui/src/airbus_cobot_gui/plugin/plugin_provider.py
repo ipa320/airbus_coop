@@ -186,7 +186,7 @@ class PluginsGroupPopup(QAgiPopup):
     def setupLaunchers(self, launchers):
         
         for launcher in launchers:
-            self.connect(launcher, SIGNAL('clicked()'), self.close)
+            launcher.clicked.connect(self.close)
             self._launchers_layout.addWidget(launcher)
         
 class PluginsGroup(QPushButton):
