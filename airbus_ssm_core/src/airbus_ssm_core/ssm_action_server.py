@@ -77,10 +77,7 @@ class ssmActionServer(object):
         self._introspection.start()
         rospy.loginfo("[SSM] : %s file loaded and created." %file)
         return True      
-    
-        
-        return True
-    
+
     def runSSM(self):
         if(self._SSM is not None):
             try:
