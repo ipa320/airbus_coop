@@ -41,7 +41,8 @@ class ssmState(smach.State):
         
         ## Copy the datamodel's value into the userData
         for data in self._datamodel:
-            ud[data] = self._datamodel[data]
+            if(self._datamodel[data] != ""):
+                ud[data] = self._datamodel[data]
         
         ## Do the <onentry>
         if(self._onEntry is not None):
@@ -92,4 +93,3 @@ class EmptyState(ssmState):
         rospy.sleep(2)
         ud.skill = "Empty"
         return "next"
-

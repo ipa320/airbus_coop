@@ -99,7 +99,8 @@ class ssmConcurrence(smach.Concurrence):
         
         ## Copy the datamodel's value into the userData
         for data in self._datamodel:
-            self.userdata[data] = self._datamodel[data]
+            if(self._datamodel[data] != ""):
+                self.userdata[data] = self._datamodel[data]
         
         ## Do the <onentry>
         if(self._onEntry is not None):
