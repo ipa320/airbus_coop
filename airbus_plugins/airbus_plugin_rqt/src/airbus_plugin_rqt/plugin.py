@@ -32,6 +32,7 @@ import sys
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_cobot_gui import Plugin
 
@@ -233,11 +234,12 @@ class RqtGuiWrapperClass(Main):
         setattr(sys, 'SELECT_QT_BINDING', self._options.qt_binding)
         from python_qt_binding import QT_BINDING
         
-        from python_qt_binding.QtCore import qDebug, qInstallMsgHandler, \
+        from python_qt_binding.QtCore import qDebug, qInstallMessageHandler,\
                                              QSettings, Qt, QtCriticalMsg, \
                                              QtDebugMsg, QtFatalMsg, \
                                              QTimer, QtWarningMsg
-        from python_qt_binding.QtGui import QAction, QIcon, QMenuBar
+        from python_qt_binding.QtGui import QIcon
+        from python_qt_binding.QtWidgets import QAction, QMenuBar
         
         from qt_gui.about_handler import AboutHandler
         from qt_gui.composite_plugin_provider import CompositePluginProvider
@@ -248,7 +250,7 @@ class RqtGuiWrapperClass(Main):
         from qt_gui.perspective_manager import PerspectiveManager
         from qt_gui.plugin_manager import PluginManager
         
-        def message_handler(type_, msg):
+        def message_handler(type_,context, msg):
             colored_output = 'TERM' in os.environ and 'ANSI_COLORS_DISABLED' not in os.environ
             cyan_color = '\033[36m' if colored_output else ''
             red_color = '\033[31m' if colored_output else ''
@@ -263,7 +265,7 @@ class RqtGuiWrapperClass(Main):
                 print(red_color + msg + reset_color, sys.stderr)
                 sys.exit(1)
                 
-        qInstallMsgHandler(message_handler)
+        qInstallMessageHandler(message_handler)
         
         app = self.create_application(argv)
         

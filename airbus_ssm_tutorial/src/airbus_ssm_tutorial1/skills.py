@@ -19,16 +19,7 @@ import rospy
 from airbus_ssm_core import ssm_state
         
 class Input(ssm_state.ssmState):
-    '''@SSM
-    Description :  Get a keyboard input and return an outcome accordingly.
-    User-data : 
-    - input : the keyboard input if it's an interger.
-    Outcome :
-    - Test  : if the input is an integer
-    - Out   : if the input is 'q'
-    - Retry : if the input is not an integer or 'q'
-    '''
-	
+    ##Describe a loop which check if i_for < cond_for
     def __init__(self):
         ssm_state.ssmState.__init__(self,outcomes=["Test","Out","Retry"], 
                                     io_keys=["input"])
@@ -46,19 +37,12 @@ class Input(ssm_state.ssmState):
             except:
                 print("[Error] Couldn't convert "+str(input) +" into an int !")
                 return "Retry"
-                
 class isPrime(ssm_state.ssmState):
-    '''@SSM
-    Description : Test if the input number is prime and add it a the prime_list if it is
-    User-data : 
-    - input : the tested number
-    - prime_list : the list of all the prime number_found
-    Outcome :
-    - Return  : atfer the test even if the input number is not prime
-    '''
+    ##Describe a loop which check if i_for < cond_for
     def __init__(self):
         ssm_state.ssmState.__init__(self,outcomes=["Return"], 
                                     io_keys=["input","prime_list"])
+        
     def is_prime(self, a):
         return all(a % i for i in xrange(2, a))
     
@@ -77,15 +61,7 @@ class isPrime(ssm_state.ssmState):
             
             
 class Primes(ssm_state.ssmState):
-    '''@SSM
-    Description : Print the list of all the prime numbers found and give a list of possible actions
-    User-data : 
-    - prime_list : the list of all the prime number found
-    Outcome :
-    - Continue  : if the input is 'c'
-    - Reset     : if the input is 'r'
-    - Off       : if the input is 'q'
-    '''
+    ##Describe a loop which check if i_for < cond_for
     def __init__(self):
         ssm_state.ssmState.__init__(self,outcomes=["Reset","Off", "Continue"], 
                                     io_keys=["prime_list"])

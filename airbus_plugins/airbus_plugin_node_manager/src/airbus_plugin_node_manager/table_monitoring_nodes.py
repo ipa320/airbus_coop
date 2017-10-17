@@ -26,6 +26,7 @@ from roslib.packages import get_pkg_dir
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from python_qt_binding import loadUi
 
@@ -37,6 +38,9 @@ from airbus_cobot_gui import Alarm
 from airbus_plugin_node_manager.res import R
 
 class ThreadNodePingAll(QThread):
+    
+    pingStates = pyqtSignal(object, object)
+    
     def __init__(self):
         QThread.__init__(self)
         self.stopFlag = False
@@ -49,7 +53,7 @@ class ThreadNodePingAll(QThread):
         while not self.stopFlag:       
             try:
                 alive_nodes, dead_nodes = rosnode_ping_all()
-                self.emit(SIGNAL("pingStates"), alive_nodes, dead_nodes)
+                self.pingStates.emit(alive_nodes, dead_nodes)
             except:
                 pass
             rospy.sleep(2.0)
@@ -61,8 +65,7 @@ class TableMonitoringNodes:
         
         self._parent = parent
         
-        QObject.connect(self._parent._but_cleanup,
-                        SIGNAL('clicked()'),self.onCleanup)
+        self._parent._but_cleanup.clicked.connect(self.onCleanup)
         
         self._datamodel = QStandardItemModel(0, 5, self._parent)
         self._parent._table_monitor.setModel(self._datamodel)
@@ -79,8 +82,7 @@ class TableMonitoringNodes:
         self._mutex = threading.Lock()
         
         self.thread_rosnode_ping_all = ThreadNodePingAll()
-        QObject.connect(self.thread_rosnode_ping_all,
-                        SIGNAL('pingStates'), self._refresh_node_table)
+        self.thread_rosnode_ping_all.pingStates.connect(self._refresh_node_table)
         
     def onStart(self):
         self.onCleanup()

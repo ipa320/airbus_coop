@@ -21,6 +21,7 @@ import time
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 
 from airbus_cobot_gui.res import R
@@ -51,6 +52,8 @@ class Alarm:
     
 class Incremental(QThread):
     
+    valueChanged = pyqtSignal(int)
+    
     def __init__(self):
         QThread.__init__(self)
         
@@ -67,7 +70,7 @@ class Incremental(QThread):
     def run(self):
         
         for i in range(self._start_pos, self._end_pos, self._step):
-            self.emit(SIGNAL('valueChanged(int)'),i)
+            self.valueChanged.emit(i)
             time.sleep(0.0005)
             
             
@@ -82,7 +85,7 @@ class AlarmWidget(QWidget):
         
         loadUi(R.layouts.alarm_widget, self)
         
-        self.connect(self.acquit_button, SIGNAL('clicked()'), self.onAcquit)
+        self.acquit_button.clicked.connect(self.onAcquit)
         
         self.what.setText(alarm.what())
         self._item.setSizeHint(self.sizeHint())
@@ -114,8 +117,8 @@ class AlarmManagerWidget(QWidget):
         self._lng     = context.getLanguage()
         
         self._incremental = Incremental()
-        self.connect(self._incremental, SIGNAL('valueChanged(int)'), self.setFixedHeight)
-        self.connect(self.drawable_button, SIGNAL('clicked()'), self.switchDrawable)
+        self._incremental.valueChanged.connect(self.setFixedHeight)
+        self.drawable_button.clicked.connect(self.switchDrawable)
         
         self._parent.alarm_label.setPixmap(R.getPixmapById("ico_alarm").scaled(
                            75,75,

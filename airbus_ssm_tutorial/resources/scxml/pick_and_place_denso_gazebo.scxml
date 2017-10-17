@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="pick_and_place" qt:editorversion="4.4.0" initial="Init">
+    <qt:editorinfo initialGeometry="337.91;-88.63;-20;-20;40;40"/>
+    <datamodel>
+        <data id="skill_file" expr="${airbus_ssm_tutorial}/resources/skills.xml"/>
+        <data id="group" expr="arm"/>
+        <data id="tool" expr="arm"/>
+        <data id="obj" expr="unit_sphere_1"/>
+    </datamodel>
+    <parallel id="Init">
+        <qt:editorinfo scenegeometry="29.41;326.69;61.08;-31.27;527.30;539.74" geometry="29.41;326.69;31.67;-357.96;527.30;539.74"/>
+        <transition type="external" event="success" target="Move" cond="Robot.success AND Camera.success">
+            <qt:editorinfo endTargetFactors="49.61;22.77" movePoint="-33.48;4.64"/>
+        </transition>
+        <state id="Camera">
+            <qt:editorinfo scenegeometry="411.91;222.75;393.30;43.60;175.06;435.45" geometry="380.26;-99.46;-18.61;-179.15;175.06;435.45"/>
+            <final id="Final_5">
+                <qt:editorinfo scenegeometry="478.81;435.08;458.81;415.08;40;40" geometry="66.90;212.33;-20;-20;40;40"/>
+            </final>
+            <state id="Sensor">
+                <qt:editorinfo scenegeometry="330.30;64.43;413.30;236.43;133;100" geometry="-81.61;-158.32;83;172;133;100"/>
+                <datamodel>
+                    <data id="skill" expr="Sensor"/>
+                </datamodel>
+                <transition type="external" event="success" target="Final_5">
+                    <qt:editorinfo movePoint="-37.40;2.20"/>
+                </transition>
+            </state>
+            <initial>
+                <qt:editorinfo scenegeometry="479.48;148.01;459.48;128.01;40;40" geometry="67.57;-74.74;-20;-20;40;40"/>
+                <transition type="external" target="Sensor"/>
+            </initial>
+        </state>
+        <state id="Robot">
+            <qt:editorinfo scenegeometry="141.71;258.79;83.32;36.64;294.59;447.35" geometry="110.06;-63.42;-58.39;-222.15;294.59;447.35"/>
+            <final id="Final_7">
+                <qt:editorinfo scenegeometry="303.64;402.17;283.64;382.17;40;40" geometry="161.93;143.38;-20;-20;40;40"/>
+            </final>
+            <initial>
+                <qt:editorinfo scenegeometry="150.64;131.79;130.64;111.79;40;40" geometry="8.93;-127;-20;-20;40;40"/>
+                <transition type="external" target="InitMoveit">
+                    <qt:editorinfo endTargetFactors="53.71;28.01" movePoint="-5.50;-2.20"/>
+                </transition>
+            </initial>
+            <state id="Home">
+                <qt:editorinfo scenegeometry="164.78;401.04;104.78;351.04;120;100" geometry="23.07;142.25;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="MoveArti"/>
+                    <data id="joints" expr="[[0,10,20,0,45,0]]"/>
+                </datamodel>
+                <transition type="external" event="success" target="Final_7">
+                    <qt:editorinfo movePoint="15.14;36.16"/>
+                </transition>
+            </state>
+            <state id="RobotInfo">
+                <qt:editorinfo scenegeometry="294.92;278.43;234.92;228.43;120;100" geometry="153.21;19.64;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="RobotInfo"/>
+                </datamodel>
+                <transition type="external" event="success" target="GroupInfo">
+                    <qt:editorinfo startTargetFactors="10.29;51.68" endTargetFactors="73.17;57.45" movePoint="6.89;-19.78"/>
+                </transition>
+            </state>
+            <state id="GroupInfo">
+                <qt:editorinfo scenegeometry="163.32;272.20;103.32;222.20;120;100" geometry="21.61;13.41;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="GroupInfo"/>
+                </datamodel>
+                <transition type="external" event="success" target="Home">
+                    <qt:editorinfo movePoint="28.52;5.18"/>
+                </transition>
+            </state>
+            <state id="InitMoveit">
+                <qt:editorinfo scenegeometry="289.02;153.48;229.02;103.48;120;100" geometry="147.31;-105.31;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="InitMoveit"/>
+                </datamodel>
+                <transition type="external" event="success" target="RobotInfo">
+                    <qt:editorinfo startTargetFactors="55.64;89.66" movePoint="29.95;5.95"/>
+                </transition>
+            </state>
+        </state>
+    </parallel>
+    <state id="Move">
+        <qt:editorinfo scenegeometry="155.88;790.92;58.17;553;559.48;1256.39" geometry="155.88;790.92;-97.71;-237.92;559.48;1256.39"/>
+        <state id="Picking">
+            <qt:editorinfo scenegeometry="201.53;916.32;81.73;849.61;515.91;313.51" geometry="45.65;125.40;-119.80;-66.71;515.91;313.51"/>
+            <state id="Pick">
+                <qt:editorinfo scenegeometry="343.54;1018.62;283.54;968.62;120;100" geometry="142.01;102.30;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="Pick"/>
+                </datamodel>
+                <transition type="external" event="success" target="MoveCart2Pick">
+                    <qt:editorinfo endTargetFactors="9.56;47.47" movePoint="8.80;37.40"/>
+                </transition>
+            </state>
+            <final id="Final_8">
+                <qt:editorinfo scenegeometry="516.10;1123.12;496.10;1103.12;40;40" geometry="314.57;206.80;-20;-20;40;40"/>
+            </final>
+            <state id="MoveCart2Pick">
+                <qt:editorinfo scenegeometry="517.64;1021.12;457.64;971.12;120;100" geometry="316.11;104.80;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="MoveCart"/>
+                    <data id="target" expr="[[0.4,0,0.6,0,180,0]]"/>
+                    <data id="offset" expr="[0,0,0,0,0,0]"/>
+                    <data id="frame" expr="/world"/>
+                </datamodel>
+                <transition type="external" event="success" target="Final_8">
+                    <qt:editorinfo movePoint="-40.70;8.80"/>
+                </transition>
+            </state>
+            <initial>
+                <qt:editorinfo scenegeometry="163;928.42;143;908.42;40;40" geometry="-38.53;12.10;-20;-20;40;40"/>
+                <transition type="external" target="MoveCart1Pick"/>
+            </initial>
+            <state id="MoveCart1Pick">
+                <qt:editorinfo scenegeometry="161.73;1020.58;101.73;970.58;120;100" geometry="-39.80;104.26;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="MoveCart"/>
+                    <data id="target" expr="[[0.4,0,0.4,0,180,0]]"/>
+                    <data id="offset" expr="[0,0,0,0,0,0]"/>
+                    <data id="frame" expr="/world"/>
+                </datamodel>
+                <transition type="external" event="success" target="Pick">
+                    <qt:editorinfo movePoint="3.30;37.40"/>
+                </transition>
+            </state>
+            <transition type="external" event="success" target="MoveArti2">
+                <qt:editorinfo movePoint="25.52;4.03"/>
+            </transition>
+        </state>
+        <state id="MoveArti1">
+            <qt:editorinfo scenegeometry="336.22;774.68;276.22;724.68;120;100" geometry="180.34;-16.24;-60;-50;120;100"/>
+            <datamodel>
+                <data id="skill" expr="MoveArti"/>
+                <data expr="[[0,30,60,0,90,0]]" id="joints"/>
+            </datamodel>
+            <transition type="external" event="success" target="Picking">
+                <qt:editorinfo endTargetFactors="50.23;18.57" movePoint="24.18;1.35"/>
+            </transition>
+        </state>
+        <state id="MoveArti3">
+            <qt:editorinfo scenegeometry="336.23;1679.96;276.23;1629.96;120;100" geometry="180.35;889.04;-60;-50;120;100"/>
+            <datamodel>
+                <data id="skill" expr="MoveArti"/>
+                <data expr="[[0,0,0,0,0,0]]" id="joints"/>
+            </datamodel>
+            <transition type="external" event="success" target="Final_6">
+                <qt:editorinfo movePoint="29.55;8.06"/>
+            </transition>
+        </state>
+        <state id="Placement">
+            <qt:editorinfo scenegeometry="190.12;1450.55;79.28;1295.91;511.65;312.34" geometry="34.24;659.63;-110.84;-154.64;511.65;312.34"/>
+            <final id="Final_9">
+                <qt:editorinfo scenegeometry="508.59;1568.25;488.59;1548.25;40;40" geometry="318.47;117.70;-20;-20;40;40"/>
+            </final>
+            <state id="Place">
+                <qt:editorinfo scenegeometry="340.07;1468.39;280.07;1418.39;120;100" geometry="149.95;17.84;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="Place"/>
+                </datamodel>
+                <transition type="external" event="success" target="MoveCart2Place">
+                    <qt:editorinfo movePoint="8.80;37.40"/>
+                </transition>
+            </state>
+            <state id="MoveCart1Place">
+                <qt:editorinfo scenegeometry="159.28;1471.45;99.28;1421.45;120;100" geometry="-30.84;20.90;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="MoveCart"/>
+                    <data id="target" expr="[[0,0.4,0.4,0,180,90]]"/>
+                    <data id="offset" expr="[0,0,0,0,0,0]"/>
+                    <data id="frame" expr="/world"/>
+                </datamodel>
+                <transition type="external" event="success" target="Place">
+                    <qt:editorinfo movePoint="9.90;34.10"/>
+                </transition>
+            </state>
+            <state id="MoveCart2Place">
+                <qt:editorinfo scenegeometry="505.75;1467.35;445.75;1417.35;120;100" geometry="315.63;16.80;-60;-50;120;100"/>
+                <datamodel>
+                    <data id="skill" expr="MoveCart"/>
+                    <data id="target" expr="[[0,0.4,0.6,0,180,90]]"/>
+                    <data id="offset" expr="[0,0,0,0,0,0]"/>
+                    <data id="frame" expr="/world"/>
+                </datamodel>
+                <transition type="external" event="success" target="Final_9">
+                    <qt:editorinfo movePoint="-35.20;8.80"/>
+                </transition>
+            </state>
+            <initial>
+                <qt:editorinfo scenegeometry="163.19;1374.65;143.19;1354.65;40;40" geometry="-26.93;-75.90;-20;-20;40;40"/>
+                <transition type="external" target="MoveCart1Place"/>
+            </initial>
+            <transition type="external" event="success" target="MoveArti3">
+                <qt:editorinfo movePoint="24.19;4.03"/>
+            </transition>
+        </state>
+        <state id="MoveArti2">
+            <qt:editorinfo scenegeometry="337.91;1224.53;277.91;1174.53;120;100" geometry="182.03;433.61;-60;-50;120;100"/>
+            <datamodel>
+                <data id="skill" expr="MoveArti"/>
+                <data expr="[[0,30,60,0,90,0],[90,30,60,0,90,0]]" id="joints"/>
+            </datamodel>
+            <transition type="external" event="success" target="Placement">
+                <qt:editorinfo endTargetFactors="51.33;10.38" movePoint="29.55;6.71"/>
+            </transition>
+        </state>
+        <initial>
+            <qt:editorinfo scenegeometry="336.22;690.52;316.22;670.52;40;40" geometry="180.34;-100.40;-20;-20;40;40"/>
+            <transition type="external" target="MoveArti1">
+                <qt:editorinfo endTargetFactors="49.51;21.46"/>
+            </transition>
+        </initial>
+        <final id="Final_6">
+            <qt:editorinfo scenegeometry="336.23;1769.39;316.23;1749.39;40;40" geometry="180.35;978.47;-20;-20;40;40"/>
+        </final>
+        <transition type="external" event="success" target="Final_10">
+            <qt:editorinfo movePoint="22.84;5.37"/>
+        </transition>
+    </state>
+    <final id="Final_10">
+        <qt:editorinfo scenegeometry="337.91;1863.46;317.91;1843.46;40;45" geometry="337.91;1863.46;-20;-20;40;45"/>
+    </final>
+</scxml>

@@ -1,6 +1,7 @@
 from roslib.packages import get_pkg_dir
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from airbus_cobot_gui.context import Context
 from plugin_provider import PluginProvider
 from plugin import Plugin

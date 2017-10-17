@@ -21,6 +21,7 @@ import threading
 from roslib.packages import get_pkg_dir
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 from airbus_cobot_gui.res import R
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
@@ -43,6 +44,7 @@ class DiagnosticsWidget(QPushButton):
     DIAGNOSTICS_TOPLEVEL_TOPIC_NAME = rospy.get_param('diagnostics_toplevel_topic_name','/diagnostics_toplevel_state')
     state = "status_stale"
     msg = "No diagnostic messages received"
+    stateChanged = pyqtSignal(str, str)
 
     def __init__(self, context):
         """! The constructor."""
@@ -50,12 +52,12 @@ class DiagnosticsWidget(QPushButton):
         self._context = context
 
         # Diagnostics top level: update the color of the button depending on the current diagnostics toplevel message
-        self.connect(self, SIGNAL("stateChanged"), self.update_state)
-        self.emit(SIGNAL('stateChanged'), self.state, self.msg)
+        self.stateChanged.connect(self.update_state)
+        self.stateChanged.emit(self.state, self.msg)
         self._diagnostics_toplevel_state_sub = rospy.Subscriber(self.DIAGNOSTICS_TOPLEVEL_TOPIC_NAME , DiagnosticStatus, self.toplevel_state_callback)
 
         # Diagnostics: when button pressed open a new window with a detailed list of components and diagnostic messages
-        self.connect(self,SIGNAL('clicked(bool)'),self._trigger_button)
+        self.clicked.connect(self._trigger_button)
 
     def update_state(self, state, msg):
         self.setIcon(R.getIconById(state))
@@ -84,6 +86,8 @@ class DiagnosticsWidget(QPushButton):
 
 class DiagnosticsPopup(QAgiPopup):
 
+    UpdateDiagnostics = pyqtSignal()
+    
     def __init__(self, parent, context):
         """! The constructor."""
         QAgiPopup.__init__(self, parent)
@@ -102,7 +106,7 @@ class DiagnosticsPopup(QAgiPopup):
 
         # Diagnostics subscriber
         DIAGNOSTICS_TOPIC_NAME = rospy.get_param('diagnostics_topic_name','/diagnostics_agg')
-        self.connect(self,SIGNAL("UpdateDiagnostics"), self.update_diag)
+        self.UpdateDiagnostics.connect(self.update_diag)
         self._diagnostics_agg_sub = rospy.Subscriber(DIAGNOSTICS_TOPIC_NAME, DiagnosticArray, self.message_cb)
 
     def update_diag(self):
@@ -121,7 +125,7 @@ class DiagnosticsPopup(QAgiPopup):
             for p in path:
                 tmp_tree = tmp_tree[p]
             tmp_tree.update(status, util.get_resource_name(status.name))
-        self.emit(SIGNAL('UpdateDiagnostics'))
+        self.UpdateDiagnostics.emit()
 
 if __name__ == "__main__":
     from airbus_cobot_gui.context import Context

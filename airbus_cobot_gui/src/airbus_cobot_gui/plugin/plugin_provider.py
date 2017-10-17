@@ -27,6 +27,7 @@ from roslib.packages import get_pkg_dir
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_pyqt_extend.QtAgiCore import QAgiPackages, get_pkg_dir_from_prefix
 from airbus_pyqt_extend.QtAgiGui import QAgiPopup
@@ -185,7 +186,7 @@ class PluginsGroupPopup(QAgiPopup):
     def setupLaunchers(self, launchers):
         
         for launcher in launchers:
-            self.connect(launcher, SIGNAL('clicked()'), self.close)
+            launcher.clicked.connect(self.close)
             self._launchers_layout.addWidget(launcher)
         
 class PluginsGroup(QPushButton):

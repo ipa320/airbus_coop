@@ -21,6 +21,7 @@ import os
 from roslib.packages import get_pkg_dir
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_cobot_gui.account import Privilege, User
 from airbus_cobot_gui.alarm import Alarm
@@ -109,7 +110,7 @@ class WrapperPlugin(QWidget):
         self._plugin_name = str(self.__class__.__name__)
         self._launcher = LauncherPlugin(self)
         
-        self.connect(self._launcher, SIGNAL('clicked()'), self.onRequestDisplayView)
+        self._launcher.clicked.connect(self.onRequestDisplayView)
         
         context.addUserEventListener(self.onUserChanged)
         context.addLanguageEventListner(self.onTranslate)

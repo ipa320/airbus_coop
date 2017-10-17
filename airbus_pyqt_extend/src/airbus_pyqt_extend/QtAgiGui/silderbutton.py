@@ -20,6 +20,7 @@ import rospy
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_pyqt_extend.QtAgiCore import loadRsc
 
@@ -34,7 +35,7 @@ rsc = loadRsc("airbus_pyqt_extend")
 ## @brief Slider button object.
 class QAgiSilderButton(QLabel):
     
-    TRIGGER = 'statusChanged'
+    statusChanged = pyqtSignal(bool)
     
     BACKGROUND_CSS = rsc.styles["QAgiSilderButton.background"]
     ON_CSS         = rsc.styles["QAgiSilderButton.on"]
@@ -123,14 +124,14 @@ class QAgiSilderButton(QLabel):
             self._trigger.setText(self._on_label)
             
             if anonymous is False:
-                self.emit(SIGNAL('statusChanged'), True)
+                self.statusChanged.emit(True)
         else:
             self._trigger.move(self._off,self._trigger.y())
             self._trigger.setStyleSheet(self.OFF_CSS)# %(self.height()/4))
             self._trigger.setText(self._off_label)
             
             if anonymous is False:
-                self.emit(SIGNAL('statusChanged'), False)
+                self.statusChanged.emit(False)
      
     def mousePressEvent(self, event):
         """! Detect button pressed.
@@ -152,12 +153,12 @@ class QAgiSilderButton(QLabel):
             self._trigger.move(self._on,self._trigger.y())
             self._trigger.setStyleSheet(self.ON_CSS)# %(self.height()/4))
             self._trigger.setText(self._on_label)
-            self.emit(SIGNAL('statusChanged'),True)
+            self.statusChanged.emit(True)
         elif x <= self._th_off:
             self._trigger.move(self._off,self._trigger.y())
             self._trigger.setStyleSheet(self.OFF_CSS)# %(self.height()/4))
             self._trigger.setText(self._off_label)
-            self.emit(SIGNAL('statusChanged'),False)
+            self.statusChanged.emit(False)
          
     def mouseMoveEvent(self, event):
         """! Detect button moved.

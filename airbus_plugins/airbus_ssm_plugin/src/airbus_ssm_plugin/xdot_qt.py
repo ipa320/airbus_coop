@@ -33,13 +33,14 @@ import re
 
 #from PySide.QtCore import *
 #from PySide.QtGui import *
-from PyQt4 import *
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+#from PyQt4 import *
+#from PyQt4.QtCore import *
+#from PyQt4.QtGui import *
 
-#from python_qt_binding import  *
-#from python_qt_binding.QtCore import  *
-#from python_qt_binding.QtGui import  *
+from python_qt_binding import  *
+from python_qt_binding.QtCore import  *
+from python_qt_binding.QtGui import  *
+from python_qt_binding.QtWidgets import  *
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-- Drawing Classes --#

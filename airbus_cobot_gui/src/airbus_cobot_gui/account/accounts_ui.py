@@ -22,6 +22,7 @@ from roslib.packages import get_pkg_dir
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 
 from accounts import User, \
@@ -68,11 +69,10 @@ class LoginDialog(QDialog):
         
         self.password_edit.setEchoMode(QLineEdit.Password)
         
-        self.connect(self.login_button, SIGNAL("clicked()"),
-                      self.account_validation)
+        self.login_button.clicked.connect(self.account_validation)
         
         if closable:
-            self.connect(self.exit_button, SIGNAL("clicked()"), self.close)
+            self.exit_button.clicked.connect(self.close)
             self.exit_button.setVisible(True)
         else:
             self.exit_button.setVisible(False)
@@ -127,8 +127,7 @@ class AddUserAccountWidget(QWidget):
         self.password_edit.setEchoMode(QLineEdit.Password)
         self.confirm_password_edit.setEchoMode(QLineEdit.Password);
         
-        self.connect(self.add_user_button, SIGNAL("clicked()"),
-                      self.add_user_account)
+        self.add_user_button.clicked.connect(self.add_user_account)
         
     def add_user_account(self):
         """! Check fields and add user account."""
@@ -220,11 +219,9 @@ class ModifUserAccountWidget(QWidget):
         self.users_list_combo.addItems(self._accounts.user_list())
         self.users_list_combo.currentIndexChanged.connect(self.update_user_info)
         
-        self.connect(self.modif_user_account_button, SIGNAL("clicked()"),
-                      self.modif_user_account)
+        self.modif_user_account_button.clicked.connect(self.modif_user_account)
         
-        self.connect(self.check_password_button, SIGNAL("clicked()"),
-                     self.check_password)
+        self.check_password_button.clicked.connect(self.check_password)
         
         self.current_password_edit.textChanged[str].connect(self.current_password_changed)
         
@@ -352,8 +349,7 @@ class RemoveUserAccountWidget(QWidget):
         self.user_list_label.setText(R.values.strings.user_list(self._lng))
         self.remove_button.setText(R.values.strings.ok(self._lng))
         
-        self.connect(self.remove_button, SIGNAL("clicked()"),
-                      self.remove_account)
+        self.remove_button.clicked.connect(self.remove_account)
          
         self._accounts = UserAccounts()
          
@@ -415,10 +411,10 @@ class UsersAccountsManagerDialog(QDialog):
         self.remove_button.setText(R.values.strings.remove(self._lng))
         self.exit_button.setText(R.values.strings.exit(self._lng))
         
-        self.connect(self.exit_button, SIGNAL("clicked()"), self.close)
-        self.connect(self.add_button, SIGNAL("clicked()"), self.load_add_user_ui)
-        self.connect(self.modif_button, SIGNAL("clicked()"), self.load_modif_user_ui)
-        self.connect(self.remove_button, SIGNAL("clicked()"), self.load_remove_user_ui)
+        self.exit_button.clicked.connect(self.close)
+        self.add_button.clicked.connect(self.load_add_user_ui)
+        self.modif_button.clicked.connect(self.load_modif_user_ui)
+        self.remove_button.clicked.connect(self.load_remove_user_ui)
         
         self.add_button.click()
         
@@ -482,12 +478,9 @@ class UserAccountPopup(DashboardPopup):
         self.access_rights_label.setText(privilege[0].upper()+privilege[1:])
         self.time_label.setText('2h:38m')
         
-        self.connect(self.connection_button, SIGNAL("clicked()"),
-                     self.open_login_dialog)
-        self.connect(self.accounts_manager_button, SIGNAL("clicked()"), 
-                     self.open_accounts_manager_dialog)
-        self.connect(self.deconnection_button, SIGNAL("clicked()"), 
-                     self.disconnect_user_account)
+        self.connection_button.clicked.connect(self.open_login_dialog)
+        self.accounts_manager_button.clicked.connect(self.open_accounts_manager_dialog)
+        self.deconnection_button.clicked.connect(self.disconnect_user_account)
         self.deconnection_button.setEnabled(True)
         
         self.adjustSize()

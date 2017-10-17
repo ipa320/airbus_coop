@@ -20,8 +20,9 @@ from rosgraph_msgs.msg import Log
 import rospkg
 import rospy
 
-from python_qt_binding.QtCore import QMutex, QMutexLocker, QTimer
-from python_qt_binding.QtGui import QWidget, QGridLayout
+from python_qt_binding.QtCore import *
+from python_qt_binding.QtGui import *
+from python_qt_binding.QtWidgets import *
 
 from rqt_console.console_settings_dialog import ConsoleSettingsDialog
 from rqt_console.console_widget import ConsoleWidget

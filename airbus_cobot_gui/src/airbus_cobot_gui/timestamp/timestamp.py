@@ -21,6 +21,7 @@ import time
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 
 from airbus_pyqt_extend import QtAgiCore
 
@@ -66,7 +67,7 @@ class Timestamp(Dashboard):
         self._time_label.setText(clk_time)
         
         self._t_datetime = QTimer(self)
-        self.connect(self._t_datetime, SIGNAL("timeout()"), self._update_time)
+        self._t_datetime.timeout.connect(self._update_time)
         self._t_datetime.start(3600)
         
     def _update_time(self):

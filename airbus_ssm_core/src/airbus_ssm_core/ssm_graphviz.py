@@ -99,7 +99,6 @@ class ssmGraph(object):
     def start(self):
         # Construct proxies
         self.construct_subgraph(self._state_machine, 'ROOT', self._graph_dot)
-        self.layout_nodes(self._graph_dot)
         self.send_graph()
         self._sub_update = rospy.Subscriber(self._server_name + "/ssm_status", String, self._update_cb, queue_size = 1)
          
@@ -214,27 +213,3 @@ class ssmGraph(object):
         else:
             graph.add_node(pydot.Node(node_name,shape='box',margin='0',width='0', height='0', fixedsize='true',style='invis',label='""'))
             self._parallel_starting = [node_name]
-            
-    def layout_nodes(self, graph):
-        subgraph_init = pydot.Subgraph(rank='same')
-        for node in graph.get_node_list():
-            if("init_" in node.get_name()):
-                if(node.get_name() in self._parallel_starting):
-                    for edge_ in graph.get_edge_list():
-                        if(edge_.get_source()==node.get_name()):
-                            subgraph_init.add_node(pydot.Node(edge_.get_destination()))
-                else:
-                    subgraph_init.add_node(node)
-     
-            
-        subgraph_final = pydot.Subgraph(rank='same')
-        for node in graph.get_node_list(): 
-            if("final_" in node.get_name()):
-                subgraph_final.add_node(node)
-            if(node.get_name() in self._parallel_ending):
-                subgraph_final.add_node(node)
-        graph_list = graph.get_subgraph_list()
-        graph.add_subgraph(subgraph_init)
-        graph.add_subgraph(subgraph_final)
-        for graph_ in graph_list:
-            self.layout_nodes(graph_)

@@ -23,12 +23,15 @@ from roslib.packages import get_pkg_dir
 
 from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
+from python_qt_binding.QtWidgets import *
 from python_qt_binding import loadUi
 
 from airbus_pyqt_extend.QtAgiGui import QAgiSilderButton
 from airbus_cobot_gui.alarm import Alarm
 from airbus_cobot_gui.emergency import EmergencyStopState
 from airbus_cobot_gui.res import R
+from matplotlib.backends.qt_compat import QtWidgets
+
 ## @class ControlMode
 ## @brief Class for difine different control mode.
 class ControlMode:
@@ -65,9 +68,8 @@ class ControlModeWidget(QWidget):
                                             on_label=R.values.strings.manu(lng),
                                             off_label=R.values.strings.auto(lng))
         self._slider_button.setFixedSize(QSize(140,40))
-        self.connect(self._slider_button,
-                     SIGNAL("statusChanged"),
-                     self._switch_mode)
+        
+        self._slider_button.statusChanged.connect(self._switch_mode)
     
     def setDefaultMode(self, mode):
         

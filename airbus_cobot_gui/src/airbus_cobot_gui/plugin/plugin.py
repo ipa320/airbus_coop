@@ -19,7 +19,7 @@
 import rospy
 from wrapper_plugin import WrapperPlugin
 from airbus_cobot_gui.control_mode import ControlMode
-from PyQt4.Qt import QObject
+from python_qt_binding.QtCore import QObject
 
 ## @package: plugin
 ##
