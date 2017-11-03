@@ -41,23 +41,14 @@ from airbus_ssm_plugin import xdot_qt
 
 from ast import literal_eval
 from functools import partial
+import subprocess
+from sys import stderr
 
 
 SERVER_NAME = '/ssm'
 #####################################
 
 from res import R
-
-class SSMRunnable(QThread):
-    
-    def __init__(self, parent, tmp_file = None):
-        QThread.__init__(self, parent)
-        self.SSM_Main = ssm_main.ssmMain()
-        
-    def run(self):
-        while(rospy.is_shutdown == False):
-            rospy.spinOnce()
-            rospy.sleep(0.1)
         
 
 class SSMIntrospection(plugin.Plugin):
@@ -107,10 +98,7 @@ class SSMIntrospection(plugin.Plugin):
         self.dotWidget = xdot_qt.DotWidget(self)
         self.gridLayout_4.addWidget(self.dotWidget)
          ##Setup Thread
-        
-        self._ssm_runnable = SSMRunnable(self)
-        self._ssm_runnable.start()
-        
+            
         ##Setup Publisher / Subscriber
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
         self._ssm_tree_view_sub = rospy.Subscriber(self._server_name+'/ssm_status',

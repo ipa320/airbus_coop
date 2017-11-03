@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="ssm_server_name" 	value="ssm"/>
+  <param name="ssm_log_path"    	value="/tmp/"/>
+  <param name="ssm_autostart"   	value="False"/>
+  <param name="ssm_enable_log"		value="False"/>
+  <node name="ssm_node" pkg="airbus_ssm_core" type="ssm_node.py" respawn="false" output="screen">
+  </node>
+  <node name="ssm_gui" pkg="airbus_ssm_plugin" type="ssm_interface_node.py" respawn="false" output="screen"/> 
+        
+</launch>
