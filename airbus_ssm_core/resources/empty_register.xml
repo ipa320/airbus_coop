@@ -5,4 +5,9 @@
 	<skill name="isPrime"	pkg="airbus_ssm_tutorial" 	module="src.airbus_ssm_tutorial1.skills" 	class="isPrime"/>
 	<skill name="Primes"	pkg="airbus_ssm_tutorial" 	module="src.airbus_ssm_tutorial1.skills" 	class="Primes"/>
 	-->	
+
+        <skill name="EmptyFunctionState" 	pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.ssm_template_testing"  class="EmptyFunctionState"	/>
+        <skill name="EmptySubscriberState" 	pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.ssm_template_testing"  class="EmptySubscriberState"	/>
+        <skill name="EmptyServiceState" 	pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.ssm_template_testing"  class="EmptyServiceState"	/>
+        <skill name="EmptyActionState" 		pkg="airbus_ssm_tutorial" 	module="ssm_test_skills.ssm_template_testing"  class="EmptyActionState"		/>
  </skills>
