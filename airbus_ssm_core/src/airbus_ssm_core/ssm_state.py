@@ -20,6 +20,8 @@ import traceback
 import rospy
 import actionlib
 import smach
+from airbus_ssm_core.msg import SimpleStateExecutorAction, SimpleStateExecutorGoal
+import json
 
 
 __all__ = ['State','CBState']
@@ -96,11 +98,11 @@ class EmptyState(ssmState):
         ud.skill = "Empty"
         return "next"
     
-class FunctionState(ssmState):
+class ssmFunctionState(ssmState):
     '''
     Execute a simple function
     '''
-    def __init__(self, function, f_args=[], f_kwargs=[],outcomes=[], io_keys=[]):
+    def __init__(self, function, f_args=[], f_kwargs={},outcomes=[], io_keys=[]):
         ssmState.__init__(self, outcomes, io_keys)
         self._f = function
         self._args = f_args
@@ -109,13 +111,13 @@ class FunctionState(ssmState):
     def execution(self, ud):
         return self._f(ud, *self._args, **self._kwargs)       
     
-class SubscriberState(FunctionState):
+class ssmSubscriberState(ssmFunctionState):
     '''
     Subscribe to a topic and wait to receive a message to execute a function
     The function should be define that way f(msg, ud, *args, **kwargs)
     '''
-    def __init__(self, topic_name, message_type, callback, f_args=[], f_kwargs=[],outcomes=[], io_keys=[], timeout_ = 60, timeout_outcome = "preempt"):
-        FunctionState.__init__(self, function, f_args, f_kwargs, outcomes, io_keys)
+    def __init__(self, topic_name, message_type, f_args=[], f_kwargs={},outcomes=[], io_keys=[], timeout_ = 60, timeout_outcome = "preempt"):
+        ssmFunctionState.__init__(self, self.callback, f_args, f_kwargs, outcomes, io_keys)
         self._to = timeout_
         self._to_outcome = timeout_outcome
         self._in_execution = False
@@ -124,23 +126,26 @@ class SubscriberState(FunctionState):
         self._subscriber = None
         self._local_userdata = None
         self.register_outcomes([timeout_outcome])
-        self._subscriber = rospy.Subscriber(topic_name, message_type, cb_wrapper, queue_size=1)
+        self._subscriber = rospy.Subscriber(topic_name, message_type, self.cb_wrapper, queue_size=1)
         
     def onInit(self): ##NOT USE
-        self._subscriber = rospy.Subscriber(topic_name, message_type, cb_wrapper, queue_size=1)
+        self._subscriber = rospy.Subscriber(topic_name, message_type, self.cb_wrapper, queue_size=1)
     
     def cb_wrapper(self, msg):
         if(self._in_execution):
             self._function_outcome = self._f(msg, self._local_userdata, *self._args, **self._kwargs)
-            self._function_executed = True      
+            self._function_executed = True
     
+    def callback(self, msg, userdata, *args, **kwargs):
+        raise NotImplementedError
+        
     def wait_for_message(self):
-        to_ = rospy.Time.now() + self._to
-        while not self._callback_return:
-            if self.preempt_requested() == True:
+        to_ = rospy.Time.now() + rospy.Duration(self._to)
+        while not self._function_executed:
+            if self.preempt_requested() or rospy.is_shutdown():
                 self.service_preempt()
                 return "preempt"
-            if rospy.Time.now() < to_:
+            if rospy.Time.now() > to_:
                 rospy.logwarn("'%s timed out : it will return the following outcome '%s'"
                              %(self.__class__.__name__,self._to_outcome))
                 return self._to_outcome
@@ -162,7 +167,7 @@ class SubscriberState(FunctionState):
     def onDestroy(self): ##NOT USE
         self._subscriber.unregister()
         
-class ServiceState(ssmState):
+class ssmServiceState(ssmState):
     '''
     Setup a message to call a service, wait for the answer and analyse the answer
     You have to implement two function : 
@@ -183,14 +188,14 @@ class ServiceState(ssmState):
         raise NotImplementedError
     
     def wait_for_service(self, service_request):
-        to_ = rospy.time(),now() + self._to
+        to_ = rospy.Time().now() + rospy.Duration(self._to)
         service_answer = None
         while service_answer == None:
             rospy.sleep(0.01)
-            if self.preempt_requested() == True:
+            if self.preempt_requested() or rospy.is_shutdown():
                 self.service_preempt()
                 return "preempt"
-            if rospy.Time.now() < to_:
+            if rospy.Time.now() > to_:
                 rospy.logwarn("'%s timed out : it will return the following outcome '%s'"
                              %(self.__class__.__name__,self._to_outcome))
                 return "timeout"
@@ -208,16 +213,16 @@ class ServiceState(ssmState):
 
     
     def execution(self, ud):
-        service_request = self.setup(ud)
+        service_request = self.setup_request(ud)
         service_answer = self.wait_for_service(service_request)
         if service_answer == "preempt":
             return "preempt"
         elif service_answer == "timeout":
             return self._to_outcome
         else:
-            return self.analysis(ud, service_answer)
+            return self.analyse_answer(ud, service_answer)
         
-class ActionClientState(ssmState):
+class ssmActionClientState(ssmState):
     '''
     
     
@@ -246,37 +251,38 @@ class ActionClientState(ssmState):
     def analyse_result(self, ud, result):
         raise NotImplementedError
     
-    def done_cb(self):
+    def done_cb(self, status, result):
+        print(result)
         self._done = True
     
     def feedback_wrapper(self, msg):
         self.analyse_feedback(self._local_userdata, msg)
     
     def wait_for_server(self):
-        to_ = rospy.time(),now() + self._tosv
+        to_ = rospy.Time().now() + rospy.Duration(self._tosv)
         server_connected = False
         while server_connected == False:
             rospy.sleep(0.01)
-            if self.preempt_requested() == True:
+            if self.preempt_requested() or rospy.is_shutdown():
                 self.service_preempt()
                 return "preempt"
-            if rospy.Time.now() < to_:
-                rospy.logwarn("'%s timed out : it will return the following outcome '%s'"
-                             %(self.__class__.__name__,self._to_outcome))
+            if rospy.Time.now() > to_:
+                rospy.logwarn("'%s connection to server timed out : it will return the following outcome '%s'"
+                             %(self.__class__.__name__,self._tosv_outcome))
                 return "timeout"
             else:
                 server_connected = self.ac_client.wait_for_server(rospy.Duration(0.1))
                 
     def wait_for_result(self):
-        to_ = rospy.time(),now() + self._toac
+        to_ = rospy.Time().now() + rospy.Duration(self._toac)
         while self._done == False:
-            if self.preempt_requested() == True:
+            if self.preempt_requested() or rospy.is_shutdown():
                 self.service_preempt()
                 self.ac_client.cancel_goal()
                 return "preempt"
-            if rospy.Time.now() < to_:
-                rospy.logwarn("'%s connection to server timed out : it will return the following outcome '%s'"
-                             %(self.__class__.__name__,self._to_outcome))
+            if rospy.Time.now() > to_:
+                rospy.logwarn("'%s action timed out : it will return the following outcome '%s'"
+                             %(self.__class__.__name__,self._toac_outcome))
                 self.ac_client.cancel_goal()
                 return "timeout"
             else:
@@ -298,6 +304,7 @@ class ActionClientState(ssmState):
         self.ac_client.send_goal(goal, done_cb = self.done_cb, active_cb=None, feedback_cb = self.feedback_wrapper)
         result = self.wait_for_result()
         if result == "preempt":
+            rospy.loginfo("goal preempted")
             return "preempt"
         elif result == "timeout":
             return self._toac_outcome
@@ -306,3 +313,25 @@ class ActionClientState(ssmState):
         ud = self._local_userdata
         return self.analyse_result(ud, self.ac_client.get_result())
     
+class ssmSimpleActionClientState(ssmActionClientState):
+    '''
+    
+    
+    '''
+    def __init__(self, action_server_name, outcomes=[], io_keys=[], timeout_server = 10, timeout_server_outcome = "preempt", timeout_action = 120, timeout_action_outcome = "preempt"):
+        ssmActionClientState.__init__(self, action_server_name, SimpleStateExecutorAction, outcomes, io_keys, timeout_server, timeout_server_outcome, timeout_action, timeout_action_outcome)
+    
+    def setup_goal(self, ud):
+        ##Write the JSON data from the user data
+        json_strings = json.dumps(ud._map)
+        goal = SimpleStateExecutorGoal()
+        goal.JSON_data = json_strings
+        return goal     
+    
+    def analyse_feedback(self, ud, feedback_msg):
+        json_data = json.loads(feedback_msg.JSON_feedback)[0]
+        ud.update(json_data)
+    
+    def analyse_result(self, ud, result):
+        json_data = json.loads(result.JSON_data)[0]
+        return result.outcome
