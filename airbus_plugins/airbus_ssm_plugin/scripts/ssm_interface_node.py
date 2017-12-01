@@ -22,7 +22,7 @@ from python_qt_binding.QtGui import *
 from python_qt_binding.QtCore import *
 from python_qt_binding.QtWidgets import *
 
-from airbus_ssm_plugin.ssm_introspection import SSMIntrospection
+from airbus_ssm_plugin.ssm_viewer import SSMViewer
 
 from airbus_cobot_gui import plugin
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     
     a = QApplication(sys.argv)
     
-    window = plugin.getStandAloneInstance("airbus_ssm_plugin", SSMIntrospection, "en")
+    window = plugin.getStandAloneInstance("airbus_ssm_plugin", SSMViewer, "en")
     window.setWindowTitle("ssmIntrospection")
     window.show()
 
