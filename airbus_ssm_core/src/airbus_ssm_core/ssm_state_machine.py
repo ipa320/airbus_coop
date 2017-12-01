@@ -373,6 +373,8 @@ class ssmMainStateMachine(ssmStateMachine):
         this flag has been set, it will prevent more states from being added to
         the state machine. 
         """
+        if(self.preempt_requested()):
+            return 'preempt'
         ##Create a the log file if ssm_enable_log is True
         if(rospy.get_param("ssm_enable_log", False) == True):
             date_str = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_")
