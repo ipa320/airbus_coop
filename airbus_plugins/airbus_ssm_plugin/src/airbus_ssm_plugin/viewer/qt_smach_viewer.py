@@ -29,6 +29,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 # Author: Jonathan Bohren 
+# Edit : Ludovic DELVAL 2017
 
 import rospy
 import rospkg
@@ -658,6 +659,7 @@ class SmachViewerFrame(QWidget):
                 # Disable the initial state button for this selection
                 #self.is_button.Disable()
                 pass
+            self.ud_tw.resizeRowsToContents()
 
     def _structure_msg_update(self, msg, server_name):
         """Update the structure of the SMACH plan (re-generate the dotcode)."""

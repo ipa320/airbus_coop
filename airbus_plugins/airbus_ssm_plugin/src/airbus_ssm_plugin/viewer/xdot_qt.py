@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # QT Version adapted by Alex Bravo
+# Edit : Ludovic DELVAL 2017
+
 
 '''Visualize dot graphs via the xdot format.'''
 
