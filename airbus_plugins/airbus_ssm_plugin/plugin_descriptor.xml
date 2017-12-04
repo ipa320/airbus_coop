@@ -1,13 +1,16 @@
 <?xml version='1.0' encoding='utf8'?>
 <plugin>
-  <import module="airbus_ssm_plugin.ssm_introspection" class="SSMIntrospection"/>
+  <import module="airbus_ssm_plugin.ssm_viewer" class="SSMViewer"/>
   <description>This plugin allow the execution and interaction with a SCXML described Smart State Machine.</description>
   <version>1.0.0</version>
   <setup>
     <icon>${airbus_ssm_plugin}/resources/images/ic_sub_ssm.png</icon>
     <access-rights>operator</access-rights>
     <parameters>
-        <param name="ssm_server_name" value="/ssm"/>
+      <param name="ssm_server_name" value="/ssm"/>
+      <param name="ssm_log_path"    	value="/tmp/"/>
+      <param name="ssm_autostart"   	value="False"/>
+      <param name="ssm_enable_log"		value="False"/>
     </parameters>
   </setup>
 </plugin>

@@ -121,7 +121,7 @@
           <enum>Qt::StrongFocus</enum>
          </property>
          <property name="text">
-          <string>AUTORELOAD</string>
+          <string>AUTO RELOAD</string>
          </property>
          <property name="checked">
           <bool>true</bool>
