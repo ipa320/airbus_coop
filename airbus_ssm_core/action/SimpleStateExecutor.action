@@ -1,0 +1,10 @@
+#goal definition
+string JSON_data
+---
+#result definition
+string JSON_data
+string outcome
+---
+#feedback
+string JSON_feedback
+string status

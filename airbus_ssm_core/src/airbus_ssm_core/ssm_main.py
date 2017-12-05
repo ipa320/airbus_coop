@@ -18,7 +18,6 @@
 
 
 import ssm_scxml_interpreter
-import ssm_introspection
 import ssm_graphviz
 import airbus_ssm_core.srv
 from std_msgs.msg import Int8, Empty, Bool
@@ -26,7 +25,7 @@ from std_msgs.msg import Int8, Empty, Bool
 import rospy
 import sys
 import os
-import smach_ros
+import ssm_introspection
 
 class ssmMain:
     
@@ -51,6 +50,10 @@ class ssmMain:
             self._init_SSM()
             
     def _init_SSM_srv(self, msg):
+        if(self._SSM is not None):
+            self._introspection.stop()
+            self._SSM.request_preempt()
+            self._SSM.execute()
         rospy.set_param('/ssm_node/scxml_file', str(msg.file_scxml.data))
         response = Bool()
         response.data = False
@@ -101,33 +104,29 @@ class ssmMain:
                 return False
         else:
             return False
-        
-        self._graphviz = ssm_graphviz.ssmGraph(self._SSM)
-        self._introspection = ssm_introspection.ssmIntrospection(self._SSM)
+        self._introspection = ssm_introspection.IntrospectionServer(self._server_name, self._SSM, 'SSM')
         self._introspection.start()
-        self._graphviz.start()
-        rospy.sleep(1)##temp fix
         rospy.loginfo("[SSM] : %s file loaded and created." %file)
         return True      
     
     def start(self, msg):
         if(self._SSM is not None):
-            self._status_pub.publish(2)
+            self._status_pub.publish(2) 
             try:
                 self._SSM.execute()
             except Exception as e:
                 self._status_pub.publish(-2)
                 rospy.logerr(e)
                 self._introspection.stop()
-                self._graphviz.stop()
                 return
             if(self._preempt == False):
                 self._status_pub.publish(10)
                 rospy.loginfo("[SSM] : Finished without error")
-            self._introspection.stop()
-            self._graphviz.stop()
+                self._introspection.stop()
         else:
             rospy.logwarn("[SSM] : Start requested but there is no state machine loaded !")
+            
+        self._introspection.stop()
             
     def _preempt_cb(self, msg):
         self._preempt = True

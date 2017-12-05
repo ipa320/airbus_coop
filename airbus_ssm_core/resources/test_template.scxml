@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="test_template" qt:editorversion="4.4.1" initial="FunctionTest">
+    <qt:editorinfo initialGeometry="423.08;65.25;-20;-20;40;40"/>
+    <state id="FunctionTest">
+        <qt:editorinfo scenegeometry="423.08;192.68;363.08;142.68;120;100" geometry="423.08;192.68;-60;-50;120;100"/>
+        <datamodel>
+            <data id="skill" expr="EmptyFunctionState"/>
+        </datamodel>
+        <transition type="external" event="next" target="SubscriberTest"/>
+    </state>
+    <datamodel>
+        <data id="skill_file" expr="${airbus_ssm_core}/resources/empty_register.xml"/>
+        <data id="data" expr="&quot;TESSST&quot;">
+            <qt:editorinfo geometry="26.51;30.58;0;0;0;0"/>
+        </data>
+    </datamodel>
+    <state id="SubscriberTest">
+        <qt:editorinfo scenegeometry="423.08;377.21;347.56;327.21;151.05;100" geometry="423.08;377.21;-75.52;-50;151.05;100"/>
+        <transition type="external" event="next" target="ServiceTest"/>
+        <datamodel>
+            <data id="skill" expr="EmptySubscriberState">
+                <qt:editorinfo geometry="26.51;30.58;0;0;0;0"/>
+            </data>
+        </datamodel>
+    </state>
+    <state id="ServiceTest">
+        <qt:editorinfo scenegeometry="423.08;539.31;363.08;489.31;120;100" geometry="423.08;539.31;-60;-50;120;100"/>
+        <datamodel>
+            <data id="skill" expr="EmptyServiceState">
+                <qt:editorinfo geometry="56.51;60.58;0;0;0;0"/>
+            </data>
+        </datamodel>
+        <transition type="external" event="next" target="ActionTest"/>
+    </state>
+    <state id="ActionTest">
+        <qt:editorinfo scenegeometry="423.09;708.54;363.09;658.54;120;100" geometry="423.09;708.54;-60;-50;120;100"/>
+        <transition type="external" event="next" target="Final_4"/>
+        <datamodel>
+            <data id="skill" expr="EmptyActionState"/>
+        </datamodel>
+        <transition type="external" event="fail" target="FunctionTest">
+            <qt:editorinfo localGeometry="-180.45;-99.91;-180.45;-520.20" endTargetFactors="25.27;45.61"/>
+        </transition>
+    </state>
+    <final id="Final_4">
+        <qt:editorinfo scenegeometry="596.40;708.54;576.40;688.54;40;40" geometry="596.40;708.54;-20;-20;40;40"/>
+    </final>
+</scxml>

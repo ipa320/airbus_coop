@@ -39,32 +39,37 @@ from airbus_ssm_core import ssm_main
 from airbus_ssm_core.srv import SSM_init
 from airbus_ssm_plugin import xdot_qt
 
+from viewer import qt_smach_viewer
+
 from ast import literal_eval
 from functools import partial
-
+import subprocess
+import signal
 
 SERVER_NAME = '/ssm'
 #####################################
 
 from res import R
 
-class SSMRunnable(QThread):
+class SSMProcess(QThread):
+    def __init__(self):
+        QThread.__init__(self)
+        self.mypopen = None
+        self._stopping = False
     
-    def __init__(self, parent, tmp_file = None):
-        QThread.__init__(self, parent)
-        self.SSM_Main = ssm_main.ssmMain()
-        
     def run(self):
-        while(rospy.is_shutdown == False):
-            rospy.spinOnce()
-            rospy.sleep(0.1)
+        self.mypopen = subprocess.Popen("exec rosrun airbus_ssm_core ssm_node.py", shell=True)
+        self.mypopen.communicate()
+    
+    def stop(self):
+        self.mypopen.send_signal(signal.SIGINT)
+        self.mypopen.wait()
+        
         
 
-class SSMIntrospection(plugin.Plugin):
+class SSMViewer(plugin.Plugin):
     
     trigger_status = pyqtSignal()
-    trigger_treeview = pyqtSignal()
-    trigger_dotcode = pyqtSignal()
     trigger_log = pyqtSignal()
     
     def __init__(self, context):
@@ -72,13 +77,7 @@ class SSMIntrospection(plugin.Plugin):
         
     def onCreate(self, param):
         
-        loadUi(R.layouts.mainwindow, self)
-        
-        self._scxml_model = QStandardItemModel()
-        self._scxml_model.setHorizontalHeaderLabels([R.values.strings.scxml_header()])
-        self.scxml_treeview.setModel(self._scxml_model)
-        self.scxml_treeview.setIconSize(QSize(24,24))       
-        
+        loadUi(R.layouts.mainwindow, self)        
         ##SET UP BUTTON
         self.open_button.setIcon(QIcon(R.images.ic_folder))
         self.open_button.setIconSize(QSize(50,50))
@@ -104,22 +103,10 @@ class SSMIntrospection(plugin.Plugin):
         self.rearm_button.setIconSize(QSize(80,80))
         self.rearm_button.setEnabled(False)
         self.rearm_button.clicked.connect(self._rearm_button_clicked)
-        self.dotWidget = xdot_qt.DotWidget(self)
-        self.gridLayout_4.addWidget(self.dotWidget)
-         ##Setup Thread
         
-        self._ssm_runnable = SSMRunnable(self)
-        self._ssm_runnable.start()
-        
+
         ##Setup Publisher / Subscriber
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
-        self._ssm_tree_view_sub = rospy.Subscriber(self._server_name+'/ssm_status',
-                                                    String,
-                                                    self._ssm_tree_view_cb)
-        
-        self._ssm_dotcode_sub = rospy.Subscriber(self._server_name+'/ssm_dotcode',
-                                                    String,
-                                                    self._ssm_dotcode_cb)
 
         self._ssm_ready_sub = rospy.Subscriber(self._server_name + '/status',
                                                Int8,
@@ -138,20 +125,24 @@ class SSMIntrospection(plugin.Plugin):
         self._request_tree_view_pub = rospy.Publisher(self._server_name+'/status_request', Empty, queue_size=1)
         
         self.trigger_status.connect(self.updateStatus)
-        self.trigger_treeview.connect(self.updateTreeView)
-        self.trigger_dotcode.connect(self.updateGraphdot)
         self.trigger_log.connect(self.updateLog)
         
         self._ssm_status = 0
         self.ssm_status.setPixmap(R.getPixmapById("ic_ssm_pending").scaled(50,50))
         
-        self._tree_view_dict = None
+        self.smach_viewer_widget = qt_smach_viewer.SmachViewerFrame(self)
+        self.smach_viewer_layout.addWidget(self.smach_viewer_widget)
+
         #self._log = ""
 
-        self._tree_view = False
         self._ssm_loaded = False
         self._ssm_paused = False
         self._auto_reload = False
+        
+        ##Setup Thread
+        rospy.sleep(0.1)
+        self.Thread = SSMProcess()
+        self.Thread.start()
            
     def clearAllStates(self):
         self._tree_view = False
@@ -159,13 +150,12 @@ class SSMIntrospection(plugin.Plugin):
         
     ###STATUS DEFINITION
     def _not_loaded(self):
-        self._clear_tree_view()
         self.ssm_status.setPixmap(R.getPixmapById("ic_ssm_pending").scaled(50,50))
         self.status_label.setText("NOT LOADED ")
         self.start_button.setEnabled(False)
         self.pause_button.setEnabled(False)
         self.open_button.setEnabled(True)
-        self.rearm_button.setEnabled(False)
+        self.rearm_button.setEnabled(True)
         self.preempt_button.setEnabled(False)
         
     def _ready_state(self):
@@ -179,12 +169,13 @@ class SSMIntrospection(plugin.Plugin):
         self.start_button.setEnabled(True)
         self.pause_button.setEnabled(False)
         self.open_button.setEnabled(True)
-        self.rearm_button.setEnabled(False)
+        self.rearm_button.setEnabled(True)
         self.preempt_button.setEnabled(False)
-        self.rearm_button.setStyleSheet("background-color: transparent")
+        self.rearm_button.setStyleSheet("")
     
     def _running_state(self):
         self.ssm_status.setPixmap(R.getPixmapById("ic_ssm_ok").scaled(50,50))
+        self.smach_viewer_widget._isActive = True
         self.status_label.setText("RUNNING ")
         self.start_button.setEnabled(False)
         self.pause_button.setEnabled(True)
@@ -194,6 +185,7 @@ class SSMIntrospection(plugin.Plugin):
     
     def _pause_state(self):
         self.ssm_status.setPixmap(R.getPixmapById("ic_ssm_pause").scaled(50,50))
+        self.smach_viewer_widget._isActive = False
         self.status_label.setText("PAUSE ")
         self.start_button.setEnabled(True)
         self.pause_button.setEnabled(False)
@@ -225,8 +217,7 @@ class SSMIntrospection(plugin.Plugin):
             self._not_loaded()
         
     def updateLog(self):
-        self.log_txt.setText(self._log)
-        
+        self.log_txt.setText(self._log)      
     
     def updateStatus(self):
             status = self._ssm_status 
@@ -244,40 +235,21 @@ class SSMIntrospection(plugin.Plugin):
                 self._not_loaded()
             elif status == 10: ##Finish
                 self._finish_state()
-                
-    def updateGraphdot(self):       
-        self.dotWidget.set_dotcode(self._dotcode)
-        self.dotWidget.zoom_to_fit()
-      
-    def updateTreeView(self):
-
-        if (self._tree_view == False):
-            self._construct_tree_view(self._tree_view_dict)
-            self._tree_view = True
-        else:
-            self._update_tree_view(self._tree_view_dict,self._scxml_model.item(0))
             
     def _log_cb(self, log):
         if(log.name == rospy.get_name()):
             strtime = datetime.datetime.now().strftime("[%Y/%m/%d-%H:%M:%S] ")
             self._log = strtime+str(log.msg)
             self.trigger_log.emit()
-    
-    def _ssm_tree_view_cb(self, msg):
-        self._tree_view_dict = literal_eval(str(msg.data))
-        self.trigger_treeview.emit()
             
     def _ssm_status_cb(self, msg):
         self._ssm_status = msg.data
         self.trigger_status.emit()
-    
-    def _ssm_dotcode_cb(self, msg):
-        self._dotcode = msg.data
-        self.trigger_dotcode.emit()
         
     
-    def openSCXMLFile(self): 
+    def openSCXMLFile(self):
         
+
         self._ssm_status = 0
         self.updateStatus()
               
@@ -293,18 +265,16 @@ class SSMIntrospection(plugin.Plugin):
         if scxmlfile[0] == "":
             return
 
-        self._scxml_model.setHorizontalHeaderLabels([scxmlfile[0]])
+        #self._scxml_model.setHorizontalHeaderLabels([scxmlfile[0]])
         rospy.set_param('/ssm_node/scxml_file',scxmlfile[0])
         self._load_SSM()
+        self.smach_viewer_widget.Reset()
         
-        
-            
     def _load_SSM(self):
         try:
             result = self._wait_ssm_isready()
             if(result == True):
                 self._ssm_loaded = True
-                self._wait_tree_view()
             else:
                 self._not_loaded()             
         except KeyError as e:
@@ -321,9 +291,6 @@ class SSMIntrospection(plugin.Plugin):
         except rospy.ServiceException, e:
             rospy.logerr('Service call failed : %s'%e)
             raise rospy.ServiceException(e)
-
-    def _wait_tree_view(self):
-        self._request_tree_view_pub.publish()
                 
     def _start_button_clicked(self):
         if(self._ssm_paused == True):
@@ -344,46 +311,11 @@ class SSMIntrospection(plugin.Plugin):
         self._preempt_pub.publish()
         self._ssm_paused = False
         
-    def _construct_tree_view(self, tree_view):
-
-        graph = SCXMLState("ROOT",SCXMLState.PARENT_STATE)
-        #FIND ROOT
-        for state, value in tree_view.iteritems():
-            if state=="ROOT":
-                self._add_states_into_treeview(state, value, graph, tree_view)
-        
-        self._scxml_model.appendRow(graph)
-        self.scxml_treeview.expandAll()
-    
-    def _add_states_into_treeview(self, state, value, graph, tree_view):
-        
-        for state_, value_ in value.iteritems():
-            child = SCXMLState(state_, SCXMLState.SIMPLE_STATE)
-            graph.appendRow(child)
-            for state__, value__ in tree_view.iteritems():
-                if(state_ == state__):
-                    child.setType(SCXMLState.PARENT_STATE)
-                    self._add_states_into_treeview(state__, value__, child, tree_view)    
-        
-    def _update_tree_view(self, tree_view, item):
-        if(item.type() == SCXMLState.PARENT_STATE):
-            for state, value in tree_view.iteritems():
-                if(item.get_name() == state):
-                    for i_item in range(item.rowCount()):
-                        for state_, value_ in value.iteritems():
-                            if(item.child(i_item).get_name() == state_):    
-                                item.child(i_item).setStatus(value_)
-                        self._update_tree_view(tree_view, item.child(i_item))
-                        
-    def _clear_tree_view(self):
-        self._tree_view_dict = None
-        self._tree_view = False
-        self._scxml_model.clear() 
-        
     def onPause(self):
         pass
     
     def onResume(self):
+        self._not_loaded()
         if(self._ssm_loaded == False):
              self._load_SSM()
         
@@ -406,6 +338,11 @@ class SSMIntrospection(plugin.Plugin):
         
     def onDestroy(self):
         self._preempt_ssm()
+        self.Thread.stop()
+        self.Thread.wait()
+        self.smach_viewer_widget.OnQuit(None)
+        
+        
 
 
     

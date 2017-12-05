@@ -248,7 +248,8 @@ class ssmStateMachine(smach.StateMachine):
             
             ## Copy the datamodel's value into the userData
             for data in self._datamodel:
-                self.userdata[data] = self._datamodel[data]
+                if(self._datamodel[data] != ""):
+                    self.userdata[data] = self._datamodel[data]
             
             ## Do the <onentry>
             if(self._onEntry is not None):
@@ -372,6 +373,8 @@ class ssmMainStateMachine(ssmStateMachine):
         this flag has been set, it will prevent more states from being added to
         the state machine. 
         """
+        if(self.preempt_requested()):
+            return 'preempt'
         ##Create a the log file if ssm_enable_log is True
         if(rospy.get_param("ssm_enable_log", False) == True):
             date_str = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_")

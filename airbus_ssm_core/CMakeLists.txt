@@ -18,7 +18,7 @@ add_service_files(
   SSM_init.srv
 )
 
-add_action_files(DIRECTORY action  FILES SSM.action)
+add_action_files(DIRECTORY action  FILES ExecuteSCXML.action SimpleStateExecutor.action)
 
 generate_messages(
   DEPENDENCIES

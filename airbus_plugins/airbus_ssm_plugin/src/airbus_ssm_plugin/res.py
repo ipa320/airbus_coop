@@ -123,6 +123,7 @@ class SsmPluginLayouts():
         self.uuid = self.__class__.__name__
         self.dir = DIR_SSMPLUGIN_LAYOUTS
         self.mainwindow = DIR_SSMPLUGIN_LAYOUTS+'/mainwindow.ui'
+        self.ssm_viewer = DIR_SSMPLUGIN_LAYOUTS+'/ssm_viewer.ui'
     def findById(self, id=""):
         try:
             return getattr(self,id)

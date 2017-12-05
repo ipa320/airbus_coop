@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # QT Version adapted by Alex Bravo
+# Edit : Ludovic DELVAL 2017
+
 
 '''Visualize dot graphs via the xdot format.'''
 
@@ -33,14 +35,19 @@ import re
 
 #from PySide.QtCore import *
 #from PySide.QtGui import *
-#from PyQt4 import *
-#from PyQt4.QtCore import *
-#from PyQt4.QtGui import *
+try:
+    from PyQt4 import *
+    from PyQt4.QtCore import *
+    from PyQt4.QtGui import *
+except:
+    from PyQt5 import *
+    from PyQt5.QtCore import *
+    from PyQt5.QtGui import *
+    from python_qt_binding.QtWidgets import *
 
-from python_qt_binding import  *
-from python_qt_binding.QtCore import  *
-from python_qt_binding.QtGui import  *
-from python_qt_binding.QtWidgets import  *
+#from python_qt_binding import  *
+#from python_qt_binding.QtCore import  *
+#from python_qt_binding.QtGui import  *
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-- Drawing Classes --#
@@ -1133,7 +1140,7 @@ class Animation(object):
 
     def start(self):
         self.timeout_id = QTimer();
-        self.dot_widget.connect(self.timeout_id, SIGNAL('timeout()'), self.tick)
+        #self.timeout_id.timeout.connect(self.tick)
         self.timeout_id.start(int(self.step * 1000))
 
     def stop(self):
@@ -1344,6 +1351,8 @@ class DotWidget(QWidget):
         super(DotWidget,  self).__init__(parent)
         self.graph = Graph()
         self.openfilename = None
+        
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
 #        self.set_flags(gtk.CAN_FOCUS)
 #        self.add_events(gtk.gdk.BUTTON_PRESS_MASK | gtk.gdk.BUTTON_RELEASE_MASK)
@@ -1535,6 +1544,10 @@ class DotWidget(QWidget):
         rect.setWidth(rect.width() - 2 * self.ZOOM_TO_FIT_MARGIN)
 #        rect.height -= 2 * self.ZOOM_TO_FIT_MARGIN
         rect.setHeight(rect.height() - 2 * self.ZOOM_TO_FIT_MARGIN)
+        if(self.graph.width < 10):
+            self.graph.width = 10
+        if(self.graph.height < 10):
+            self.graph.height = 10
         zoom_ratio = min(
 #            float(rect.width)/float(self.graph.width),
             float(rect.width())/float(self.graph.width),
@@ -1605,9 +1618,6 @@ class DotWidget(QWidget):
         self.animation.stop()
         self.drag_action.abort()
 
-        for cb in self.select_cbs:
-            cb(event)
-
         action_type = self.get_drag_action(event)
         self.drag_action = action_type(self)
         self.drag_action.on_button_press(event)
@@ -1627,7 +1637,7 @@ class DotWidget(QWidget):
         deltay = self.pressy - event.y()
         return (time.time() < self.presstime + click_timeout
                 and math.hypot(deltax, deltay) < click_fuzz)
-
+        
     def mouseReleaseEvent(self, event):
         self.drag_action.on_button_release(event)
         self.drag_action = NullAction(self)
@@ -1635,9 +1645,9 @@ class DotWidget(QWidget):
             x, y = event.x(), event.y()
             url = self.get_url(x, y)
             if url is not None:
-                self.emit(SIGNAL("clicked"), unicode(url.url), event)
+                for cb in self.select_cbs:
+                    cb(unicode(url.url),event)
             else:
-                self.emit(SIGNAL("clicked"), 'none', event)
                 jump = self.get_jump(x, y)
                 if jump is not None:
                     self.animate_to(jump.x, jump.y)
@@ -1648,9 +1658,9 @@ class DotWidget(QWidget):
             x, y = event.x(), event.y()
             url = self.get_url(x, y)
             if url is not None:
-                self.emit(SIGNAL("right_clicked"), unicode(url.url), event)
+                for cb in self.select_cbs:
+                    cb(unicode(url.url),event)
             else:
-                self.emit(SIGNAL("right_clicked"), 'none', event)
                 jump = self.get_jump(x, y)
                 if jump is not None:
                     self.animate_to(jump.x, jump.y)
@@ -1663,18 +1673,16 @@ class DotWidget(QWidget):
         return False
 
     def wheelEvent(self, event):
-        if event.delta() > 0:
+        if event.angleDelta().y() > 0:
             self.zoom_image(self.zoom_ratio * self.ZOOM_INCREMENT,
                             pos=(event.x(), event.y()))
-        if event.delta() < 0:
+        if event.angleDelta().y() < 0:
             self.zoom_image(self.zoom_ratio / self.ZOOM_INCREMENT,
                             pos=(event.x(), event.y()))
 
     def mouseMoveEvent(self, event):
         self.drag_action.on_motion_notify(event)
         self.setFocus()
-        for cb in self.select_cbs:
-            cb(event)
 
     def on_area_size_allocate(self, area, allocation):
         if self.zoom_to_fit_on_resize:
@@ -1702,218 +1710,6 @@ class DotWidget(QWidget):
     def get_jump(self, x, y):
         x, y = self.window_to_graph(x, y)
         return self.graph.get_jump(x, y)
-
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#class DotWindow(gtk.Window):
-class DotWindow(QMainWindow):
-
-    def __init__(self):
-        super(DotWindow,  self).__init__(None)
-        self.graph = Graph()
-        self.setWindowTitle(QApplication.applicationName())
-        self.widget = DotWidget()
-        self.widget.setContextMenuPolicy(Qt.ActionsContextMenu)
-        self.setCentralWidget(self.widget)
-
-        palette = QPalette ()
-        palette.setColor(QPalette.Background, Qt.white)
-        self.setPalette(palette)
-
-        self.filename = None
-
-        file_open_action = self.create_action("&Open...", self.on_open,
-                QKeySequence.Open, "fileopen", "Open an existing dot file")
-        file_reload_action = self.create_action("&Refresh", self.on_reload,
-                QKeySequence.Refresh, "view-refresh", "Reload opened dot file")
-        zoom_in_action = self.create_action("Zoom In", self.widget.on_zoom_in,
-                QKeySequence.ZoomIn, "zoom-in", "Zoom in")
-        zoom_out_action = self.create_action("Zoom Out", self.widget.on_zoom_out,
-                QKeySequence.ZoomIn, "zoom-out", "Zoom Out")
-        zoom_fit_action = self.create_action("Zoom Fit", self.widget.on_zoom_fit,
-                None, "zoom-fit-best", "Zoom Fit")
-        zoom_100_action = self.create_action("Zoom 100%", self.widget.on_zoom_100,
-                None, "zoom-original", "Zoom 100%")
-
-        self.file_menu = self.menuBar().addMenu("&File")
-        self.file_menu_actions = (file_open_action, file_reload_action)
-        self.connect(self.file_menu, SIGNAL("aboutToShow()"), self.update_file_menu)
-
-        file_toolbar = self.addToolBar("File")
-        file_toolbar.setObjectName("FileToolBar")
-        self.add_actions(file_toolbar, (file_open_action, file_reload_action))
-
-        fileToolbar = self.addToolBar("Zoom")
-        fileToolbar.setObjectName("ZoomToolBar")
-        self.add_actions(fileToolbar, (zoom_in_action, zoom_out_action,  zoom_fit_action,  zoom_100_action))
-
-        settings = QSettings()
-        self.recent_files = settings.value("RecentFiles").toStringList()
-        size = settings.value("MainWindow/Size", QVariant(QSize(512, 512))).toSize()
-        self.resize(size)
-        position = settings.value("MainWindow/Position", QVariant(QPoint(0, 0))).toPoint()
-        self.move(position)
-
-        self.restoreState(settings.value("MainWindow/State").toByteArray())
-        self.update_file_menu()
-
-        self.show()
-
-    def create_action(self, text, slot=None, shortcut=None, icon=None,
-                     tip=None, checkable=False, signal="triggered()"):
-        action = QAction(text, self)
-        if icon is not None:
-            action.setIcon(QIcon.fromTheme(icon))
-        if shortcut is not None:
-            action.setShortcut(shortcut)
-        if tip is not None:
-            action.setToolTip(tip)
-            action.setStatusTip(tip)
-        if slot is not None:
-            self.connect(action, SIGNAL(signal), slot)
-        if checkable:
-            action.setCheckable(True)
-        return action
-
-    def add_actions(self, target, actions):
-        for action in actions:
-            if action is None:
-                target.addSeparator()
-            else:
-                target.addAction(action)
-
-    def update_file(self, filename):
-        import os
-        if not hasattr(self, "last_mtime"):
-            self.last_mtime = None
-
-        current_mtime = os.stat(filename).st_mtime
-        if current_mtime != self.last_mtime:
-            self.last_mtime = current_mtime
-            self.open_file(filename)
-
-        return True
-
-    def set_filter(self, filter):
-        self.widget.set_filter(filter)
-
-    def set_dotcode(self, dotcode, filename='<stdin>'):
-        if self.widget.set_dotcode(dotcode, filename):
-            self.setWindowTitle(os.path.basename(filename) + ' - ' + QApplication.applicationName())
-            self.widget.zoom_to_fit()
-
-    def set_xdotcode(self, xdotcode, filename='<stdin>'):
-        if self.widget.set_xdotcode(xdotcode):
-            self.setWindowTitle(os.path.basename(filename) + ' - ' + QApplication.applicationName())
-            self.widget.zoom_to_fit()
-
-    def open_file(self, filename=None):
-        if filename is None:
-            action = self.sender()
-            if isinstance(action, QAction):
-                filename = unicode(action.data().toString())
-            else:
-                return
-        try:
-            fp = file(filename, 'rt')
-            self.set_dotcode(fp.read(), filename)
-            fp.close()
-            self.add_recent_file(filename)
-        except IOError, ex:
-            pass
-
-    def on_open(self):
-        dir = os.path.dirname(self.filename) \
-                if self.filename is not None else "."
-        formats = ["*.dot"]
-        filename = unicode(QFileDialog.getOpenFileName(self,
-                            "Open dot File", dir,
-                            "Dot files (%s)" % " ".join(formats)))
-        if filename:
-            self.open_file(filename)
-
-    def on_reload(self):
-        self.widget.reload()
-
-    def update_file_menu(self):
-        self.file_menu.clear()
-        self.add_actions(self.file_menu, self.file_menu_actions[:-1])
-        current = QString(self.filename) \
-                if self.filename is not None else None
-        recent_files = []
-        for fname in self.recent_files:
-            if fname != current and QFile.exists(fname):
-                recent_files.append(fname)
-        if recent_files:
-            self.file_menu.addSeparator()
-            for i, fname in enumerate(recent_files):
-                action = QAction(QIcon(":/icon.png"), "&%d %s" % (i + 1, QFileInfo(fname).fileName()), self)
-                action.setData(QVariant(fname))
-                self.connect(action, SIGNAL("triggered()"), self.open_file)
-                self.file_menu.addAction(action)
-        self.file_menu.addSeparator()
-        self.file_menu.addAction(self.file_menu_actions[-1])
-
-    def add_recent_file(self, filename):
-        if filename is None:
-            return
-        if not self.recent_files.contains(filename):
-            self.recent_files.prepend(QString(filename))
-            while self.recent_files.count() > 14:
-                self.recent_files.takeLast()
-
-def closeEvent(self, event):
-        settings = QSettings()
-        filename = QVariant(QString(self.filename)) if self.filename is not None else QVariant()
-        settings.setValue("LastFile", filename)
-        recent_files = QVariant(self.recent_files) if self.recent_files else QVariant()
-        settings.setValue("RecentFiles", recent_files)
-        settings.setValue("MainWindow/Size", QVariant(self.size()))
-
-        #AB It looks like PyQt 4.7.4 has a bug that results in both self.pos() and self.geometry() returning the same values
-        # see http://doc.qt.nokia.com/latest/application-windows.html#window-geometry for explanation of why they should be different
-        # The results is a small (5,24) shift of window on consequent start from previous position
-        #print (self.pos())
-        #print (self.geometry())
-        settings.setValue("MainWindow/Position", QVariant(self.pos()))
-        #settings.setValue("MainWindow/Geometry", QVariant(self.saveGeometry()))
-        settings.setValue("MainWindow/State", QVariant(self.saveState()))
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-def main():
-    import optparse
-
-    parser = optparse.OptionParser(usage='\n\t%prog [file]', version='%%prog %s' % __version__)
-    # This program can shell to different Graphviz filter processes specified by -f option
-    parser.add_option(
-        '-f', '--filter',
-        type='choice', choices=('dot', 'neato', 'twopi', 'circo', 'fdp'),
-        dest='filter', default='dot',
-        help='graphviz filter: dot, neato, twopi, circo, or fdp [default: %default]')
-
-    (options, args) = parser.parse_args(sys.argv[1:])
-    if len(args) > 1:
-        parser.error('incorrect number of arguments')
-
-    app = QApplication(sys.argv)
-    app.setOrganizationName("RobotNV")
-    app.setOrganizationDomain("robotNV.com")
-    app.setApplicationName("Dot Viewer")
-    app.setWindowIcon(QIcon(":/icon.png"))
-
-    win = DotWindow()
-    win.show()
-#    win.connect('destroy', gtk.main_quit)
-#    win.set_filter(options.filter)
-    if len(args) >= 1:
-        if args[0] == '-':
-            win.set_dotcode(sys.stdin.read())
-        else:
-            win.open_file(args[0])
-#            gobject.timeout_add(1000, win.update_file, args[0])
-#    gtk.main()
-    sys.exit(app.exec_())
-
 
 
 
