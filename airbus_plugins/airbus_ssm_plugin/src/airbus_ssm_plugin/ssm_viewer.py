@@ -315,9 +315,9 @@ class SSMViewer(plugin.Plugin):
         pass
     
     def onResume(self):
-        self._not_loaded()
         if(self._ssm_loaded == False):
-             self._load_SSM()
+            self._not_loaded()
+            self._load_SSM()
         
         
     def onControlModeChanged(self, mode):
