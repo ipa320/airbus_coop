@@ -37,9 +37,8 @@ from airbus_cobot_gui import plugin, ControlMode, EmergencyStopState
 from scxml import SCXMLState
 from airbus_ssm_core import ssm_main
 from airbus_ssm_core.srv import SSM_init
-from airbus_ssm_plugin import xdot_qt
 
-from viewer import qt_smach_viewer
+from viewer import qt_smach_viewer, xdot_qt
 
 from ast import literal_eval
 from functools import partial
