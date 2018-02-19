@@ -19,7 +19,8 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-	packages=['airbus_ssm_plugin'],
+	packages=['airbus_ssm_plugin',
+		  'airbus_ssm_plugin.viewer'],
 	package_dir={'': 'src'},
 )
 

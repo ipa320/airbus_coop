@@ -18,7 +18,6 @@
 
 
 import ssm_scxml_interpreter
-import ssm_graphviz
 import airbus_ssm_core.srv
 from std_msgs.msg import Int8, Empty, Bool
 
