@@ -65,8 +65,6 @@ class ssmStateMachine(smach.StateMachine):
         self._onExit  = None
         self._pause = False
         self._preempt_pause = False
-        self._tree_view = None
-        self._tree_view_cb = None
         self._server_name = rospy.get_param('ssm_server_name', '/ssm')
         self._pause_sub = rospy.Subscriber(self._server_name + '/pause',
                                              Bool,
@@ -80,16 +78,17 @@ class ssmStateMachine(smach.StateMachine):
         """Callback empty message for propagate preempt
         to currently active state.
         """
-        if(self._is_running):
-            self._preempt_pause = True
+        self._preempt_pause = True
         
         
     def _request_pause_cb(self, msg):
         """Callback empty message for propagate preempt
         to currently active state.
         """
-        if(self._is_running):
-            self._pause = msg.data
+        
+        if(self._is_running or self._pause == True):
+                self._pause = msg.data
+            
         
     def _update_once(self):
         """Method that updates the state machine once.
@@ -124,11 +123,11 @@ class ssmStateMachine(smach.StateMachine):
                     self._preempted_state = None
             else:
                 # We were preempted after the last state was running
-                # So we sho                 if(self._preempt_requested):uld preempt this state before we execute it
+                # So we should preempt this state before we execute it
                 self._preempt_current_state()
 
         # Execute the state
-        self._tree_view_enable_state(self._current_label)
+
         try:
             self._state_transitioning_lock.release()
             outcome = self._current_state.execute(
@@ -147,7 +146,7 @@ class ssmStateMachine(smach.StateMachine):
         finally:
             self._state_transitioning_lock.acquire()
         
-        self._tree_view_disable_state(self._current_label)
+
         # Check if outcome was a potential outcome for this type of state
         if outcome not in self._current_state.get_registered_outcomes():
             raise smach.InvalidTransitionError(
@@ -264,17 +263,14 @@ class ssmStateMachine(smach.StateMachine):
             while container_outcome is None and self._is_running and not smach.is_shutdown(): 
                 # Update the state machine
                 if(self._pause):
-                    self._tree_view_pause_state(self._current_label)
-                    cpt = 30
+                    to_ = rospy.Time.now() - rospy.Duration(5.0)
                     while(self._pause):
-                        if(cpt >= 30):
-                            cpt = 0
+                        if(rospy.Time.now() > to_):
+                            to_ = rospy.Time.now() + rospy.Duration(5.0)
                             rospy.logwarn("[SSM] : Smart State Machine is paused")
                             rospy.logwarn("[SSM] : Next state executed is : " +self._current_label)
-                        cpt = cpt+1
                         rospy.sleep(0.1)
                         if(self._preempt_pause):
-                            self._tree_view_disable_state(self._current_label)
                             return "preempt"
   
                 container_outcome = self._update_once()
@@ -296,40 +292,7 @@ class ssmStateMachine(smach.StateMachine):
             self._is_running = False
 
         return container_outcome
-    
-    
-    def _create_tree_view(self):
-        self._tree_view = {}
-        for child in self.get_children():
-            self._tree_view[child]  = 0
-            
-    def _tree_view_enable_state(self, label):
-        if(self._tree_view is not None):
-            self._tree_view[label] = 1
-            self.call_update_tree_view_cb()
-    
-    def _tree_view_disable_state(self, label):
-        if(self._tree_view is not None):
-            self._tree_view[label] = 0
-            self.call_update_tree_view_cb()
-            
-    def _tree_view_pause_state(self, label):
-        if(self._tree_view is not None):
-            self._tree_view[label] = -1
-            self.call_update_tree_view_cb()
-            
-    def get_tree_view(self):
-        return self._tree_view
-    
-    def register_tree_view_cb(self, callback):
-        self._tree_view_cb = callback
-    
-    def call_update_tree_view_cb(self):
-        if(self._tree_view_cb is not None):
-            try:
-                self._tree_view_cb()
-            except:
-                smach.logerr("Could not execute treeview callback: "+traceback.format_exc())
+
     
 class ssmMainStateMachine(ssmStateMachine):
     """StateMachine

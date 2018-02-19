@@ -156,6 +156,8 @@ class ContainerProxy():
     
     def stop(self):
         self._keep_running = False
+        self._status_pub_thread.join()
+        self._structure_pub_thread.join()
 
     def _status_pub_loop(self):
         """Loop to publish the status and structure heartbeats."""
@@ -217,24 +219,21 @@ class ContainerProxy():
             #print str(structure_msg)
             # Construct status message
             #print self._container.get_active_states()
-            bckp_dict = {}
+            copy_dict = {}
             for data in self._container.userdata._data:
                 try:
                     pickle.dumps(self._container.userdata._data[data],2)
+                    copy_dict[data] = self._container.userdata._data[data]
                 except Exception as e:
-                    bckp_dict[data] = self._container.userdata._data[data]
-                    self._container.userdata._data.pop(data,None)
-                    self._container.userdata._data[data] = "Not Available"
+                    copy_dict[data] = "Not Available" 
                     continue
             state_msg = SmachContainerStatus(
                     Header(stamp = rospy.Time.now()),
                     path,
                     self._container.get_initial_states(),
                     self._container.get_active_states(),
-                    pickle.dumps(self._container.userdata._data,2),
+                    pickle.dumps(copy_dict,2),
                     info_str)
-            for data in bckp_dict:
-                self._container.userdata._data[data] = bckp_dict[data]
             
             # Publish message
             self._status_pub.publish(state_msg)
